@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Government Exams 2025</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f3f7;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background: linear-gradient(to right, #ff7f50, #ff6347);
+            color: #fff;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-body p {
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .card-body a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        .card-body a:hover {
+            background: #1d6fa5;
+        }
+        .show-button {
+            display: block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #27ae60;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .show-button:hover {
+            background-color: #2ecc71;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .state-psc-links {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+        }
+        .state-psc-links a {
+            display: block;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .state-psc-links a:hover {
+            background-color: #1d6fa5;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+            .container {
+                padding: 10px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .card {
+                padding: 15px;
+            }
+            .card-header {
+                font-size: 1.2rem;
+            }
+            .card-body p {
+                font-size: 0.9rem;
+            }
+            .show-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            footer {
+                font-size: 0.8rem;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .card-body p {
+                font-size: 0.8rem;
+            }
+            .card-body a {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
+            .show-button {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Government Exams 2025 🌟</h1>
+        <div class="grid">
+            <!-- Government Exams Card -->
+            <div class="card">
+                <div class="card-header">UPSC (Civil Services)</div>
+                <div class="card-body">
+                    <p><strong>Exam Date:</strong> 28th May 2025</p>
+                    <p><strong>Posts:</strong> IAS, IPS, IFS, IRS, and more</p>
+                    <p><strong>Website:</strong> <a href="https://www.upsc.gov.in" target="_blank">Visit Official Website</a></p>
+                </div>
+            </div>
+
+            <!-- Government Exams Card -->
+            <div class="card">
+                <div class="card-header">SSC (Staff Selection Commission)</div>
+                <div class="card-body">
+                    <p><strong>Exam Date:</strong> Various throughout 2025</p>
+                    <p><strong>Posts:</strong> CGL, CHSL, JE, Stenographer, GD Constable</p>
+                    <p><strong>Website:</strong> <a href="https://ssc.nic.in" target="_blank">Visit Official Website</a></p>
+                </div>
+            </div>
+
+            <!-- Government Exams Card -->
+            <div class="card">
+                <div class="card-header">IBPS (Bank Exams)</div>
+                <div class="card-body">
+                    <p><strong>Exam Date:</strong> Prelims in August 2025</p>
+                    <p><strong>Posts:</strong> Clerk, PO, SO, RRB</p>
+                    <p><strong>Website:</strong> <a href="https://www.ibps.in" target="_blank">Visit Official Website</a></p>
+                </div>
+            </div>
+
+            <!-- Government Exams Card -->
+            <div class="card">
+                <div class="card-header">RBI (Reserve Bank of India)</div>
+                <div class="card-body">
+                    <p><strong>Exam Date:</strong> 15th July 2025</p>
+                    <p><strong>Posts:</strong> Grade B Officer, Assistant</p>
+                    <p><strong>Website:</strong> <a href="https://www.rbi.org.in" target="_blank">Visit Official Website</a></p>
+                </div>
+            </div>
+
+            <!-- Government Exams Card -->
+            <div class="card">
+                <div class="card-header">Railway Recruitment Board (RRB)</div>
+                <div class="card-body">
+                    <p><strong>Exam Date:</strong> Ongoing throughout 2025</p>
+                    <p><strong>Posts:</strong> NTPC, Group D, JE</p>
+                    <p><strong>Website:</strong> <a href="https://indianrailways.gov.in" target="_blank">Visit Official Website</a></p>
+                </div>
+            </div>
+
+            <!-- State PSC Exams Card -->
+            <div class="card">
+                <div class="card-header">State PSC Exams</div>
+                <div class="card-body">
+                    <p><strong>Exam Date:</strong> Depends on state schedule</p>
+                    <p><strong>Posts:</strong> Administrative Services, Lecturer, Engineer</p>
+                    <a href="#" class="show-button" onclick="toggleStateLinks()">Show All States</a>
+                    <div class="state-psc-links" id="state-psc-links">
+                        <a href="http://uppsc.up.nic.in" target="_blank">UPPSC (Uttar Pradesh)</a>
+                        <a href="https://www.mpsc.gov.in" target="_blank">MPSC (Maharashtra)</a>
+                        <a href="https://www.bpsc.bih.nic.in" target="_blank">BPSC (Bihar)</a>
+                        <a href="https://rpsc.rajasthan.gov.in" target="_blank">RPSC (Rajasthan)</a>
+                        <a href="https://www.hpssc.gov.in" target="_blank">HPPSC (Himachal Pradesh)</a>
+                        <a href="https://www.tnpsc.gov.in" target="_blank">TNPSC (Tamil Nadu)</a>
+                        <a href="https://www.wbpsc.gov.in" target="_blank">WBPSC (West Bengal)</a>
+                        <a href="https://www.appsc.gov.in" target="_blank">APPSC (Andhra Pradesh)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>📰 Latest Updates on Exams | ⏰ Stay Prepared | 💻 Visit Official Websites for More Details</p>
+    </footer>
+
+    <script>
+        function toggleStateLinks() {
+            var links = document.getElementById('state-psc-links');
+            links.style.display = (links.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</body>
+</html>
