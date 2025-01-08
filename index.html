@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Ask Question</title>
     <script type="module">
+        // Firebase Configuration
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
@@ -25,7 +26,9 @@
             const loginButton = document.getElementById("login-btn");
             const formSection = document.getElementById("form-section");
             const userNameSpan = document.getElementById("user-name");
+            const questionForm = document.getElementById("question-form");
 
+            // Google Login
             loginButton.addEventListener("click", () => {
                 const provider = new GoogleAuthProvider();
                 signInWithPopup(auth, provider)
@@ -38,6 +41,36 @@
                     .catch((error) => {
                         alert("Login Failed: " + error.message);
                     });
+            });
+
+            // Form Submission
+            questionForm.addEventListener("submit", (event) => {
+                event.preventDefault(); // Prevent Default Form Submission
+
+                // Check if the user is logged in
+                if (auth.currentUser) {
+                    const name = document.getElementById("name").value;
+                    const college = document.getElementById("college").value;
+                    const subject = document.getElementById("subject").value;
+                    const question = document.getElementById("question").value;
+
+                    // Use the correct template ID here
+                    emailjs.send("service_pj74wtl", "template_fdu5o5r", {
+                        name: name,
+                        college: college,
+                        subject: subject,
+                        question: question,
+                    })
+                    .then(() => {
+                        alert("Your question has been submitted successfully!");
+                        questionForm.reset(); // Reset form after submission
+                    })
+                    .catch((error) => {
+                        alert("Failed to submit your question: " + error.text);
+                    });
+                } else {
+                    alert("Please login to submit your question.");
+                }
             });
         };
     </script>
