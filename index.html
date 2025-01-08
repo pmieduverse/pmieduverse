@@ -8,7 +8,9 @@
         // Firebase Configuration
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
 
+        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyD7OLxO0Pa-q9kC0EpnaOOESTvGD4bFIe8",
             authDomain: "pmi-eduverse-login.firebaseapp.com",
@@ -19,17 +21,19 @@
             measurementId: "G-GDP8GHPT43"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const analytics = getAnalytics(app);
 
         // Initialize EmailJS
-        emailjs.init("eT5ap2denjFuWGh33"); // Correct Public Key
+        emailjs.init("eT5ap2denjFuWGh33"); // Public Key
 
         window.onload = () => {
             const loginButton = document.getElementById("login-btn");
             const formSection = document.getElementById("form-section");
-            const questionForm = document.getElementById("question-form");
             const userNameSpan = document.getElementById("user-name");
+            const questionForm = document.getElementById("question-form");
 
             // Google Login
             loginButton.addEventListener("click", () => {
@@ -57,7 +61,7 @@
                     const subject = document.getElementById("subject").value;
                     const question = document.getElementById("question").value;
 
-                    // Use the correct template ID here
+                    // Use EmailJS to send the form data
                     emailjs.send("service_pj74wtl", "template_fdu5o5r", {
                         name: name,
                         college: college,
@@ -78,50 +82,11 @@
         };
     </script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
-        }
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
-        #login-btn, #form-section {
-            text-align: center;
-            margin: 20px auto;
-        }
-        #form-section {
-            display: none;
-        }
-        input, textarea {
-            display: block;
-            margin: 10px auto;
-            width: 80%;
-            max-width: 400px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
     <h1>Login aur Apna Sawal Poochhein</h1>
     <button id="login-btn">Login with Google</button>
-    <div id="form-section">
+    <div id="form-section" style="display: none;">
         <p>Swagat hai, <span id="user-name"></span></p>
         <form id="question-form">
             <input type="text" id="name" placeholder="Apna Naam" required>
