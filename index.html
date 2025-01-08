@@ -3,29 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Modern Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login & Ask Question</title>
+    <script type="module">
+        // Import Firebase Modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7OLxO0Pa-q9kC0EpnaOOESTvGD4bFIe8",
+            authDomain: "pmi-eduverse-login.firebaseapp.com",
+            projectId: "pmi-eduverse-login",
+            storageBucket: "pmi-eduverse-login.firebasestorage.app",
+            messagingSenderId: "156644852521",
+            appId: "1:156644852521:web:f4dbf0f1b9bca40cb9ad38",
+            measurementId: "G-GDP8GHPT43"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // EmailJS Initialization
+        (function () {
+            emailjs.init("your_user_id"); // Replace 'your_user_id' with your EmailJS User ID
+        })();
+
+        window.onload = () => {
+            const loginButton = document.getElementById("login-btn");
+            const formSection = document.getElementById("form-section");
+            const questionForm = document.getElementById("question-form");
+            const userNameSpan = document.getElementById("user-name");
+
+            // Google Login
+            loginButton.addEventListener("click", () => {
+                const provider = new GoogleAuthProvider();
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        const user = result.user;
+                        loginButton.style.display = "none";
+                        formSection.style.display = "block";
+                        userNameSpan.textContent = user.displayName;
+                    })
+                    .catch((error) => {
+                        alert("Login Failed: " + error.message);
+                    });
+            });
+
+            // Form Submission
+            questionForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const name = document.getElementById("name").value;
+                const college = document.getElementById("college").value;
+                const subject = document.getElementById("subject").value;
+                const question = document.getElementById("question").value;
+
+                emailjs.send("service_pj74wtl", "template_4kpmap5", {
+                    name: name,
+                    college: college,
+                    subject: subject,
+                    question: question,
+                })
+                .then(() => {
+                    alert("Your question has been submitted successfully!");
+                    questionForm.reset();
+                })
+                .catch((error) => {
+                    alert("Failed to submit your question: " + error.text);
+                });
+            });
+        };
+    </script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        #login-btn, #form-section {
+            text-align: center;
+            margin: 20px auto;
+        }
+        #form-section {
+            display: none;
+        }
+        input, textarea {
+            display: block;
+            margin: 10px auto;
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <h1>My Website</h1>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="exams.html">Exams</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="posts.html">Posts</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <h2>Welcome to the Website</h2>
-        <p>This is a modern website with navigation links.</p>
-    </main>
+    <h1>Login aur Apna Sawal Poochhein</h1>
+    <button id="login-btn">Login with Google</button>
+    <div id="form-section">
+        <p>Swagat hai, <span id="user-name"></span></p>
+        <form id="question-form">
+            <input type="text" id="name" placeholder="Apna Naam" required>
+            <input type="text" id="college" placeholder="College Ka Naam" required>
+            <input type="text" id="subject" placeholder="Subject" required>
+            <textarea id="question" placeholder="Apna Sawaal Yahan Likhein" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
