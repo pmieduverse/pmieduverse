@@ -22,11 +22,14 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
+        // Initialize EmailJS
+        emailjs.init("eT5ap2denjFuWGh33"); // Correct Public Key
+
         window.onload = () => {
             const loginButton = document.getElementById("login-btn");
             const formSection = document.getElementById("form-section");
-            const userNameSpan = document.getElementById("user-name");
             const questionForm = document.getElementById("question-form");
+            const userNameSpan = document.getElementById("user-name");
 
             // Google Login
             loginButton.addEventListener("click", () => {
@@ -73,56 +76,47 @@
                 }
             });
         };
-    <script type="module">
-   // Initialize EmailJS
-   emailjs.init("eT5ap2denjFuWGh33"); // Public Key Here
+    </script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-   window.onload = () => {
-       const loginButton = document.getElementById("login-btn");
-       const formSection = document.getElementById("form-section");
-       const questionForm = document.getElementById("question-form");
-       const userNameSpan = document.getElementById("user-name");
-
-       // Google Login
-       loginButton.addEventListener("click", () => {
-           const provider = new GoogleAuthProvider();
-           signInWithPopup(auth, provider)
-               .then((result) => {
-                   const user = result.user;
-                   loginButton.style.display = "none"; // Hide Login Button after Success
-                   formSection.style.display = "block"; // Show Form Section after Login
-                   userNameSpan.textContent = user.displayName; // Display Logged In User Name
-               })
-               .catch((error) => {
-                   alert("Login Failed: " + error.message);
-               });
-       });
-
-       // Form Submission
-       questionForm.addEventListener("submit", (event) => {
-           event.preventDefault(); // Prevent Default Form Submission
-
-           const name = document.getElementById("name").value;
-           const college = document.getElementById("college").value;
-           const subject = document.getElementById("subject").value;
-           const question = document.getElementById("question").value;
-
-           emailjs.send("service_pj74wtl", "template_fdu5o5r", {
-               name: name,
-               college: college,
-               subject: subject,
-               question: question,
-           })
-           .then(() => {
-               alert("Your question has been submitted successfully!");
-               questionForm.reset(); // Reset form after submission
-           })
-           .catch((error) => {
-               alert("Failed to submit your question: " + error.text);
-           });
-       });
-   };
-</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        #login-btn, #form-section {
+            text-align: center;
+            margin: 20px auto;
+        }
+        #form-section {
+            display: none;
+        }
+        input, textarea {
+            display: block;
+            margin: 10px auto;
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <h1>Login aur Apna Sawal Poochhein</h1>
