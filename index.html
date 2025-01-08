@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Ask Question</title>
+    <!-- Firebase and EmailJS SDK -->
     <script type="module">
         // Firebase Configuration (already correct)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import emailjs from "https://cdn.emailjs.com/dist/email.min.js"; // Import EmailJS SDK
 
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyD7OLxO0Pa-q9kC0EpnaOOESTvGD4bFIe8",
             authDomain: "pmi-eduverse-login.firebaseapp.com",
@@ -19,11 +22,12 @@
             measurementId: "G-GDP8GHPT43"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Initialize EmailJS
-        emailjs.init("eT5ap2denjFuWGh33"); // Replace with correct Public Key
+        // Initialize EmailJS with your public key
+        emailjs.init("eT5ap2denjFuWGh33"); // Replace with your EmailJS public key
 
         window.onload = () => {
             const loginButton = document.getElementById("login-btn");
@@ -55,7 +59,7 @@
                 const subject = document.getElementById("subject").value;
                 const question = document.getElementById("question").value;
 
-                // Use the correct template ID here
+                // Send data via EmailJS
                 emailjs.send("service_pj74wtl", "template_fdu5o5r", {
                     name: name,
                     college: college,
@@ -72,7 +76,9 @@
             });
         };
     </script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- EmailJS SDK -->
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -126,8 +132,4 @@
         </form>
     </div>
 </body>
-    <script type="module">
-    import emailjs from 'https://cdn.emailjs.com/dist/email.min.js'; // Updated CDN link
-    emailjs.init("eT5ap2denjFuWGh33"); // Apna Public Key yahan daalein
-</script>
 </html>
