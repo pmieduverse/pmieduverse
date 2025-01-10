@@ -1,33 +1,72 @@
+/* styles.css */
+
 body {
+  background-color: #1a1a1a;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.neon-text {
+  font-size: 4em;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  animation: neon-animation 1.5s infinite alternate;
+}
+
+@keyframes neon-animation {
+  from {
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
+  }
+  to {
+    text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  }
+}
+
+.quiz-container {
+  background: #222;
+  border-radius: 15px;
   padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
 }
 
-h1 {
-  text-align: center;
-}
-
-.question {
-  margin: 15px 0;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
+.neon-button {
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #fff;
   padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-#result {
+  font-size: 1.2em;
   margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+  background-color: #ff00ff;
+  color: #222;
+  transform: scale(1.1);
+}
+
+.option {
+  padding: 10px;
+  margin: 10px;
+  background-color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background-color: #ff00ff;
 }
