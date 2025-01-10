@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Use the same CSS file -->
+  <style>
+    .result-container {
+      text-align: center;
+      margin-top: 100px;
+      color: #fff;
+    }
+    .result-container h2 {
+      font-size: 2em;
+      color: #ff00ff; /* Neon color for the result text */
+    }
+    .play-again-btn {
+      background-color: #ff00ff;
+      padding: 10px 20px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+    .play-again-btn:hover {
+      background-color: #fff;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h2>Quiz Completed!</h2>
+    <p id="score"></p>
+    <button class="play-again-btn" onclick="restartQuiz()">Play Again</button>
+  </div>
+
+  <script>
+    // Retrieve the score from the localStorage
+    const score = localStorage.getItem("score");
+    const totalQuestions = localStorage.getItem("totalQuestions");
+
+    // Display the result score
+    document.getElementById("score").innerText = `Your score is: ${score}/${totalQuestions}`;
+
+    // Function to restart the quiz
+    function restartQuiz() {
+      localStorage.removeItem("score");
+      localStorage.removeItem("totalQuestions");
+      window.location.href = "index.html"; // Redirect back to the main quiz page
+    }
+  </script>
+</body>
+</html>
