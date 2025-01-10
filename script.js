@@ -78,17 +78,34 @@ document.getElementById('submit-btn').addEventListener('click', () => {
 
   // Check if there are more questions
   if (currentQuestionIndex < questions.length) {
-    displayQuestion();
+    displayQuestion(); // Display next question
   } else {
-    alert(`Quiz Completed! Your score is: ${score}/${questions.length}`);
-    // Optionally, reset the quiz or hide the quiz
-    currentQuestionIndex = 0;
-    score = 0; // Reset score for the next attempt
-    displayQuestion();
+    showResult(); // Display result if quiz is completed
   }
 
   // Reset selected answer
   selectedAnswer = null;
 });
+
+// Function to display the final result
+function showResult() {
+  const questionContainer = document.getElementById('question-container');
+  questionContainer.innerHTML = `
+    <div class="result">
+      <h2>Quiz Completed!</h2>
+      <p>Your score is: ${score}/${questions.length}</p>
+      <button onclick="restartQuiz()">Play Again</button>
+    </div>
+  `;
+  document.getElementById('submit-btn').style.display = 'none'; // Hide the submit button after quiz completion
+}
+
+// Function to restart the quiz
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  displayQuestion(); // Display the first question again
+  document.getElementById('submit-btn').style.display = 'block'; // Show the submit button again
+}
 
 window.onload = displayQuestion; // Display the first question when the page loads
