@@ -29,7 +29,10 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
+let selectedAnswer = null;
+let score = 0;
 
+// Function to display the current question
 function displayQuestion() {
   const questionContainer = document.getElementById('question-container');
   const question = questions[currentQuestionIndex];
@@ -43,26 +46,49 @@ function displayQuestion() {
   `;
 }
 
+// Function to handle answer selection
 function selectAnswer(answer) {
-  const selectedOption = document.querySelectorAll('.option');
-  selectedOption.forEach(option => {
-    option.style.backgroundColor = option.textContent === answer ? '#ff00ff' : '';
+  // Deselect all options
+  const options = document.querySelectorAll('.option');
+  options.forEach(option => {
+    option.style.backgroundColor = ''; // Reset background color
   });
+
+  // Highlight the selected option
+  const selectedOption = [...options].find(option => option.textContent === answer);
+  selectedOption.style.backgroundColor = '#ff00ff'; // Highlight selected option
+  
+  selectedAnswer = answer; // Store the selected answer
 }
 
+// Function to handle the submit button click
 document.getElementById('submit-btn').addEventListener('click', () => {
-  const selectedOption = document.querySelector('.option[style*="background-color"]');
-  if (selectedOption) {
-    alert(`You selected: ${selectedOption.textContent}`);
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-      displayQuestion();
-    } else {
-      alert('Quiz Completed!');
-    }
-  } else {
-    alert("Please select an option!");
+  if (!selectedAnswer) {
+    alert("Please select an option before submitting!");
+    return; // Don't proceed if no answer is selected
   }
+
+  // Check if the selected answer is correct
+  const currentQuestion = questions[currentQuestionIndex];
+  if (selectedAnswer === currentQuestion.correctAnswer) {
+    score++; // Increment score if answer is correct
+  }
+
+  currentQuestionIndex++; // Move to the next question
+
+  // Check if there are more questions
+  if (currentQuestionIndex < questions.length) {
+    displayQuestion();
+  } else {
+    alert(`Quiz Completed! Your score is: ${score}/${questions.length}`);
+    // Optionally, reset the quiz or hide the quiz
+    currentQuestionIndex = 0;
+    score = 0; // Reset score for the next attempt
+    displayQuestion();
+  }
+
+  // Reset selected answer
+  selectedAnswer = null;
 });
 
-window.onload = displayQuestion;
+window.onload = displayQuestion; // Display the first question when the page loads
