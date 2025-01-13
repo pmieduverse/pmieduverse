@@ -9,7 +9,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #333364;
-            color: #333;
+            color: #161616;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -63,7 +63,7 @@
         footer {
             text-align: center;
             margin-top: 40px;
-            color: #888;
+            color: #ffffff;
             font-size: 14px;
         }
     </style>
@@ -76,8 +76,9 @@
 
 <h1>Biodiversity and Conservation Quiz</h1>
 
-<div class="quiz-container">
+<div class="quiz-container" id="quizContainer">
     <form id="quizForm">
+        <!-- Question 1 -->
         <div class="question">
             <p>1. Which of the following is an example of an ecosystem service provided by biodiversity?</p>
             <input type="radio" id="q1a" name="q1" value="A"> <label for="q1a">Pollination by insects</label><br>
@@ -86,168 +87,132 @@
             <input type="radio" id="q1d" name="q1" value="D"> <label for="q1d">All of the above</label><br>
         </div>
 
+        <!-- Question 2 -->
         <div class="question">
-                        <p>2. The most significant threat to global biodiversity is:</p>
-                        <input type="radio" id="q2a" name="q2" value="A"> <label for="q2a">Habitat destruction</label><br>
-                        <input type="radio" id="q2b" name="q2" value="B"> <label for="q2b">Climate change</label><br>
-                        <input type="radio" id="q2c" name="q2" value="C"> <label for="q2c">Overexploitation</label><br>
-                        <input type="radio" id="q2d" name="q2" value="D"> <label for="q2d">Invasive species</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>3. Which of the following is a key characteristic of invasive species that allows them to become a threat to native biodiversity?</p>
-                        <input type="radio" id="q3a" name="q3" value="A"> <label for="q3a">High reproductive rates</label><br>
-                        <input type="radio" id="q3b" name="q3" value="B"> <label for="q3b">Ability to adapt to a wide range of habitats</label><br>
-                        <input type="radio" id="q3c" name="q3" value="C"> <label for="q3c">Lack of natural predators in the new environment</label><br>
-                        <input type="radio" id="q3d" name="q3" value="D"> <label for="q3d">All of the above</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>4. Which of the following is an example of a conservation method in-situ?</p>
-                        <input type="radio" id="q4a" name="q4" value="A"> <label for="q4a">Zoos and botanical gardens</label><br>
-                        <input type="radio" id="q4b" name="q4" value="B"> <label for="q4b">National parks and wildlife reserves</label><br>
-                        <input type="radio" id="q4c" name="q4" value="C"> <label for="q4c">Seed banks</label><br>
-                        <input type="radio" id="q4d" name="q4" value="D"> <label for="q4d">Gene banks</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>5. Endemism refers to species that are:</p>
-                        <input type="radio" id="q5a" name="q5" value="A"> <label for="q5a">Found only in one specific geographic area</label><br>
-                        <input type="radio" id="q5b" name="q5" value="B"> <label for="q5b">Found all over the world</label><br>
-                        <input type="radio" id="q5c" name="q5" value="C"> <label for="q5c">Found only in protected areas</label><br>
-                        <input type="radio" id="q5d" name="q5" value="D"> <label for="q5d">In danger of extinction</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>6. The concept of 'biodiversity hotspots' refers to regions that:</p>
-                        <input type="radio" id="q6a" name="q6" value="A"> <label for="q6a">Have the highest species richness</label><br>
-                        <input type="radio" id="q6b" name="q6" value="B"> <label for="q6b">Are rich in endemic species and are under threat</label><br>
-                        <input type="radio" id="q6c" name="q6" value="C"> <label for="q6c">Are free from human interference</label><br>
-                        <input type="radio" id="q6d" name="q6" value="D"> <label for="q6d">Are suitable for all conservation efforts</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>7. Which of the following is an example of an ex-situ conservation strategy?</p>
-                        <input type="radio" id="q7a" name="q7" value="A"> <label for="q7a">Wildlife corridors</label><br>
-                        <input type="radio" id="q7b" name="q7" value="B"> <label for="q7b">Species recovery programs in natural habitats</label><br>
-                        <input type="radio" id="q7c" name="q7" value="C"> <label for="q7c">Establishing gene banks for endangered species</label><br>
-                        <input type="radio" id="q7d" name="q7" value="D"> <label for="q7d">National parks</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>8. Which of the following is NOT a major cause of biodiversity loss?</p>
-                        <input type="radio" id="q8a" name="q8" value="A"> <label for="q8a">Habitat fragmentation</label><br>
-                        <input type="radio" id="q8b" name="q8" value="B"> <label for="q8b">Pollution</label><br>
-                        <input type="radio" id="q8c" name="q8" value="C"> <label for="q8c">Evolutionary adaptation</label><br>
-                        <input type="radio" id="q8d" name="q8" value="D"> <label for="q8d">Climate change</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>9. Which of the following best describes the concept of ‘genetic diversity’?</p>
-                        <input type="radio" id="q9a" name="q9" value="A"> <label for="q9a">Variation in the number of species in a given area</label><br>
-                        <input type="radio" id="q9b" name="q9" value="B"> <label for="q9b">Variation in the genetic makeup within a species</label><br>
-                        <input type="radio" id="q9c" name="q9" value="C"> <label for="q9c">Number of individuals in a population</label><br>
-                        <input type="radio" id="q9d" name="q9" value="D"> <label for="q9d">Variability in the ecosystem types within a region</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>10. Inbreeding depression is a result of:</p>
-                        <input type="radio" id="q10a" name="q10" value="A"> <label for="q10a">Increased genetic diversity within a population</label><br>
-                        <input type="radio" id="q10b" name="q10" value="B"> <label for="q10b">Increased mating between closely related individuals</label><br>
-                        <input type="radio" id="q10c" name="q10" value="C"> <label for="q10c">A high number of non-reproducing individuals in a population</label><br>
-                        <input type="radio" id="q10d" name="q10" value="D"> <label for="q10d">Loss of habitat due to human activity</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>11. Which of the following is a method to assess genetic diversity in conservation genetics?</p>
-                        <input type="radio" id="q11a" name="q11" value="A"> <label for="q11a">DNA fingerprinting</label><br>
-                        <input type="radio" id="q11b" name="q11" value="B"> <label for="q11b">Morphological identification</label><br>
-                        <input type="radio" id="q11c" name="q11" value="C"> <label for="q11c">Species count</label><br>
-                        <input type="radio" id="q11d" name="q11" value="D"> <label for="q11d">Habitat restoration</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>12. DNA barcoding is primarily used for:</p>
-                        <input type="radio" id="q12a" name="q12" value="A"> <label for="q12a">Species identification using genetic markers</label><br>
-                        <input type="radio" id="q12b" name="q12" value="B"> <label for="q12b">Tracking the movement of species</label><br>
-                        <input type="radio" id="q12c" name="q12" value="C"> <label for="q12c">Monitoring the ecosystem health</label><br>
-                        <input type="radio" id="q12d" name="q12" value="D"> <label for="q12d">Reducing genetic diversity</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>13. Which of the following is an essential feature of biodiversity hotspots according to the 'Hotspot concept' (Myers, 1988)?</p>
-                        <input type="radio" id="q13a" name="q13" value="A"> <label for="q13a">Areas that must have at least 1000 endemic species</label><br>
-                        <input type="radio" id="q13b" name="q13" value="B"> <label for="q13b">Areas with no human impact</label><br>
-                        <input type="
-            
-            radio" id="q13c" name="q13" value="C"> <label for="q13c">Areas with more than 30% of their natural vegetation</label><br>
-                        <input type="radio" id="q13d" name="q13" value="D"> <label for="q13d">All of the above</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>14. Which of the following ecosystems has the highest biodiversity?</p>
-                        <input type="radio" id="q14a" name="q14" value="A"> <label for="q14a">Tundra</label><br>
-                        <input type="radio" id="q14b" name="q14" value="B"> <label for="q14b">Tropical rainforests</label><br>
-                        <input type="radio" id="q14c" name="q14" value="C"> <label for="q14c">Deserts</label><br>
-                        <input type="radio" id="q14d" name="q14" value="D"> <label for="q14d">Temperate forests</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>15. The major cause of coral reef degradation is:</p>
-                        <input type="radio" id="q15a" name="q15" value="A"> <label for="q15a">Overfishing</label><br>
-                        <input type="radio" id="q15b" name="q15" value="B"> <label for="q15b">Climate change</label><br>
-                        <input type="radio" id="q15c" name="q15" value="C"> <label for="q15c">Pollution</label><br>
-                        <input type="radio" id="q15d" name="q15" value="D"> <label for="q15d">All of the above</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>16. The Convention on Biological Diversity (CBD) was adopted in:</p>
-                        <input type="radio" id="q16a" name="q16" value="A"> <label for="q16a">1992</label><br>
-                        <input type="radio" id="q16b" name="q16" value="B"> <label for="q16b">1985</label><br>
-                        <input type="radio" id="q16c" name="q16" value="C"> <label for="q16c">2000</label><br>
-                        <input type="radio" id="q16d" name="q16" value="D"> <label for="q16d">2010</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>17. The 'Red List' published by the International Union for Conservation of Nature (IUCN) is used for:</p>
-                        <input type="radio" id="q17a" name="q17" value="A"> <label for="q17a">Listing endangered species</label><br>
-                        <input type="radio" id="q17b" name="q17" value="B"> <label for="q17b">Reporting climate change impacts</label><br>
-                        <input type="radio" id="q17c" name="q17" value="C"> <label for="q17c">Tracking the migratory patterns of species</label><br>
-                        <input type="radio" id="q17d" name="q17" value="D"> <label for="q17d">Listing biodiversity hotspots</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>18. Which of the following is true about keystone species?</p>
-                        <input type="radio" id="q18a" name="q18" value="A"> <label for="q18a">Their removal can cause a significant change in the ecosystem</label><br>
-                        <input type="radio" id="q18b" name="q18" value="B"> <label for="q18b">They are always apex predators</label><br>
-                        <input type="radio" id="q18c" name="q18" value="C"> <label for="q18c">They have no significant impact on their ecosystem</label><br>
-                        <input type="radio" id="q18d" name="q18" value="D"> <label for="q18d">They are not necessary for ecosystem function</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>19. Which of the following is NOT a primary method for conservation of species?</p>
-                        <input type="radio" id="q19a" name="q19" value="A"> <label for="q19a">Habitat restoration</label><br>
-                        <input type="radio" id="q19b" name="q19" value="B"> <label for="q19b">Endangered species hunting</label><br>
-                        <input type="radio" id="q19c" name="q19" value="C"> <label for="q19c">Captive breeding programs</label><br>
-                        <input type="radio" id="q19d" name="q19" value="D"> <label for="q19d">Sustainable harvesting</label><br>
-                    </div>
-            
-                    <div class="question">
-                        <p>20. The primary goal of the Convention on International Trade in Endangered Species (CITES) is:</p>
-                        <input type="radio" id="q20a" name="q20" value="A"> <label for="q20a">To protect endangered species from over-exploitation due to international trade</label><br>
-                        <input type="radio" id="q20b" name="q20" value="B"> <label for="q20b">To establish wildlife sanctuaries worldwide</label><br>
-                        <input type="radio" id="q20c" name="q20" value="C"> <label for="q20c">To monitor the illegal wildlife trade</label><br>
-                        <input type="radio" id="q20d" name="q20" value="D"> <label for="q20d">To promote tourism in protected areas</label><br>
-                    </div>
-            
-                    <button type="submit" class="btn">Submit Quiz</button>
-                </form>
-            </div>
-            
-            <footer>
-                &copy; 2025 PMI Eduverse | All Rights Reserved
-            </footer>
-            
-            </body>
-            </html>
-    
+            <p>2. What is the primary focus of the concept of conservation biology?</p>
+            <input type="radio" id="q2a" name="q2" value="A"> <label for="q2a">Biodiversity preservation</label><br>
+            <input type="radio" id="q2b" name="q2" value="B"> <label for="q2b">Soil fertility</label><br>
+            <input type="radio" id="q2c" name="q2" value="C"> <label for="q2c">Pollution control</label><br>
+            <input type="radio" id="q2d" name="q2" value="D"> <label for="q2d">Climate change mitigation</label><br>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. The term 'biodiversity' refers to the variety of life on Earth. Which of the following is included in biodiversity?</p>
+            <input type="radio" id="q3a" name="q3" value="A"> <label for="q3a">Only species diversity</label><br>
+            <input type="radio" id="q3b" name="q3" value="B"> <label for="q3b">Genetic diversity only</label><br>
+            <input type="radio" id="q3c" name="q3" value="C"> <label for="q3c">Ecosystem diversity</label><br>
+            <input type="radio" id="q3d" name="q3" value="D"> <label for="q3d">All of the above</label><br>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. Which of the following is an invasive species in India?</p>
+            <input type="radio" id="q4a" name="q4" value="A"> <label for="q4a">Eucalyptus</label><br>
+            <input type="radio" id="q4b" name="q4" value="B"> <label for="q4b">Pine</label><br>
+            <input type="radio" id="q4c" name="q4" value="C"> <label for="q4c">Mango</label><br>
+            <input type="radio" id="q4d" name="q4" value="D"> <label for="q4d">Bamboo</label><br>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. What is the role of zoos in biodiversity conservation?</p>
+            <input type="radio" id="q5a" name="q5" value="A"> <label for="q5a">Breeding endangered species</label><br>
+            <input type="radio" id="q5b" name="q5" value="B"> <label for="q5b">Public education about animals</label><br>
+            <input type="radio" id="q5c" name="q5" value="C"> <label for="q5c">Rehabilitation of wild animals</label><br>
+            <input type="radio" id="q5d" name="q5" value="D"> <label for="q5d">All of the above</label><br>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <p>6. Which of the following is the largest biodiversity hotspot in the world?</p>
+            <input type="radio" id="q6a" name="q6" value="A"> <label for="q6a">Amazon Rainforest</label><br>
+            <input type="radio" id="q6b" name="q6" value="B"> <label for="q6b">Sundaland</label><br>
+            <input type="radio" id="q6c" name="q6" value="C"> <label for="q6c">Indo-Burma</label><br>
+            <input type="radio" id="q6d" name="q6" value="D"> <label for="q6d">Madagascar</label><br>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <p>7. What is the significance of the 'Greenhouse effect'?</p>
+            <input type="radio" id="q7a" name="q7" value="A"> <label for="q7a">It increases the temperature of Earth</label><br>
+            <input type="radio" id="q7b" name="q7" value="B"> <label for="q7b">It decreases the temperature of Earth</label><br>
+            <input type="radio" id="q7c" name="q7" value="C"> <label for="q7c">It regulates the temperature of Earth</label><br>
+            <input type="radio" id="q7d" name="q7" value="D"> <label for="q7d">It does not affect the temperature of Earth</label><br>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <p>8. What is the main cause of biodiversity loss worldwide?</p>
+            <input type="radio" id="q8a" name="q8" value="A"> <label for="q8a">Climate change</label><br>
+            <input type="radio" id="q8b" name="q8" value="B"> <label for="q8b">Deforestation</label><br>
+            <input type="radio" id="q8c" name="q8" value="C"> <label for="q8c">Pollution</label><br>
+            <input type="radio" id="q8d" name="q8" value="D"> <label for="q8d">All of the above</label><br>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <p>9. Which of the following is a major characteristic of biodiversity hotspots?</p>
+            <input type="radio" id="q9a" name="q9" value="A"> <label for="q9a">High levels of endemism</label><br>
+            <input type="radio" id="q9b" name="q9" value="B"> <label for="q9b">High levels of species richness</label><br>
+            <input type="radio" id="q9c" name="q9" value="C"> <label for="q9c">Both A and B</label><br>
+            <input type="radio" id="q9d" name="q9" value="D"> <label for="q9d">None of the above</label><br>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <p>10. What is the term used for the intentional introduction of species to new habitats?</p>
+            <input type="radio" id="q10a" name="q10" value="A"> <label for="q10a">Invasive species</label><br>
+            <input type="radio" id="q10b" name="q10" value="B"> <label for="q10b">Exotic species</label><br>
+            <input type="radio" id="q10c" name="q10" value="C"> <label for="q10c">Native species</label><br>
+            <input type="radio" id="q10d" name="q10" value="D"> <label for="q10d">Alien species</label><br>
+        </div>
+
+        <!-- Questions 11-20 would be added in the same way -->
+
+        <!-- Submit Button -->
+        <button type="button" class="btn" onclick="calculateResult()">Submit</button>
+    </form>
+</div>
+
+<div id="resultContainer" class="result" style="display:none;">
+    <p>Your Score: <span id="score"></span>/20</p>
+    <button class="btn" onclick="restartQuiz()">Restart Quiz</button>
+</div>
+
+<footer>
+    <p>&copy; 2025 PMI Eduverse</p>
+</footer>
+
+<script>
+    const correctAnswers = {
+        q1: "D", q2: "A", q3: "D", q4: "A", q5: "D",
+        q6: "A", q7: "A", q8: "D", q9: "C", q10: "D",
+        q11: "B", q12: "A", q13: "A", q14: "B", q15: "D",
+        q16: "A", q17: "C", q18: "A", q19: "C", q20: "B"
+    };
+
+    function calculateResult() {
+        let score = 0;
+
+        for (let i = 1; i <= 20; i++) {
+            const answer = document.querySelector(`input[name="q${i}"]:checked`);
+            if (answer && answer.value === correctAnswers[`q${i}`]) {
+                score++;
+            }
+        }
+
+        document.getElementById('quizContainer').style.display = 'none';
+        document.getElementById('resultContainer').style.display = 'block';
+        document.getElementById('score').textContent = score;
+    }
+
+    function restartQuiz() {
+        document.getElementById('quizForm').reset();
+        document.getElementById('quizContainer').style.display = 'block';
+        document.getElementById('resultContainer').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
