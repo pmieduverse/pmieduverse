@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBPS Agriculture Field Officer (AFO)</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1e1e2f;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            color: #fff;
+            margin: 0;
+            font-size: 2.5rem;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #00c6ff, 0 0 30px #0072ff;
+            }
+            to {
+                text-shadow: 0 0 20px #fff, 0 0 30px #00c6ff, 0 0 40px #0072ff;
+            }
+        }
+        .container {
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            border-left: 5px solid #0072ff;
+            padding-left: 10px;
+            color: #00c6ff;
+            font-size: 1.8rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: center;
+        }
+        table th {
+            background: #0072ff;
+            color: #fff;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #0072ff;
+            color: #fff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PMI EDUVERSE: IBPS Agriculture Field Officer (AFO)</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>काम और जिम्मेदारियाँ</h2>
+            <ul>
+                <li><strong>किसानों को मार्गदर्शन देना:</strong> AFO का मुख्य काम किसानों को बेहतर agricultural practices, सही fertilizers, pesticides और high-yield seeds के बारे में जानकारी देना होता है।</li>
+                <li><strong>एग्रीकल्चर लोन स्वीकृत करना:</strong> किसानों और एग्रीकल्चर व्यवसायों के लिए loan applications को जांचना, प्रक्रिया करना और स्वीकृत करना।</li>
+                <li><strong>बैंक उत्पादों का प्रचार:</strong> किसानों के बीच बैंक के उत्पाद जैसे crop insurance और agriculture schemes का प्रचार करना।</li>
+                <li><strong>फील्ड विज़िट:</strong> नियमित रूप से गांवों और खेतों का निरीक्षण करना और किसानों की समस्याओं को समझना।</li>
+                <li><strong>सरकारी योजनाओं का क्रियान्वयन:</strong> Government schemes जैसे PM-Kisan और अन्य loan waivers को जमीनी स्तर पर लागू करना।</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>वेतन (Salary)</h2>
+            <ul>
+                <li><strong>Basic Pay:</strong> ₹23,700</li>
+                <li><strong>Gross Salary:</strong> लगभग ₹38,000 - ₹42,000 (सभी allowances जोड़कर)।</li>
+                <li><strong>अन्य लाभ (Perks):</strong>
+                    <ul>
+                        <li>HRA (House Rent Allowance)</li>
+                        <li>DA (Dearness Allowance)</li>
+                        <li>Medical benefits</li>
+                        <li>Provident Fund (PF), Pension</li>
+                        <li>Travel और अन्य भत्ते।</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Career Growth (प्रमोशन के अवसर)</h2>
+            <p>Scale I Officer (AFO) से लेकर Scale II Manager और Scale III Senior Manager तक प्रमोशन के अवसर। प्रदर्शन के आधार पर Deputy General Manager और General Manager तक पहुँच सकते हैं।</p>
+        </div>
+        <div class="section">
+            <h2>आयु सीमा</h2>
+            <p><strong>Minimum:</strong> 20 years <strong>Maximum:</strong> 30 years</p>
+        </div>
+        <div class="section">
+            <h2>शैक्षणिक योग्यता</h2>
+            <p>Agriculture Field Officer (Scale I) के लिए 4 साल की डिग्री (Graduation) निम्नलिखित विषयों में होनी चाहिए:</p>
+            <ul>
+                <li>Agriculture</li>
+                <li>Horticulture</li>
+                <li>Animal Husbandry</li>
+                <li>Veterinary Science</li>
+                <li>Dairy Science</li>
+                <li>Fishery Science</li>
+                <li>Agri. Marketing & Cooperation</li>
+                <li>B.Tech Biotechnology</li>
+                <li>Food Technology</li>
+                <li>Sericulture आदि।</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>परीक्षा शुल्क</h2>
+            <ul>
+                <li>SC/ST/PwBD: ₹175 (inclusive of GST)</li>
+                <li>अन्य सभी: ₹850 (inclusive of GST)</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>IBPS Agriculture Field Officer 2025 Exam Pattern</h2>
+            <h3>Prelims</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Name of Tests</th>
+                        <th>No. of Questions</th>
+                        <th>Maximum Marks</th>
+                        <th>Medium of Exam</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>English Language</td>
+                        <td>50</td>
+                        <td>25</td>
+                        <td>English</td>
+                        <td>40 Minutes</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Reasoning</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>English/Hindi</td>
+                        <td>40 Minutes</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Quantitative Aptitude</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>English/Hindi</td>
+                        <td>40 Minutes</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Mains</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Name of Tests</th>
+                        <th>No. of Questions</th>
+                        <th>Maximum Marks</th>
+                        <th>Medium of Exam</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Professional Knowledge</td>
+                        <td>60</td>
+                        <td>60</td>
+                        <td>English/Hindi</td>
+                        <td>45 Minutes</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Interview</h3>
+            <p>Prelims और Mains में सफलता के बाद Interview Round आयोजित किया जाता है।</p>
+        </div>
+        <div class="section">
+            <h2>2022 Prelims और Mains Cut-Off</h2>
+            <h3>Prelims Cut-Off</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>SC</th>
+                        <th>ST</th>
+                        <th>OBC</th>
+                        <th>EWS</th>
+                        <th>UR</th>
+                        <th>HI</th>
+                        <th>OC</th>
+                        <th>VI</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Agricultural Field Officer</td>
+                        <td>17.75</td>
+                        <td>17.75</td>
+                        <td>17.75</td>
+                        <td>17.75</td>
+                        <td>17.75</td>
+                        <td>14</td>
+                        <td>31.75</td>
+                        <td>33.38</td>
+                        <td>15.75</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Mains Cut-Off</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>SC</th>
+                        <th>ST</th>
+                        <th>OBC</th>
+                        <th>EWS</th>
+                        <th>UR</th>
+                        <th>HI</th>
+                        <th>OC</th>
+                        <th>VI</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Agriculture Field Officer (Scale I)</td>
+                        <td>27</td>
+                        <td>22.25</td>
+                        <td>27.5</td>
+                        <td>27.5</td>
+                        <td>27.5</td>
+                        <td>19.75</td>
+                        <td>27</td>
+                        <td>24.5</td>
+                        <td>20.75</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 PMI EDUVERSE. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
