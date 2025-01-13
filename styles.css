@@ -1,1 +1,99 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #141414;
+}
+
+.header .logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.header nav a:hover {
+    background: #f39c12;
+}
+
+.welcome-section, .contact-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.welcome-section h1, .contact-section h1 {
+    font-size: 3rem;
+    color: #f39c12;
+}
+
+.welcome-section p {
+    margin: 20px 0;
+    font-size: 1.2rem;
+}
+
+.welcome-section .btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: linear-gradient(45deg, #e74c3c, #f39c12);
+    text-decoration: none;
+    border-radius: 30px;
+    transition: transform 0.3s;
+}
+
+.welcome-section .btn:hover {
+    transform: scale(1.1);
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #1c1c1c;
+    border-radius: 10px;
+}
+
+form input, form textarea, form button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+form button {
+    background: linear-gradient(45deg, #e74c3c, #f39c12);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+form button:hover {
+    transform: scale(1.05);
+}
 
