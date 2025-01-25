@@ -35,11 +35,23 @@
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
-    <div class="max-w-7xl mx-auto p-6">
+    <!-- Login Page -->
+    <div id="login-page" class="flex items-center justify-center min-h-screen bg-gray-200">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-96">
+            <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">Enter Your Roll Number</h2>
+            <input type="text" id="roll-number" class="w-full p-3 mb-4 border border-gray-300 rounded" placeholder="Roll Number" />
+            <button id="login-button" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Login</button>
+        </div>
+    </div>
+
+    <div id="quiz-page" class="hidden max-w-7xl mx-auto p-6">
         <!-- Header -->
         <header class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-blue-700">PMI Eduverse Quiz</h1>
             <div class="text-lg text-gray-700">
+                <span class="font-semibold">Roll Number: </span>
+                <span id="user-roll-number" class="text-blue-500"></span>
+                <br />
                 <span class="font-semibold">Time Left: </span>
                 <span id="timer" class="text-red-500">30:00</span>
             </div>
@@ -104,6 +116,34 @@
     </div>
 
     <script>
+        // Check if roll number is entered and save it
+        let rollNumber = null;
+        const loginPage = document.getElementById('login-page');
+        const quizPage = document.getElementById('quiz-page');
+        const rollNumberInput = document.getElementById('roll-number');
+        const rollNumberDisplay = document.getElementById('user-roll-number');
+        const loginButton = document.getElementById('login-button');
+
+        loginButton.addEventListener('click', () => {
+            rollNumber = rollNumberInput.value;
+            if (rollNumber) {
+                localStorage.setItem('rollNumber', rollNumber); // Save roll number to local storage
+                loginPage.classList.add('hidden');
+                quizPage.classList.remove('hidden');
+                rollNumberDisplay.textContent = rollNumber;
+            } else {
+                alert('Please enter your roll number!');
+            }
+        });
+
+        // Use stored roll number if available
+        if (localStorage.getItem('rollNumber')) {
+            rollNumber = localStorage.getItem('rollNumber');
+            loginPage.classList.add('hidden');
+            quizPage.classList.remove('hidden');
+            rollNumberDisplay.textContent = rollNumber;
+        }
+
         const questions = [
         { 
     "id": 1, 
@@ -921,6 +961,7 @@
             });
 
             resultDetails.innerHTML += `<p class='mt-4 text-lg font-bold'>Score: ${correct} / ${questions.length}</p>`;
+            resultDetails.innerHTML += `<p class='mt-2'>Roll Number: ${rollNumber}</p>`; // Show roll number
             resultContainer.classList.remove("hidden");
 
             testSubmitted = true;
