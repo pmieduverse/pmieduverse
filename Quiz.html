@@ -3,216 +3,934 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodiversity and Conservation Quiz - PMI Eduverse</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>PMI Eduverse Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #333364;
-            color: #161616;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        header {
-            background-color: #ff0000;
-            padding: 15px;
-            text-align: center;
-            color: rgb(255, 255, 255);
-            font-size: 24px;
-            font-weight: 600;
-        }
-        h1 {
-            color: #008CBA;
-            text-align: center;
-            margin-top: 40px;
-        }
-        .quiz-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        label {
-            margin-left: 10px;
-            font-size: 18px;
-        }
-        .btn {
-            background-color: #01fb22;
+        .question-active {
+            background-color: #3b82f6;
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
+        }
+        #branding {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
+            background: #1f2937;
+            color: white;
+            overflow: hidden;
         }
-        .btn:hover {
-            background-color: #005f73;
+        #branding span {
+            display: inline-block;
+            white-space: nowrap;
+            animation: slide 10s linear infinite;
         }
-        .result {
-            text-align: center;
-            font-size: 20px;
-            margin-top: 20px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #ffffff;
-            font-size: 14px;
+        @keyframes slide {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-blue-700">PMI Eduverse Quiz</h1>
+            <div class="text-lg text-gray-700">
+                <span class="font-semibold">Time Left: </span>
+                <span id="timer" class="text-red-500">30:00</span>
+            </div>
+        </header>
 
-<header>
-    PMI Eduverse
-</header>
+        <!-- Main Content -->
+        <div class="flex gap-6">
+            <!-- Question Section -->
+            <div class="flex-1 bg-white rounded-lg shadow p-6">
+                <div id="question-container">
+                    <!-- Question will dynamically load here -->
+                </div>
 
-<h1>Biodiversity and Conservation Quiz</h1>
+                <!-- Action Buttons -->
+                <div class="mt-6 flex justify-between">
+                    <button id="skip" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Skip</button>
+                    <button id="save-next" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save & Next</button>
+                </div>
+            </div>
 
-<div class="quiz-container" id="quizContainer">
-    <form id="quizForm">
-        <!-- Question 1 -->
-        <div class="question">
-            <p>1. Which of the following is an example of an ecosystem service provided by biodiversity?</p>
-            <input type="radio" id="q1a" name="q1" value="A"> <label for="q1a">Pollination by insects</label><br>
-            <input type="radio" id="q1b" name="q1" value="B"> <label for="q1b">Air pollution control</label><br>
-            <input type="radio" id="q1c" name="q1" value="C"> <label for="q1c">Soil erosion</label><br>
-            <input type="radio" id="q1d" name="q1" value="D"> <label for="q1d">All of the above</label><br>
+            <!-- Question Navigator -->
+            <div class="w-1/4 bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Question Navigator</h2>
+                <div id="question-buttons" class="grid grid-cols-5 gap-2">
+                    <!-- Buttons will dynamically load here -->
+                </div>
+            </div>
         </div>
 
-        <!-- Question 2 -->
-        <div class="question">
-            <p>2. What is the primary focus of the concept of conservation biology?</p>
-            <input type="radio" id="q2a" name="q2" value="A"> <label for="q2a">Biodiversity preservation</label><br>
-            <input type="radio" id="q2b" name="q2" value="B"> <label for="q2b">Soil fertility</label><br>
-            <input type="radio" id="q2c" name="q2" value="C"> <label for="q2c">Pollution control</label><br>
-            <input type="radio" id="q2d" name="q2" value="D"> <label for="q2d">Climate change mitigation</label><br>
+        <!-- Skip Questions Section -->
+        <div class="mt-6 bg-white p-4 rounded-lg shadow">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Skip Questions</h2>
+            <div id="skip-questions" class="space-y-2">
+                <!-- Skip questions will be listed here -->
+            </div>
         </div>
-
-        <!-- Question 3 -->
-        <div class="question">
-            <p>3. The term 'biodiversity' refers to the variety of life on Earth. Which of the following is included in biodiversity?</p>
-            <input type="radio" id="q3a" name="q3" value="A"> <label for="q3a">Only species diversity</label><br>
-            <input type="radio" id="q3b" name="q3" value="B"> <label for="q3b">Genetic diversity only</label><br>
-            <input type="radio" id="q3c" name="q3" value="C"> <label for="q3c">Ecosystem diversity</label><br>
-            <input type="radio" id="q3d" name="q3" value="D"> <label for="q3d">All of the above</label><br>
-        </div>
-
-        <!-- Question 4 -->
-        <div class="question">
-            <p>4. Which of the following is an invasive species in India?</p>
-            <input type="radio" id="q4a" name="q4" value="A"> <label for="q4a">Eucalyptus</label><br>
-            <input type="radio" id="q4b" name="q4" value="B"> <label for="q4b">Pine</label><br>
-            <input type="radio" id="q4c" name="q4" value="C"> <label for="q4c">Mango</label><br>
-            <input type="radio" id="q4d" name="q4" value="D"> <label for="q4d">Bamboo</label><br>
-        </div>
-
-        <!-- Question 5 -->
-        <div class="question">
-            <p>5. What is the role of zoos in biodiversity conservation?</p>
-            <input type="radio" id="q5a" name="q5" value="A"> <label for="q5a">Breeding endangered species</label><br>
-            <input type="radio" id="q5b" name="q5" value="B"> <label for="q5b">Public education about animals</label><br>
-            <input type="radio" id="q5c" name="q5" value="C"> <label for="q5c">Rehabilitation of wild animals</label><br>
-            <input type="radio" id="q5d" name="q5" value="D"> <label for="q5d">All of the above</label><br>
-        </div>
-
-        <!-- Question 6 -->
-        <div class="question">
-            <p>6. Which of the following is the largest biodiversity hotspot in the world?</p>
-            <input type="radio" id="q6a" name="q6" value="A"> <label for="q6a">Amazon Rainforest</label><br>
-            <input type="radio" id="q6b" name="q6" value="B"> <label for="q6b">Sundaland</label><br>
-            <input type="radio" id="q6c" name="q6" value="C"> <label for="q6c">Indo-Burma</label><br>
-            <input type="radio" id="q6d" name="q6" value="D"> <label for="q6d">Madagascar</label><br>
-        </div>
-
-        <!-- Question 7 -->
-        <div class="question">
-            <p>7. What is the significance of the 'Greenhouse effect'?</p>
-            <input type="radio" id="q7a" name="q7" value="A"> <label for="q7a">It increases the temperature of Earth</label><br>
-            <input type="radio" id="q7b" name="q7" value="B"> <label for="q7b">It decreases the temperature of Earth</label><br>
-            <input type="radio" id="q7c" name="q7" value="C"> <label for="q7c">It regulates the temperature of Earth</label><br>
-            <input type="radio" id="q7d" name="q7" value="D"> <label for="q7d">It does not affect the temperature of Earth</label><br>
-        </div>
-
-        <!-- Question 8 -->
-        <div class="question">
-            <p>8. What is the main cause of biodiversity loss worldwide?</p>
-            <input type="radio" id="q8a" name="q8" value="A"> <label for="q8a">Climate change</label><br>
-            <input type="radio" id="q8b" name="q8" value="B"> <label for="q8b">Deforestation</label><br>
-            <input type="radio" id="q8c" name="q8" value="C"> <label for="q8c">Pollution</label><br>
-            <input type="radio" id="q8d" name="q8" value="D"> <label for="q8d">All of the above</label><br>
-        </div>
-
-        <!-- Question 9 -->
-        <div class="question">
-            <p>9. Which of the following is a major characteristic of biodiversity hotspots?</p>
-            <input type="radio" id="q9a" name="q9" value="A"> <label for="q9a">High levels of endemism</label><br>
-            <input type="radio" id="q9b" name="q9" value="B"> <label for="q9b">High levels of species richness</label><br>
-            <input type="radio" id="q9c" name="q9" value="C"> <label for="q9c">Both A and B</label><br>
-            <input type="radio" id="q9d" name="q9" value="D"> <label for="q9d">None of the above</label><br>
-        </div>
-
-        <!-- Question 10 -->
-        <div class="question">
-            <p>10. What is the term used for the intentional introduction of species to new habitats?</p>
-            <input type="radio" id="q10a" name="q10" value="A"> <label for="q10a">Invasive species</label><br>
-            <input type="radio" id="q10b" name="q10" value="B"> <label for="q10b">Exotic species</label><br>
-            <input type="radio" id="q10c" name="q10" value="C"> <label for="q10c">Native species</label><br>
-            <input type="radio" id="q10d" name="q10" value="D"> <label for="q10d">Alien species</label><br>
-        </div>
-
-        <!-- Questions 11-20 would be added in the same way -->
 
         <!-- Submit Button -->
-        <button type="button" class="btn" onclick="calculateResult()">Submit</button>
-    </form>
-</div>
+        <div class="mt-6 text-center">
+            <button id="submit-test" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">Submit Test</button>
+        </div>
 
-<div id="resultContainer" class="result" style="display:none;">
-    <p>Your Score: <span id="score"></span>/20</p>
-    <button class="btn" onclick="restartQuiz()">Restart Quiz</button>
-</div>
+        <!-- Result Section -->
+        <div id="result-container" class="hidden mt-6 bg-white rounded-lg shadow p-6">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">Test Analysis</h2>
+            <div id="result-details">
+                <!-- Result details will load dynamically here -->
+            </div>
+            
+            <!-- Send Result Button -->
+            <div class="mt-6 text-center">
+                <a href="https://t.me/crocovexQuiz" target="_blank">
+                    <button class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Send Your Result</button>
+                </a>
+            </div>
+        </div>
+    </div>
 
-<footer>
-    <p>&copy; 2025 PMI Eduverse</p>
-</footer>
+    <!-- Branding Footer -->
+    <div id="branding">
+        <span>Crocovex | PMI Eduverse | All Rights Reserved | PMI Eduverse Quiz System</span>
+    </div>
 
-<script>
-    const correctAnswers = {
-        q1: "D", q2: "A", q3: "D", q4: "A", q5: "D",
-        q6: "A", q7: "A", q8: "D", q9: "C", q10: "D",
-        q11: "B", q12: "A", q13: "A", q14: "B", q15: "D",
-        q16: "A", q17: "C", q18: "A", q19: "C", q20: "B"
-    };
+    <script>
+        const questions = [
+        { 
+    "id": 1, 
+    "text": "Which of the following is an abiotic component of an ecosystem?", 
+    "options": ["Bacteria", "Fungi", "Sunlight", "Plants"], 
+    "correct": 2 
+  },
+  { 
+    "id": 2, 
+    "text": "Which of the following is a biotic component of an ecosystem?", 
+    "options": ["Water", "Air", "Rocks", "Animals"], 
+    "correct": 3 
+  },
+  { 
+    "id": 3, 
+    "text": "The competitive exclusion principle states that:", 
+    "options": [
+      "Two species can coexist indefinitely if they occupy the same niche", 
+      "Two species cannot coexist indefinitely if they occupy the same niche", 
+      "Species with similar niches will always outcompete each other", 
+      "Species with different niches will always outcompete each other"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 4, 
+    "text": "Which of the following is an example of niche partitioning?", 
+    "options": [
+      "Different bird species feeding on different parts of the same tree", 
+      "Lions and hyenas hunting the same prey", 
+      "Trees growing at different elevations in a forest", 
+      "Fish species inhabiting different depths of the same lake"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 5, 
+    "text": "Which of the following is an example of a habitat?", 
+    "options": [
+      "The role of a bee in pollination", 
+      "The area of a forest where deer live", 
+      "The diet of a lion", 
+      "The migration pattern of birds"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 6, 
+    "text": "Which of the following is an example of a fundamental niche?", 
+    "options": [
+      "The range of temperatures a species can tolerate", 
+      "The specific area where a species lives", 
+      "The actual role a species plays in its environment", 
+      "The interactions a species has with other species"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 7, 
+    "text": "Which of the following is an example of a realized niche?", 
+    "options": [
+      "The range of temperatures a species can tolerate", 
+      "The specific area where a species lives", 
+      "The actual role a species plays in its environment", 
+      "The interactions a species has with other species"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 8, 
+    "text": "Which of the following is an example of resource partitioning?", 
+    "options": [
+      "Different bird species feeding on different parts of the same tree", 
+      "Lions and hyenas hunting the same prey", 
+      "Trees growing at different elevations in a forest", 
+      "Fish species inhabiting different depths of the same lake"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 9, 
+    "text": "Which of the following is an example of a keystone species?", 
+    "options": [
+      "A tree species that provides food and shelter for many animals", 
+      "A predator that regulates the population of herbivores", 
+      "A plant species that fixes nitrogen in the soil", 
+      "A decomposer that breaks down dead organic matter"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 10, 
+    "text": "Which of the following is an example of a foundation species?", 
+    "options": [
+      "A tree species that provides food and shelter for many animals", 
+      "A predator that regulates the population of herbivores", 
+      "A plant species that fixes nitrogen in the soil", 
+      "A decomposer that breaks down dead organic matter"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 11, 
+    "text": "Which of the following is an example of a habitat?", 
+    "options": [
+      "The role of a bee in pollination", 
+      "The area of a forest where deer live", 
+      "The diet of a lion", 
+      "The migration pattern of birds"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 12, 
+    "text": "Which of the following is an example of a realized niche?", 
+    "options": [
+      "The range of temperatures a species can tolerate", 
+      "The specific area where a species lives", 
+      "The actual role a species plays in its environment", 
+      "The interactions a species has with other species"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 13, 
+    "text": "Which of the following is an example of resource partitioning?", 
+    "options": [
+      "Different bird species feeding on different parts of the same tree", 
+      "Lions and hyenas hunting the same prey", 
+      "Trees growing at different elevations in a forest", 
+      "Fish species inhabiting different depths of the same lake"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 14, 
+    "text": "Which of the following is an example of a keystone species?", 
+    "options": [
+      "A tree species that provides food and shelter for many animals", 
+      "A predator that regulates the population of herbivores", 
+      "A plant species that fixes nitrogen in the soil", 
+      "A decomposer that breaks down dead organic matter"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 15, 
+    "text": "Which of the following is an example of a foundation species?", 
+    "options": [
+      "A tree species that provides food and shelter for many animals", 
+      "A predator that regulates the population of herbivores", 
+      "A plant species that fixes nitrogen in the soil", 
+      "A decomposer that breaks down dead organic matter"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 16, 
+    "text": "Which of the following is an example of a habitat?", 
+    "options": [
+      "The role of a bee in pollination", 
+      "The area of a forest where deer live", 
+      "The diet of a lion", 
+      "The migration pattern of birds"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 17, 
+    "text": "Which of the following is an example of a fundamental niche?", 
+    "options": [
+      "The range of temperatures a species can tolerate", 
+      "The specific area where a species lives", 
+      "The actual role a species plays in its environment", 
+      "The interactions a species has with other species"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 18, 
+    "text": "Which of the following is an example of a realized niche?", 
+    "options": [
+      "The range of temperatures a species can tolerate", 
+      "The specific area where a species lives", 
+      "The actual role a species plays in its environment", 
+      "The interactions a species has with other species"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 19, 
+    "text": "Which of the following is an example of resource partitioning?", 
+    "options": [
+      "Different bird species feeding on different parts of the same tree", 
+      "Lions and hyenas hunting the same prey", 
+      "Trees growing at different elevations in a forest", 
+      "Fish species inhabiting different depths of the same lake"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 20, 
+    "text": "Which of the following is an example of a keystone species?", 
+    "options": [
+      "A tree species that provides food and shelter for many animals", 
+      "A predator that regulates the population of herbivores", 
+      "A plant species that fixes nitrogen in the soil", 
+      "A decomposer that breaks down dead organic matter"
+    ], 
+    "correct": 1 
+  },
+  {
+    "id": 21, 
+    "text": "Which of the following is an example of a foundation species?", 
+    "options": [
+      "A tree species that provides food and shelter for many animals", 
+      "A predator that regulates the population of herbivores", 
+      "A plant species that fixes nitrogen in the soil", 
+      "A decomposer that breaks down dead organic matter"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 22, 
+    "text": "Which of the following best describes the relationship between different species in a community?", 
+    "options": [
+      "Symbiosis", 
+      "Competition", 
+      "Predation", 
+      "All of the above"
+    ], 
+    "correct": 3 
+  },
+  { 
+    "id": 23, 
+    "text": "Which of the following is an abiotic factor in an ecosystem?", 
+    "options": [
+      "Temperature", 
+      "Animals", 
+      "Bacteria", 
+      "Plants"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 24, 
+    "text": "Which of the following is an example of a primary consumer?", 
+    "options": [
+      "Herbivore", 
+      "Carnivore", 
+      "Omnivore", 
+      "Decomposer"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 25, 
+    "text": "Which of the following ecosystems has the highest biodiversity?", 
+    "options": [
+      "Tundra", 
+      "Desert", 
+      "Tropical rainforest", 
+      "Savanna"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 26, 
+    "text": "In the context of ecological succession, what is the first species to colonize a barren environment?", 
+    "options": [
+      "Pioneer species", 
+      "Climax species", 
+      "Keystone species", 
+      "Invasive species"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 27, 
+    "text": "Which of the following is an example of a mutualistic relationship?", 
+    "options": [
+      "A bee pollinates a flower", 
+      "A lion preys on a zebra", 
+      "A cuckoo lays its eggs in another bird’s nest", 
+      "A remora fish attaches to a shark"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 28, 
+    "text": "Which of the following is NOT an example of a biotic factor?", 
+    "options": [
+      "Bacteria", 
+      "Temperature", 
+      "Plants", 
+      "Animals"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 29, 
+    "text": "What is the primary cause of climate change?", 
+    "options": [
+      "Deforestation", 
+      "Burning of fossil fuels", 
+      "Overpopulation", 
+      "Natural variations"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 30, 
+    "text": "Which of the following is an example of an abiotic component?", 
+    "options": [
+      "Water", 
+      "Fungi", 
+      "Animals", 
+      "Plants"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 31, 
+    "text": "Which level of ecological organization includes multiple populations of different species living together?", 
+    "options": [
+      "Species", 
+      "Population", 
+      "Community", 
+      "Ecosystem"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 32, 
+    "text": "Which of the following is an example of commensalism?", 
+    "options": [
+      "A bird feeding on a zebra's ticks", 
+      "A lion hunting a zebra", 
+      "A tapeworm living in a host’s intestine", 
+      "A bee pollinating a flower"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 33, 
+    "text": "Which term refers to the total mass of living matter in a specific area?", 
+    "options": [
+      "Biomass", 
+      "Productivity", 
+      "Biotic potential", 
+      "Carrying capacity"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 34, 
+    "text": "Which of the following processes involves the release of carbon dioxide into the atmosphere?", 
+    "options": [
+      "Photosynthesis", 
+      "Respiration", 
+      "Transpiration", 
+      "Nitrification"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 35, 
+    "text": "Which of the following is an example of a carnivore?", 
+    "options": [
+      "Lion", 
+      "Deer", 
+      "Rabbit", 
+      "Elephant"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 36, 
+    "text": "Which of the following factors does NOT influence the rate of succession?", 
+    "options": [
+      "Soil composition", 
+      "Climatic conditions", 
+      "Animal migration", 
+      "Seed dispersal"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 37, 
+    "text": "Which type of organism is capable of photosynthesis?", 
+    "options": [
+      "Plants", 
+      "Fungi", 
+      "Animals", 
+      "Bacteria"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 38, 
+    "text": "Which of the following is an example of an abiotic factor in an ecosystem?", 
+    "options": [
+      "Light", 
+      "Insects", 
+      "Fish", 
+      "Decomposers"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 39, 
+    "text": "Which term describes a stable, mature ecosystem that has undergone succession?", 
+    "options": [
+      "Climax community", 
+      "Pioneer community", 
+      "Transitional community", 
+      "Successional community"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 40, 
+    "text": "In an energy pyramid, which level has the greatest amount of energy?", 
+    "options": [
+      "Producers", 
+      "Primary consumers", 
+      "Secondary consumers", 
+      "Tertiary consumers"
+    ], 
+    "correct": 0 
+  },
+  {
+    "id": 41, 
+    "text": "Which of the following is NOT a characteristic of an ecosystem?", 
+    "options": [
+      "It consists of biotic and abiotic components", 
+      "It can exist without a constant input of energy", 
+      "It has a specific boundary", 
+      "It is self-sustaining in nature"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 42, 
+    "text": "What does the term 'biome' refer to?", 
+    "options": [
+      "A population of individuals in a species", 
+      "The physical environment of an organism", 
+      "A large community of plants and animals that occupies a distinct region", 
+      "An individual organism’s habitat"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 43, 
+    "text": "Which of the following is a characteristic of a desert biome?", 
+    "options": [
+      "High precipitation and dense vegetation", 
+      "Hot, dry conditions and sparse vegetation", 
+      "Cold, wet conditions with coniferous trees", 
+      "Temperate climate with seasonal changes"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 44, 
+    "text": "Which of the following ecosystems has the highest net primary productivity?", 
+    "options": [
+      "Tropical rainforest", 
+      "Temperate forest", 
+      "Savanna", 
+      "Coral reefs"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 45, 
+    "text": "Which of the following is an example of a trophic level?", 
+    "options": [
+      "Producers", 
+      "Primary consumers", 
+      "Secondary consumers", 
+      "All of the above"
+    ], 
+    "correct": 3 
+  },
+  { 
+    "id": 46, 
+    "text": "Which of the following is true about the carbon cycle?", 
+    "options": [
+      "Carbon is released into the atmosphere only through respiration", 
+      "Plants and animals store carbon in the form of carbohydrates", 
+      "Only plants participate in the carbon cycle", 
+      "All of the above"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 47, 
+    "text": "Which of the following organisms is a primary producer?", 
+    "options": [
+      "Grass", 
+      "Rabbit", 
+      "Lion", 
+      "Eagle"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 48, 
+    "text": "Which of the following is NOT a type of ecological interaction?", 
+    "options": [
+      "Mutualism", 
+      "Competition", 
+      "Excretion", 
+      "Predation"
+    ], 
+    "correct": 2 
+  },
+  { 
+    "id": 49, 
+    "text": "Which of the following best describes a climax community?", 
+    "options": [
+      "A community in which species composition changes over time", 
+      "A stable community that does not change", 
+      "The first species to colonize an area", 
+      "A community that never reaches stability"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 50, 
+    "text": "In the nitrogen cycle, which organism is primarily responsible for nitrogen fixation?", 
+    "options": [
+      "Bacteria", 
+      "Fungi", 
+      "Plants", 
+      "Animals"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 51, 
+    "text": "Which of the following is an example of a secondary consumer?", 
+    "options": [
+      "Lion", 
+      "Frog", 
+      "Grasshopper", 
+      "Deer"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 52, 
+    "text": "Which of the following is an example of a biome with permafrost?", 
+    "options": [
+      "Tundra", 
+      "Tropical rainforest", 
+      "Desert", 
+      "Savanna"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 53, 
+    "text": "What is the main function of decomposers in an ecosystem?", 
+    "options": [
+      "To break down dead organisms and recycle nutrients", 
+      "To consume primary producers", 
+      "To compete with primary consumers", 
+      "To produce energy through photosynthesis"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 54, 
+    "text": "Which of the following is a feature of an oligotrophic lake?", 
+    "options": [
+      "Low nutrient levels and high oxygen content", 
+      "High nutrient levels and low oxygen content", 
+      "Low biodiversity", 
+      "High concentrations of pollutants"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 55, 
+    "text": "Which of the following is an example of a limiting factor in an ecosystem?", 
+    "options": [
+      "Water availability", 
+      "Temperature", 
+      "Food availability", 
+      "All of the above"
+    ], 
+    "correct": 3 
+  },
+  { 
+    "id": 56, 
+    "text": "Which of the following is an example of an abiotic factor affecting species distribution?", 
+    "options": [
+      "Climate", 
+      "Food availability", 
+      "Predators", 
+      "All of the above"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 57, 
+    "text": "Which of the following is a characteristic of a tropical rainforest?", 
+    "options": [
+      "High biodiversity and warm temperatures", 
+      "Low biodiversity and cold temperatures", 
+      "High biodiversity and cold temperatures", 
+      "Low biodiversity and warm temperatures"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 58, 
+    "text": "Which of the following is true about the water cycle?", 
+    "options": [
+      "Water is constantly cycled between the atmosphere and Earth's surface", 
+      "Water only evaporates from oceans", 
+      "Water only moves through precipitation", 
+      "None of the above"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 59, 
+    "text": "Which of the following is an example of a pioneer species?", 
+    "options": [
+      "Lichen", 
+      "Tree", 
+      "Rabbit", 
+      "Deer"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 60, 
+    "text": "Which of the following terms refers to the non-living components of an ecosystem?", 
+    "options": [
+      "Biotic", 
+      "Abiotic", 
+      "Symbiotic", 
+      "Trophic"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 61, 
+    "text": "Which of the following is a characteristic of a savanna biome?", 
+    "options": [
+      "High rainfall and dense vegetation", 
+      "Low rainfall and sparse vegetation", 
+      "Cold temperatures and low precipitation", 
+      "High biodiversity and warm temperatures"
+    ], 
+    "correct": 1 
+  },
+  { 
+    "id": 62, 
+    "text": "What is the primary function of chlorophyll in plants?", 
+    "options": [
+      "To capture light energy for photosynthesis", 
+      "To transport nutrients", 
+      "To store energy", 
+      "To protect against herbivores"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 63, 
+    "text": "Which of the following processes involves the conversion of nitrogen gas into a usable form for plants?", 
+    "options": [
+      "Nitrogen fixation", 
+      "Denitrification", 
+      "Nitrification", 
+      "Ammonification"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 64, 
+    "text": "Which of the following is an example of a decomposer?", 
+    "options": [
+      "Bacteria", 
+      "Plants", 
+      "Lions", 
+      "Eagles"
+    ], 
+    "correct": 0 
+  },
+  { 
+    "id": 65, 
+    "text": "Which of the following is a characteristic of an estuarine ecosystem?", 
+    "options": [
+      "Where freshwater meets saltwater", 
+      "Found only in tropical areas", 
+      "Contains no plant life", 
+      "Only contains saltwater"
+    ], 
+    "correct": 0 
+  },
+        ];
 
-    function calculateResult() {
-        let score = 0;
+        let currentQuestion = 0;
+        let answers = Array(questions.length).fill(null);
+        let skippedQuestions = []; // To store skipped questions
+        let timer = 1500; // 25 minutes
+        let testSubmitted = false; // Flag to prevent resubmitting test
 
-        for (let i = 1; i <= 20; i++) {
-            const answer = document.querySelector(`input[name="q${i}"]:checked`);
-            if (answer && answer.value === correctAnswers[`q${i}`]) {
-                score++;
+        // Timer Countdown
+        const timerElement = document.getElementById("timer");
+        let countdownInterval = setInterval(() => {
+            if (timer > 0 && !testSubmitted) {
+                timer--;
+                const minutes = Math.floor(timer / 60).toString().padStart(2, "0");
+                const seconds = (timer % 60).toString().padStart(2, "0");
+                timerElement.textContent = `${minutes}:${seconds}`;
+            } else if (timer === 0 && !testSubmitted) {
+                submitTest();
             }
+        }, 1000);
+
+        // Load Questions
+        const questionContainer = document.getElementById("question-container");
+        const questionButtons = document.getElementById("question-buttons");
+
+        function loadQuestion(index) {
+            const question = questions[index];
+            questionContainer.innerHTML = `
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Q${index + 1}: ${question.text}</h2>
+                <div class="space-y-4">
+                    ${question.options.map((option, i) => `
+                        <label class="block bg-gray-100 p-2 rounded cursor-pointer">
+                            <input type="radio" name="answer" value="${i}" class="mr-2" ${answers[index] === i ? "checked" : ""}> ${option}
+                        </label>
+                    `).join("")}
+                </div>
+            `;
+
+            updateNavigator(index);
         }
 
-        document.getElementById('quizContainer').style.display = 'none';
-        document.getElementById('resultContainer').style.display = 'block';
-        document.getElementById('score').textContent = score;
-    }
+        function updateNavigator(activeIndex) {
+            questionButtons.innerHTML = "";
+            questions.forEach((q, i) => {
+                const statusClass = answers[i] !== null ? "bg-green-500 text-white" : "bg-gray-300";
+                questionButtons.innerHTML += `
+                    <button class="p-2 rounded ${i === activeIndex ? "question-active" : statusClass}" onclick="loadQuestion(${i})">
+                        ${i + 1}
+                    </button>
+                `;
+            });
+        }
 
-    function restartQuiz() {
-        document.getElementById('quizForm').reset();
-        document.getElementById('quizContainer').style.display = 'block';
-        document.getElementById('resultContainer').style.display = 'none';
-    }
-</script>
+        // Save Answer
+        document.getElementById("save-next").addEventListener("click", () => {
+            const selectedOption = document.querySelector("input[name='answer']:checked");
+            if (selectedOption) {
+                answers[currentQuestion] = parseInt(selectedOption.value); // Save the selected answer
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    loadQuestion(currentQuestion);
+                }
+            }
+        });
 
+        // Skip Question
+        document.getElementById("skip").addEventListener("click", () => {
+            if (currentQuestion < questions.length - 1) {
+                skippedQuestions.push(currentQuestion); // Add to skipped questions
+                updateSkippedQuestions();
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        // Update Skip Questions List
+        function updateSkippedQuestions() {
+            const skippedContainer = document.getElementById("skip-questions");
+            skippedContainer.innerHTML = skippedQuestions.map((index) => `
+                <button class="text-blue-600" onclick="loadSkippedQuestion(${index})">Q${index + 1}</button>
+            `).join("");
+        }
+
+        // Load Skipped Question
+        function loadSkippedQuestion(index) {
+            currentQuestion = index;
+            loadQuestion(index);
+        }
+
+        // Submit Test
+        function submitTest() {
+            if (testSubmitted) return;
+
+            clearInterval(countdownInterval); // Stop the timer
+
+            const resultContainer = document.getElementById("result-container");
+            const resultDetails = document.getElementById("result-details");
+            let correct = 0;
+            resultDetails.innerHTML = "";
+
+            questions.forEach((q, i) => {
+                const userAnswer = answers[i];
+                if (userAnswer === q.correct) {
+                    correct++;
+                    resultDetails.innerHTML += `<p class='text-green-600'>Q${i + 1}: Correct</p>`;
+                } else {
+                    resultDetails.innerHTML += `<p class='text-red-600'>Q${i + 1}: Incorrect (Correct: ${q.options[q.correct]})</p>`;
+                }
+            });
+
+            resultDetails.innerHTML += `<p class='mt-4 text-lg font-bold'>Score: ${correct} / ${questions.length}</p>`;
+            resultContainer.classList.remove("hidden");
+
+            testSubmitted = true;
+            document.getElementById("submit-test").disabled = true;
+        }
+
+        // Submit Button Event Listener
+        document.getElementById("submit-test").addEventListener("click", submitTest);
+
+        loadQuestion(currentQuestion);
+    </script>
 </body>
 </html>
