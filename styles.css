@@ -7,7 +7,7 @@
 
 /* Body styling */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; /* More modern font */
     background: linear-gradient(135deg, #00bcd4, #ff4081);
     color: white;
     height: 100vh;
@@ -15,6 +15,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
 }
 
 /* Button Container */
@@ -23,6 +24,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    animation: fadeIn 1.5s ease-out;
 }
 
 /* Button Styling */
@@ -32,11 +34,15 @@ body {
     background: #ff4081;
     padding: 20px 40px;
     font-size: 2rem;
+    font-weight: bold;
     border-radius: 50px;
     text-align: center;
     width: 300px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .button:hover {
@@ -44,18 +50,46 @@ body {
     transform: scale(1.1);
 }
 
-/* Footer */
+/* Footer with Animated Crocovex line */
 footer {
-    text-align: center;
-    padding: 10px;
-    font-size: 0.8rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
     position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    z-index: 0;
+}
+
+/* Crocovex Animated Line */
+footer::before {
+    content: "Crocovex Animated Footer Line - Keeping it running";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    animation: slideLine 5s linear infinite;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    color: #00bcd4;
+    font-weight: bold;
 }
 
 /* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes neonEffect {
     0% {
         text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081;
@@ -66,4 +100,24 @@ footer {
     100% {
         text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081;
     }
+}
+
+@keyframes slideLine {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+/* Branding for PMI EDUVERSE */
+.pmi-logo {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff4081;
+    text-align: center;
+    margin-bottom: 50px;
+    animation: neonEffect 2s infinite alternate;
 }
