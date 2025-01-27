@@ -24,7 +24,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     width: 80%;
     animation: fadeIn 1.5s ease-out;
@@ -38,7 +38,6 @@ body {
     width: 250px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 10px;
 }
 
 /* Hover Effect for Sections */
