@@ -18,23 +18,25 @@
             background: linear-gradient(135deg, #1a237e, #00bcd4); /* Dual-tone background */
             color: white;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
             flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 80px; /* Space for footer */
             animation: backgroundAnimation 10s infinite alternate;
         }
 
         /* Branding Section */
         .pmi-logo {
             font-family: 'Roboto', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
             color: #ff4081;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             animation: neonEffect 2s infinite alternate;
+            width: 100%;
         }
 
         /* Neon Effect Animation */
@@ -55,9 +57,9 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            width: 80%;
-            animation: fadeIn 1.5s ease-out;
+            gap: 15px;
+            width: 100%;
+            max-width: 1200px;
             margin-top: 20px;
         }
 
@@ -65,9 +67,9 @@
         .section {
             background: rgba(0, 0, 0, 0.7); /* Dark background */
             border-radius: 15px;
-            padding: 30px;
-            width: 250px;
-            height: 300px; /* Equal height for all sections */
+            padding: 15px;
+            width: 200px;
+            height: 250px; /* Equal height for all sections */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -82,16 +84,16 @@
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #ff4081;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .description {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         /* Button Styling */
@@ -100,7 +102,7 @@
             color: white;
             background: #ff4081;
             padding: 10px 20px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             border-radius: 50px;
             text-align: center;
@@ -118,15 +120,15 @@
 
         /* Footer Styling */
         footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
+            padding: 20px 0; /* Increased padding for larger footer */
             text-align: center;
-            padding: 10px;
-            font-size: 1rem;
+            font-size: 1.2rem;
             background-color: rgba(0, 0, 0, 0.6);
             color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
         }
 
         /* Animation for Fade In */
@@ -153,6 +155,53 @@
                 background: linear-gradient(135deg, #1a237e, #00bcd4);
             }
         }
+
+        /* Responsive Design: Mobile and Tablet */
+        @media (max-width: 768px) {
+            .pmi-logo {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            .section-container {
+                gap: 10px;
+            }
+            .section {
+                width: 180px;
+                height: 220px;
+                padding: 12px;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            .button {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Further adjustment for smaller screens */
+        @media (max-width: 480px) {
+            .pmi-logo {
+                font-size: 1.5rem;
+            }
+            .section-container {
+                gap: 10px;
+            }
+            .section {
+                width: 100%;
+                height: auto;
+                padding: 12px;
+            }
+            h2 {
+                font-size: 1rem;
+            }
+            .description {
+                font-size: 0.9rem;
+            }
+            .button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -164,61 +213,47 @@
 
     <!-- Section Container with Left to Right Layout -->
     <div class="section-container">
-
         <!-- Section 1: Csir-NET -->
         <div class="section">
             <h2>Csir-NET</h2>
-            <p class="description">
-                Test your skills in Ecology. Solve problems from Fundamental Concepts.
-            </p>
+            <p class="description">Test your skills in Ecology. Solve problems from Fundamental Concepts.</p>
             <a href="csirnet.html" class="button">Start Ecology</a>
         </div>
 
         <!-- Section 2: Physics Quiz -->
         <div class="section">
             <h2>Physics Quiz</h2>
-            <p class="description">
-                Explore the world of physics with questions covering mechanics, thermodynamics, and more.
-            </p>
+            <p class="description">Explore the world of physics with questions covering mechanics, thermodynamics, and more.</p>
             <a href="physics-quiz.html" class="button">Start Physics Quiz</a>
         </div>
 
         <!-- Section 3: Chemistry Quiz -->
         <div class="section">
             <h2>Chemistry Quiz</h2>
-            <p class="description">
-                Test your knowledge in chemistry with questions on organic, inorganic, and physical chemistry.
-            </p>
+            <p class="description">Test your knowledge in chemistry with questions on organic, inorganic, and physical chemistry.</p>
             <a href="chemistry-quiz.html" class="button">Start Chemistry Quiz</a>
         </div>
 
         <!-- Section 4: Biology Quiz -->
         <div class="section">
             <h2>Biology Quiz</h2>
-            <p class="description">
-                Dive into biology, including topics on human anatomy, botany, and ecology.
-            </p>
+            <p class="description">Dive into biology, including topics on human anatomy, botany, and ecology.</p>
             <a href="biology-quiz.html" class="button">Start Biology Quiz</a>
         </div>
 
         <!-- Section 5: History Quiz -->
         <div class="section">
             <h2>History Quiz</h2>
-            <p class="description">
-                Challenge your knowledge of world history, from ancient civilizations to modern events.
-            </p>
+            <p class="description">Challenge your knowledge of world history, from ancient civilizations to modern events.</p>
             <a href="history-quiz.html" class="button">Start History Quiz</a>
         </div>
 
         <!-- Section 6: Geography Quiz -->
         <div class="section">
             <h2>Geography Quiz</h2>
-            <p class="description">
-                Test your understanding of world geography, including countries, capitals, and landmarks.
-            </p>
+            <p class="description">Test your understanding of world geography, including countries, capitals, and landmarks.</p>
             <a href="geography-quiz.html" class="button">Start Geography Quiz</a>
         </div>
-
     </div>
 
     <!-- Footer with Animated Line -->
