@@ -7,7 +7,7 @@
 
 /* Body styling */
 body {
-    font-family: 'Roboto', sans-serif; /* More modern font */
+    font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #00bcd4, #ff4081);
     color: white;
     height: 100vh;
@@ -18,13 +18,31 @@ body {
     overflow: hidden;
 }
 
-/* Button Container */
-.button-container {
+/* Section Container */
+.section-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
     animation: fadeIn 1.5s ease-out;
+}
+
+/* Individual Section */
+.section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff4081;
+}
+
+.description {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
 }
 
 /* Button Styling */
@@ -33,7 +51,7 @@ body {
     color: white;
     background: #ff4081;
     padding: 20px 40px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     border-radius: 50px;
     text-align: center;
@@ -87,18 +105,6 @@ footer::before {
     100% {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes neonEffect {
-    0% {
-        text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081;
-    }
-    50% {
-        text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4, 0 0 30px #00bcd4, 0 0 40px #00bcd4;
-    }
-    100% {
-        text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081, 0 0 40px #ff4081;
     }
 }
 
