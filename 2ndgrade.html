@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Eduverse Examination</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff6347, #1e3a8a, #4caf50); /* Red, Blue, Green */
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-size: cover;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ff6347, #1e3a8a, #facc15); /* Red, Blue, Yellow */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        button {
+            background: linear-gradient(to right, #ff6347, #4caf50); /* Red to Green gradient */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.6);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .question-option {
+            background: linear-gradient(45deg, #4CAF50, #1e3a8a); /* Green to Blue gradient */
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .question-option:hover {
+            background: linear-gradient(45deg, #ff6347, #facc15); /* Red to Yellow gradient */
+        }
+
+        .question-option.selected {
+            background: linear-gradient(45deg, #ff6347, #4caf50); /* Red to Green gradient */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .timer {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #facc15;
+        }
+
+        .incorrect-text {
+            color: #ff6347; /* Red color for incorrect */
+        }
+
+        /* New Thumbnail Section */
+        .thumbnail-section {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .thumbnail-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Login Section -->
+     <div id="loginContainer" class="container">
+        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Examination</h1>
+        
+        <!-- Thumbnail Section -->
+        <div class="mb-6">
+            <img src="https://i.ibb.co/VMQ0MS3/exam.jpg" alt="Exam Thumbnail" class="w-full h-auto max-w-[1280px] max-h-[720px] mx-auto rounded-lg shadow-lg">
+            <p class="text-center mt-2 text-lg font-semibold">RPSC II Grade Teacher [1st Paper]</p>
+        </div>
+
+        <!-- Total Questions Section -->
+        <div class="bg-gray-800 text-white p-4 rounded shadow-lg mb-4">
+            <p class="text-lg font-bold">Total Questions in Quiz: 20 <span id="totalQuestions"></span></p>
+            <p class="text-sm text-gray-300">Prepare yourself to complete all questions before submitting!</p>
+        </div>
+
+        <input id="rollNumber" type="text" placeholder="Enter Roll Number" class="w-full p-3 mb-4 rounded text-black">
+        <input id="userName" type="text" placeholder="Enter Your Name" class="w-full p-3 mb-4 rounded text-black">
+        <button onclick="startQuiz()" class="w-full mt-4">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizContainer" class="container hidden">
+        <h1 class="text-2xl font-bold mb-4 gradient-text">PMI Eduverse Examination</h1>
+        <div id="timer" class="timer mb-4"></div>
+        <div id="questionBox">
+            <h2 id="question" class="text-lg font-semibold mb-6">Loading question...</h2>
+            <div id="options" class="grid gap-4"></div>
+        </div>
+        <div class="flex justify-between mt-6">
+            <button onclick="prevQuestion()" class="bg-gray-400">Previous</button>
+            <button onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+
+    <!-- Result Section -->
+    <div id="resultContainer" class="container hidden">
+        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">Results</h1>
+        <p id="resultInfo" class="text-lg mb-4 text-center"></p>
+        <p id="totalMarks" class="text-lg mb-4 text-center"></p>
+        <canvas id="resultChart" class="mb-6"></canvas>
+        <div id="incorrectQuestions" class="mt-6"></div>
+        <button onclick="restartQuiz()" class="w-full mt-4">Restart Quiz</button>
+    </div>
+
+    <script>
+        const questions = [
+  {
+    "question": "गुर्जर प्रतिहार वंश का संस्थापक कौन था?",
+    "options": ["नागभट्ट प्रथम", "मिहिर भोज", "वत्सराज", "महेंद्रपाल"],
+    "correct": 0
+  },
+  {
+    "question": "गुर्जर प्रतिहारों की राजधानी कौन सी थी?",
+    "options": ["कन्नौज", "अजमेर", "चित्तौड़गढ़", "उदयपुर"],
+    "correct": 0
+  },
+  {
+    "question": "गुर्जर प्रतिहार वंश ने किस विदेशी आक्रमणकारी का प्रतिरोध किया?",
+    "options": ["महमूद गजनवी", "सिकंदर महान", "मुहम्मद गोरी", "अरब"],
+    "correct": 3
+  },
+  {
+    "question": "मिहिर भोज के शासनकाल में किस देवता की पूजा मुख्य रूप से होती थी?",
+    "options": ["विष्णु", "शिव", "दुर्गा", "काली"],
+    "correct": 0
+  },
+  {
+    "question": "गुर्जर प्रतिहारों का सबसे शक्तिशाली राजा कौन माना जाता है?",
+    "options": ["नागभट्ट प्रथम", "मिहिर भोज", "महेंद्रपाल", "वत्सराज"],
+    "correct": 1
+  },
+  {
+    "question": "गुर्जर प्रतिहारों का प्रसिद्ध दुर्ग कहाँ स्थित है?",
+    "options": ["ग्वालियर", "जैसलमेर", "चित्तौड़गढ़", "रणथंभौर"],
+    "correct": 0
+  },
+  {
+    "question": "गुर्जर प्रतिहार वंश का उदय किस शताब्दी में हुआ?",
+    "options": ["7वीं शताब्दी", "8वीं शताब्दी", "9वीं शताब्दी", "10वीं शताब्दी"],
+    "correct": 1
+  },
+  {
+    "question": "नागभट्ट प्रथम ने किसके आक्रमण को विफल किया था?",
+    "options": ["अरबों", "तुर्कों", "मंगोलों", "गजनवियों"],
+    "correct": 0
+  },
+  {
+    "question": "गुर्जर प्रतिहारों की सेना को किसके मुकाबले सबसे ताकतवर माना गया था?",
+    "options": ["चोलों", "पालों", "राष्ट्रकूटों", "सामान्य राजपूतों"],
+    "correct": 2
+  },
+  {
+    "question": "मिहिर भोज को किस उपाधि से सम्मानित किया गया?",
+    "options": ["आदिलशाह", "आधिपति", "आदिवराह", "महानायक"],
+    "correct": 2
+  },
+  {
+    "question": "गुर्जर प्रतिहारों का संबंध किस धर्म से अधिक था?",
+    "options": ["जैन धर्म", "बौद्ध धर्म", "हिंदू धर्म", "इस्लाम"],
+    "correct": 2
+  },
+  {
+    "question": "गुर्जर प्रतिहार वंश का पतन किस कारण से हुआ?",
+    "options": ["अरबों का आक्रमण", "राष्ट्रकूटों का आक्रमण", "पाल वंश का आक्रमण", "आंतरिक कलह"],
+    "correct": 3
+  },
+  {
+    "question": "गुर्जर प्रतिहारों की सबसे प्रसिद्ध स्थापत्य कला कौन सी थी?",
+    "options": ["मंदिर निर्माण", "किला निर्माण", "मस्जिद निर्माण", "बौद्ध मठ"],
+    "correct": 0
+  },
+  {
+    "question": "मिहिर भोज के शासनकाल को किस रूप में जाना जाता है?",
+    "options": ["स्वर्ण युग", "संग्राम युग", "धार्मिक युग", "पतन युग"],
+    "correct": 0
+  },
+  {
+    "question": "गुर्जर प्रतिहार किस प्रमुख स्थल से जुड़े थे?",
+    "options": ["उज्जैन", "कन्नौज", "पाटलिपुत्र", "मथुरा"],
+    "correct": 1
+  },
+  {
+    "question": "गुर्जर प्रतिहारों ने किस राजवंश को हराकर अपनी शक्ति स्थापित की?",
+    "options": ["राष्ट्रकूट", "पाल", "चोल", "मौर्य"],
+    "correct": 1
+  },
+  {
+    "question": "गुर्जर प्रतिहार वंश का संबंध किस प्रमुख नदी क्षेत्र से था?",
+    "options": ["गंगा", "यमुना", "नर्मदा", "चंबल"],
+    "correct": 0
+  },
+  {
+    "question": "मिहिर भोज का दूसरा नाम क्या था?",
+    "options": ["नागभट्ट", "आदिवराह", "वत्सराज", "महेंद्रपाल"],
+    "correct": 1
+  },
+  {
+    "question": "गुर्जर प्रतिहार किस वंश का हिस्सा माने जाते थे?",
+    "options": ["कछवाहा", "सोलंकी", "परमार", "राजपूत"],
+    "correct": 3
+  },
+  {
+    "question": "गुर्जर प्रतिहारों के काल में कन्नौज किस चीज़ के लिए प्रसिद्ध था?",
+    "options": ["व्यापार", "शिक्षा", "धार्मिक गतिविधि", "राजनीतिक शक्ति"],
+    "correct": 3
+  }
+];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let rollNumber = "";
+        let userName = "";
+        let timerInterval;
+        let timeLeft = 600;
+
+        function startQuiz() {
+            rollNumber = document.getElementById('rollNumber').value;
+            userName = document.getElementById('userName').value;
+
+            if (!rollNumber || !userName) {
+                alert('Please enter both Roll Number and Name');
+                return;
+            }
+
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            startTimer();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const questionData = questions[currentQuestion];
+            document.getElementById('question').textContent = questionData.question;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+
+            questionData.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'question-option';
+                if (userAnswers[currentQuestion] === index) {
+                    button.classList.add('selected');
+                }
+                button.onclick = () => {
+                    userAnswers[currentQuestion] = index;
+                    loadQuestion();
+                };
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.remove('hidden');
+
+            document.getElementById('resultInfo').textContent = `Name: ${userName}, Roll Number: ${rollNumber}`;
+            document.getElementById('totalMarks').textContent = `Score: ${correct} / ${questions.length}`;
+
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        label: 'Results',
+                        data: [correct, incorrect],
+                        backgroundColor: ['#ff6347', '#1e3a8a'], // Red and Blue
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const incorrectQuestionsDiv = document.getElementById('incorrectQuestions');
+            incorrectQuestionsDiv.innerHTML = '<h3 class="text-lg font-bold text-white">Incorrect Answers:</h3>';
+            questions.forEach((question, index) => {
+                if (userAnswers[index] !== question.correct) {
+                    const incorrectText = document.createElement('p');
+                    incorrectText.className = 'incorrect-text';
+                    incorrectText.textContent = `${question.question} - Correct Answer: ${question.options[question.correct]}`;
+                    incorrectQuestionsDiv.appendChild(incorrectText);
+                }
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            timeLeft = 300;
+            clearInterval(timerInterval);
+            document.getElementById('resultContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
