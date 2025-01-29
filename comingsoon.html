@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Eduverse Examination - Coming Soon</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            background: url('https://pixabay.com/get/g0430148cee8aeb64861cf37de492c9577e74dee62645a0dc1c761287dc72668c72a97647c5b2f9422e7b29ab4633d318.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6); /* semi-transparent black background for readability */
+            padding: 50px;
+            border-radius: 15px;
+        }
+        h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #ff6600; /* Metallic orange */
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .countdown {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff6600;
+            margin-top: 30px;
+        }
+        .contact {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #fff;
+        }
+        .contact a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .ai-animation {
+            width: 100px;
+            height: 100px;
+            margin-top: 30px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .countdown {
+                font-size: 1.8em;
+            }
+            .contact {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>PMI Eduverse Examination Test Series will be available soon!</p>
+        <div class="countdown" id="countdown"></div>
+        <p class="contact">Need it sooner? Contact us at <a href="mailto:pmieduverse@gmail.com">pmieduverse@gmail.com</a></p>
+        <img src="https://i.ibb.co/tmCRtbt/pngwing-com.png" alt="AI Animation" class="ai-animation">
+    </div>
+
+    <script>
+        // Countdown Timer Script
+        const countdownElement = document.getElementById('countdown');
+        const endDate = new Date('2025-03-31T00:00:00'); // Replace with your launch date
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = endDate - now;
+            if (timeLeft <= 0) {
+                countdownElement.textContent = "Launch Now!";
+                clearInterval(countdownInterval);
+            } else {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
