@@ -396,25 +396,6 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
     }
 });
-
-// Disable Text Selection
-document.addEventListener('selectstart', event => event.preventDefault());
-
-// Detect DevTools Open
-setInterval(function() {
-    if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
-        document.body.innerHTML = '';
-    }
-}, 1000);
-
-// Obfuscation Example (For External HTML Loading)
-function loadProtectedHTML() {
-    let encodedHTML = 'PGgxPkhlbGxvIFdvcmxkPC9oMT4='; // Base64 Encoded HTML (Example)
-    document.body.innerHTML = atob(encodedHTML);
-}
-
-// Call this function if you want to load HTML dynamically
-// loadProtectedHTML();
     </script>
 </body>
 </html>
