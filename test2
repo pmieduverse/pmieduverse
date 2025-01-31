@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Eduverse - Google Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #00bcd4, #8bc34a); /* Beautiful gradient background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        h2 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: slideIn 1.5s ease-out;
+        }
+
+        button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        #user-info {
+            font-size: 1.2em;
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInText 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Login to PMI Eduverse</h2>
+        <button id="googleLogin">Login with Google</button>
+        <p id="user-info"></p>
+    </div>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAjnEzm0NmtpCkPT3ewkkkkt7baVVs5b7o",
+            authDomain: "pmi-eduverse-login-a1e5e.firebaseapp.com",
+            projectId: "pmi-eduverse-login-a1e5e",
+            storageBucket: "pmi-eduverse-login-a1e5e.appspot.com",
+            messagingSenderId: "773283869534",
+            appId: "1:773283869534:web:3cd6f0ec71e6c1130ed5cf",
+            measurementId: "G-VRXNDVJCMM"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Google Login Function
+        document.getElementById("googleLogin").addEventListener("click", () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log("User signed in:", user);
+                    document.getElementById("user-info").innerText = `Welcome, ${user.displayName}`;
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Login failed! Check the console for more details.");
+                });
+        });
+    </script>
+</body>
+</html>
