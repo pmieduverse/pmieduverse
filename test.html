@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with OTP</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff7b00, #ff3d7f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+        h2 { color: #ff3d7f; }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+        }
+        button {
+            background: linear-gradient(45deg, #ff7b00, #ff3d7f);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #ff3d7f, #ff7b00);
+        }
+        .message { margin-top: 10px; color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Login with OTP</h2>
+        <input type="text" id="phoneNumber" placeholder="Enter Mobile Number">
+        <button id="sendOtpBtn">Send OTP</button>
+
+        <div id="otpBox" style="display: none;">
+            <input type="text" id="otp" placeholder="Enter OTP">
+            <button id="verifyOtpBtn">Verify OTP</button>
+        </div>
+
+        <p class="message" id="message"></p>
+        <div id="recaptcha-container"></div>
+    </div>
+
+    <script type="module">
+        // ✅ Import Firebase SDK (ES Module)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+
+        // ✅ Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAjnEzm0NmtpCkPT3ewkkkkt7baVVs5b7o",
+            authDomain: "pmi-eduverse-login-a1e5e.firebaseapp.com",
+            projectId: "pmi-eduverse-login-a1e5e",
+            storageBucket: "pmi-eduverse-login-a1e5e.appspot.com",
+            messagingSenderId: "773283869534",
+            appId: "1:773283869534:web:3cd6f0ec71e6c1130ed5cf",
+            measurementId: "G-VRXNDVJCMM"
+        };
+
+        // ✅ Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // ✅ Configure reCAPTCHA
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            size: "invisible",
+            callback: () => console.log("reCAPTCHA verified"),
+        });
+
+        // ✅ Send OTP
+        document.getElementById("sendOtpBtn").addEventListener("click", () => {
+            let phoneNumber = document.getElementById("phoneNumber").value;
+            let messageElement = document.getElementById("message");
+
+            if (phoneNumber.length !== 10) {
+                messageElement.innerHTML = "Enter a valid 10-digit mobile number.";
+                return;
+            }
+
+            const appVerifier = window.recaptchaVerifier;
+            signInWithPhoneNumber(auth, "+91" + phoneNumber, appVerifier)
+                .then(confirmationResult => {
+                    window.confirmationResult = confirmationResult;
+                    document.getElementById("otpBox").style.display = "block";
+                    messageElement.innerHTML = "OTP Sent Successfully!";
+                    messageElement.style.color = "green";
+                })
+                .catch(error => {
+                    messageElement.innerHTML = "Error: " + error.message;
+                });
+        });
+
+        // ✅ Verify OTP
+        document.getElementById("verifyOtpBtn").addEventListener("click", () => {
+            let otp = document.getElementById("otp").value;
+            let messageElement = document.getElementById("message");
+
+            if (otp.length !== 6) {
+                messageElement.innerHTML = "Enter a valid 6-digit OTP.";
+                return;
+            }
+
+            window.confirmationResult.confirm(otp)
+                .then(result => {
+                    messageElement.innerHTML = "Login Successful! Redirecting...";
+                    messageElement.style.color = "green";
+                    setTimeout(() => { window.location.href = "premium.html"; }, 2000);
+                })
+                .catch(error => {
+                    messageElement.innerHTML = "Invalid OTP! Try Again.";
+                });
+        });
+    </script>
+</body>
+</html>
