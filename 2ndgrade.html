@@ -7,10 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff6347, #1e3a8a, #4caf50); /* Red, Blue, Green */
+            background: linear-gradient(135deg, #1e3a8a, #ffd700); /* Blue and Gold */
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -22,21 +24,21 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
-            background: rgba(0, 0, 0, 0.6);
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.7);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #ff6347, #1e3a8a, #facc15); /* Red, Blue, Yellow */
+            background: linear-gradient(to right, #ff6347, #ffd700); /* Red and Gold */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         button {
-            background: linear-gradient(to right, #ff6347, #4caf50); /* Red to Green gradient */
+            background: linear-gradient(to right, #1e3a8a, #ffd700); /* Blue and Gold */
             border: none;
             color: white;
             padding: 10px 20px;
@@ -44,7 +46,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.6);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.6);
         }
 
         button:hover {
@@ -53,7 +55,7 @@
         }
 
         .question-option {
-            background: linear-gradient(45deg, #4CAF50, #1e3a8a); /* Green to Blue gradient */
+            background: linear-gradient(45deg, #1e3a8a, #ffd700); /* Blue and Gold */
             color: white;
             padding: 10px;
             border-radius: 8px;
@@ -62,11 +64,11 @@
         }
 
         .question-option:hover {
-            background: linear-gradient(45deg, #ff6347, #facc15); /* Red to Yellow gradient */
+            background: linear-gradient(45deg, #ff6347, #ffd700); /* Red and Gold */
         }
 
         .question-option.selected {
-            background: linear-gradient(45deg, #ff6347, #4caf50); /* Red to Green gradient */
+            background: linear-gradient(45deg, #ff6347, #1e3a8a); /* Red and Blue */
         }
 
         .hidden {
@@ -76,14 +78,13 @@
         .timer {
             font-size: 1.25rem;
             font-weight: bold;
-            color: #facc15;
+            color: #ffd700; /* Gold */
         }
 
         .incorrect-text {
             color: #ff6347; /* Red color for incorrect */
         }
 
-        /* New Thumbnail Section */
         .thumbnail-section {
             background: rgba(255, 255, 255, 0.2);
             padding: 1rem;
@@ -106,8 +107,8 @@
     </style>
 </head>
 <body>
-     <!-- Login Section -->
-     <div id="loginContainer" class="container">
+    <!-- Login Section -->
+    <div id="loginContainer" class="container">
         <h1 class="text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Examination</h1>
         
         <!-- Thumbnail Section -->
@@ -132,12 +133,14 @@
         <h1 class="text-2xl font-bold mb-4 gradient-text">PMI Eduverse Examination</h1>
         <div id="timer" class="timer mb-4"></div>
         <div id="questionBox">
+            <h2 id="questionNumber" class="text-lg font-semibold mb-2">Question 1 of 10</h2>
             <h2 id="question" class="text-lg font-semibold mb-6">Loading question...</h2>
             <div id="options" class="grid gap-4"></div>
         </div>
         <div class="flex justify-between mt-6">
             <button onclick="prevQuestion()" class="bg-gray-400">Previous</button>
             <button onclick="nextQuestion()">Next</button>
+            <button onclick="submitQuiz()" class="bg-red-500">Submit Quiz</button>
         </div>
     </div>
 
@@ -148,112 +151,66 @@
         <p id="totalMarks" class="text-lg mb-4 text-center"></p>
         <canvas id="resultChart" class="mb-6"></canvas>
         <div id="incorrectQuestions" class="mt-6"></div>
-        <button onclick="restartQuiz()" class="w-full mt-4">Restart Quiz</button>
+        
+        <!-- Download PDF Button -->
+        <button onclick="downloadResultPDF()" class="w-full mt-4 bg-blue-500 text-white py-2 rounded">Download PDF</button>
+        
+        <button onclick="restartQuiz()" class="w-full mt-4 bg-gray-500 text-white py-2 rounded">Restart Quiz</button>
     </div>
 
     <script>
         const questions = [
-  {
-    "question": "गुर्जर प्रतिहार वंश का संस्थापक कौन था?",
-    "options": ["नागभट्ट प्रथम", "मिहिर भोज", "वत्सराज", "महेंद्रपाल"],
-    "correct": 0
-  },
-  {
-    "question": "गुर्जर प्रतिहारों की राजधानी कौन सी थी?",
-    "options": ["कन्नौज", "अजमेर", "चित्तौड़गढ़", "उदयपुर"],
-    "correct": 0
-  },
-  {
-    "question": "गुर्जर प्रतिहार वंश ने किस विदेशी आक्रमणकारी का प्रतिरोध किया?",
-    "options": ["महमूद गजनवी", "सिकंदर महान", "मुहम्मद गोरी", "अरब"],
-    "correct": 3
-  },
-  {
-    "question": "मिहिर भोज के शासनकाल में किस देवता की पूजा मुख्य रूप से होती थी?",
-    "options": ["विष्णु", "शिव", "दुर्गा", "काली"],
-    "correct": 0
-  },
-  {
-    "question": "गुर्जर प्रतिहारों का सबसे शक्तिशाली राजा कौन माना जाता है?",
-    "options": ["नागभट्ट प्रथम", "मिहिर भोज", "महेंद्रपाल", "वत्सराज"],
-    "correct": 1
-  },
-  {
-    "question": "गुर्जर प्रतिहारों का प्रसिद्ध दुर्ग कहाँ स्थित है?",
-    "options": ["ग्वालियर", "जैसलमेर", "चित्तौड़गढ़", "रणथंभौर"],
-    "correct": 0
-  },
-  {
-    "question": "गुर्जर प्रतिहार वंश का उदय किस शताब्दी में हुआ?",
-    "options": ["7वीं शताब्दी", "8वीं शताब्दी", "9वीं शताब्दी", "10वीं शताब्दी"],
-    "correct": 1
-  },
-  {
-    "question": "नागभट्ट प्रथम ने किसके आक्रमण को विफल किया था?",
-    "options": ["अरबों", "तुर्कों", "मंगोलों", "गजनवियों"],
-    "correct": 0
-  },
-  {
-    "question": "गुर्जर प्रतिहारों की सेना को किसके मुकाबले सबसे ताकतवर माना गया था?",
-    "options": ["चोलों", "पालों", "राष्ट्रकूटों", "सामान्य राजपूतों"],
-    "correct": 2
-  },
-  {
-    "question": "मिहिर भोज को किस उपाधि से सम्मानित किया गया?",
-    "options": ["आदिलशाह", "आधिपति", "आदिवराह", "महानायक"],
-    "correct": 2
-  },
-  {
-    "question": "गुर्जर प्रतिहारों का संबंध किस धर्म से अधिक था?",
-    "options": ["जैन धर्म", "बौद्ध धर्म", "हिंदू धर्म", "इस्लाम"],
-    "correct": 2
-  },
-  {
-    "question": "गुर्जर प्रतिहार वंश का पतन किस कारण से हुआ?",
-    "options": ["अरबों का आक्रमण", "राष्ट्रकूटों का आक्रमण", "पाल वंश का आक्रमण", "आंतरिक कलह"],
-    "correct": 3
-  },
-  {
-    "question": "गुर्जर प्रतिहारों की सबसे प्रसिद्ध स्थापत्य कला कौन सी थी?",
-    "options": ["मंदिर निर्माण", "किला निर्माण", "मस्जिद निर्माण", "बौद्ध मठ"],
-    "correct": 0
-  },
-  {
-    "question": "मिहिर भोज के शासनकाल को किस रूप में जाना जाता है?",
-    "options": ["स्वर्ण युग", "संग्राम युग", "धार्मिक युग", "पतन युग"],
-    "correct": 0
-  },
-  {
-    "question": "गुर्जर प्रतिहार किस प्रमुख स्थल से जुड़े थे?",
-    "options": ["उज्जैन", "कन्नौज", "पाटलिपुत्र", "मथुरा"],
-    "correct": 1
-  },
-  {
-    "question": "गुर्जर प्रतिहारों ने किस राजवंश को हराकर अपनी शक्ति स्थापित की?",
-    "options": ["राष्ट्रकूट", "पाल", "चोल", "मौर्य"],
-    "correct": 1
-  },
-  {
-    "question": "गुर्जर प्रतिहार वंश का संबंध किस प्रमुख नदी क्षेत्र से था?",
-    "options": ["गंगा", "यमुना", "नर्मदा", "चंबल"],
-    "correct": 0
-  },
-  {
-    "question": "मिहिर भोज का दूसरा नाम क्या था?",
-    "options": ["नागभट्ट", "आदिवराह", "वत्सराज", "महेंद्रपाल"],
-    "correct": 1
-  },
-  {
-    "question": "गुर्जर प्रतिहार किस वंश का हिस्सा माने जाते थे?",
-    "options": ["कछवाहा", "सोलंकी", "परमार", "राजपूत"],
-    "correct": 3
-  },
-  {
-    "question": "गुर्जर प्रतिहारों के काल में कन्नौज किस चीज़ के लिए प्रसिद्ध था?",
-    "options": ["व्यापार", "शिक्षा", "धार्मिक गतिविधि", "राजनीतिक शक्ति"],
-    "correct": 3
-  }
-];
+            {
+                "question": "अजमेर के चौहान वंश के संस्थापक कौन थे?",
+                "options": ["सिंहराज", "अरणोराज", "विग्रहराज चौहान", "गुजराजदेव"],
+                "correct": 0
+            },
+            {
+                "question": "पृथ्वीराज चौहान के दरबारी कवि कौन थे?",
+                "options": ["चंदबरदाई", "जयानक", "विद्यापति", "कालिदास"],
+                "correct": 0
+            },
+            {
+                "question": "तराइन के प्रथम युद्ध (1191) में पृथ्वीराज चौहान ने किसे हराया था?",
+                "options": ["मुहम्मद ग़ोरी", "ग्यासुद्दीन बलबन", "कुतुबुद्दीन ऐबक", "इल्तुतमिश"],
+                "correct": 0
+            },
+            {
+                "question": "निम्नलिखित में से कौनसा शासक अजमेर का नहीं था?",
+                "options": ["सोमेश्वर", "विग्रहराज चतुर्थ", "राजदेव", "चंद्रगुप्त मौर्य"],
+                "correct": 3
+            },
+            {
+                "question": "अजमेर स्थित अढ़ाई दिन का झोपड़ा किसने बनवाया था?",
+                "options": ["ग्यासुद्दीन बलबन", "इल्तुतमिश", "मुहम्मद ग़ोरी", "अलाउद्दीन खिलजी"],
+                "correct": 2
+            },
+            {
+                "question": "किस शासक ने अजयमेरु दुर्ग (तारागढ़) का निर्माण करवाया?",
+                "options": ["अरनोराज", "सिंहराज", "अजयराज", "सोमेश्वर"],
+                "correct": 2
+            },
+            {
+                "question": "चौहान वंश का सबसे प्रतापी राजा कौन था?",
+                "options": ["अजयपाल", "विग्रहराज चतुर्थ", "सोमेश्वर", "पृथ्वीराज तृतीय"],
+                "correct": 3
+            },
+            {
+                "question": "पृथ्वीराज रासो किस भाषा में लिखा गया था?",
+                "options": ["संस्कृत", "प्राकृत", "अपभ्रंश", "राजस्थानी"],
+                "correct": 2
+            },
+            {
+                "question": "अजमेर में स्थित ढाई दिन का झोपड़ा मूल रूप से क्या था?",
+                "options": ["बौद्ध मठ", "जैन मंदिर", "हिंदू मंदिर", "इस्लामी मदरसा"],
+                "correct": 2
+            },
+            {
+                "question": "विग्रहराज चतुर्थ को किस उपाधि से सम्मानित किया गया था?",
+                "options": ["राजराजेश्वर", "महामंडलेश्वर", "परम भट्टारक", "त्रिभुवन नरेश"],
+                "correct": 0
+            }
+        ];
 
         let currentQuestion = 0;
         let userAnswers = [];
@@ -294,6 +251,7 @@
 
         function loadQuestion() {
             const questionData = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             document.getElementById('question').textContent = questionData.question;
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = '';
@@ -317,8 +275,6 @@
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
                 loadQuestion();
-            } else {
-                showResults();
             }
         }
 
@@ -329,11 +285,18 @@
             }
         }
 
+        function submitQuiz() {
+            if (confirm("Are you sure you want to submit the quiz?")) {
+                showResults();
+            }
+        }
+
         function showResults() {
             clearInterval(timerInterval);
 
             const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
             const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
 
             document.getElementById('quizContainer').classList.add('hidden');
             document.getElementById('resultContainer').classList.remove('hidden');
@@ -376,26 +339,101 @@
         function restartQuiz() {
             currentQuestion = 0;
             userAnswers = [];
-            timeLeft = 300;
+            timeLeft = 600;
             clearInterval(timerInterval);
             document.getElementById('resultContainer').classList.add('hidden');
             document.getElementById('loginContainer').classList.remove('hidden');
         }
-        // Disable Right Click
-document.addEventListener('contextmenu', event => event.preventDefault());
 
-// Disable Ctrl+U (View Source) and DevTools Shortcuts
-document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
-        event.preventDefault();
-    }
-    if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
-        event.preventDefault();
-    }
-    if (event.ctrlKey && (event.key === 'c' || event.key === 'C')) {
-        event.preventDefault();
-    }
-});
+        function downloadResultPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const examDate = new Date().toLocaleDateString();
+    const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+    const incorrect = questions.length - correct;
+    const totalTimeSpent = 600 - timeLeft;
+
+    // Set background color for the header
+    doc.setFillColor(30, 58, 138); // Blue color
+    doc.rect(0, 0, 210, 30, 'F'); // Fill the header area
+
+    // Add header text
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.setTextColor(255, 255, 255); // White text
+    doc.text("PMI EDUVERSE EXAM RESULT", 105, 20, { align: 'center' });
+
+    // Add the branding logo on the top left
+    const logoUrl = 'https://i.ibb.co/PzmBMLmY/SJHY6436.png';  // Logo URL
+    doc.addImage(logoUrl, 'PNG', 10, 5, 30, 30); // Positioning logo at top left
+
+    // Create a border around the page (no margins)
+    const pageWidth = 210; // Page width (A4)
+    const pageHeight = 297; // Page height (A4)
+    const borderThickness = 2; // Thickness of the border
+
+    // Draw the border
+    doc.setLineWidth(borderThickness);
+    doc.setDrawColor(0, 0, 0); // Black color for the border
+    doc.rect(0, 0, pageWidth, pageHeight); // Create a rectangle around the page, no margin
+
+    // Reset text color and font for the body
+    doc.setTextColor(0, 0, 0); // Black text
+    doc.setFontSize(16);
+
+    // Add user details
+    doc.setFont("helvetica", "bold");
+    doc.text("Candidate Details:", 20, 50);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Name: ${userName}`, 20, 60);
+    doc.text(`Roll Number: ${rollNumber}`, 20, 70);
+
+    // Add exam details
+    doc.setFont("helvetica", "bold");
+    doc.text("Exam Details:", 20, 90);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Marks: ${correct} / ${questions.length}`, 20, 100);
+    doc.text(`Total Time Spent: ${Math.floor(totalTimeSpent / 60)} min ${totalTimeSpent % 60} sec`, 20, 110);
+    doc.text(`Total Incorrect Answers: ${incorrect}`, 20, 120);
+    doc.text(`Test Topic: General Knowledge`, 20, 130);
+    doc.text(`Date of Exam: ${examDate}`, 20, 140);
+
+    // Add a colored box for the examiner's note
+    doc.setFillColor(255, 215, 0); // Gold color
+    doc.rect(20, 150, 170, 30, 'F'); // Fill the box area
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(0, 0, 0); // Black text
+    doc.text("Examiner's Note:", 25, 160);
+    doc.setFont("helvetica", "normal");
+    doc.text("Focus on conceptual clarity and practice regularly!", 25, 170);
+
+    // Add footer
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(30, 58, 138); // Blue text
+    doc.text("PMI EDUVERSE", 105, 280, { align: 'center' });
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(0, 0, 0); // Black text
+    doc.text("Thank You for participating!", 105, 290, { align: 'center' });
+
+    // Save the PDF
+    doc.save("Quiz_Result.pdf");
+}
+
+        // Disable Right Click
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable Ctrl+U (View Source) and DevTools Shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'C')) {
+                event.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
