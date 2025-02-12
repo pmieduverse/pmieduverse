@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Eduverse Examination</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-size: cover;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Login Container */
+        .container {
+            width: 100%;
+            max-width: 95%;
+            background: rgba(30, 41, 59, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            margin: 15px auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #f472b6, #ec4899, #db2777); /* Pink gradient for title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Quiz Section */
+        button {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed); /* Purple gradient for buttons */
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+            width: 100%;
+            margin: 10px 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .question-option {
+            background: rgba(124, 58, 237, 0.1);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            text-align: left;
+            display: block;
+            width: 100%;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-option:hover {
+            background: rgba(124, 58, 237, 0.2);
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+
+        .question-option.selected {
+            background: linear-gradient(135deg, #059669, #10b981); /* Green gradient for selected */
+            border: none;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Timer Section */
+        .timer {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #f59e0b;
+            text-align: center;
+            padding: 15px;
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border: 2px solid rgba(14, 165, 233, 0.3); /* Sky blue for inputs */
+            background: rgba(30, 41, 59, 0.9);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Question Box */
+        #questionBox {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #question {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #ffffff; /* Added white color for better visibility */
+        }
+
+        /* Result Section */
+        .incorrect-text {
+            color: #ef4444;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            margin: 8px 0;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        #resultChart {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            background-color: #374151;
+            border-radius: 9999px;
+            height: 0.625rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #3b82f6;
+            transition: width 0.3s ease-in-out;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.2rem;
+            }
+
+            .gradient-text {
+                font-size: 1.6rem;
+            }
+
+            button {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+
+            .question-option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+            #question {
+                font-size: 1.2rem;
+            }
+
+            .timer {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Rest of the HTML remains the same -->
+    <!-- Login Section -->
+    <div id="loginContainer" class="container">
+        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Examination</h1>
+        
+        <!-- Thumbnail Section -->
+        <div class="mb-6">
+            <img src="https://media-hosting.imagekit.io//1a3b827165c94637/PMIeduEXAMhS.png?Expires=1833973356&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=ItlwPJTb3cK3QqjoyJBaJNawiKf-zGBG1i~lvQfK8pVCIl0Up2-Jmylho0Pz26bWy3fWyTVhfrVj53hNhCQEkQqyzPO3m33KouzH5th4MEi6lPJtrx8Up~VN5~PdmVYUyyf2W3kRRCEU9wymgzTzAFjSGmUKyH34RP11-VDDAKP1skl0I-wXKNlr3Du9jqg7WH0VzqgKTW1TbkSqV2~gLFIBnSEcJHs3ROhhoswf3qQOL5Z76lDcrhhQ9qVveBhAebTOZ41zGZBx3aHwyOqT6lUUDck64SzPqHRFESJ0aC27fQqISxcM9uZeYc0QhjQsBF4omOSvPZu5n1XSRhw4Bw__" alt="Exam Thumbnail" class="w-full h-auto max-w-[1280px] max-h-[720px] mx-auto rounded-lg shadow-lg">
+            <p class="text-center mt-2 text-lg font-semibold">RAS 2025 ||2 FEB EXAM</p>
+        </div>
+
+        <!-- Total Questions Section -->
+        <div class="bg-gray-800 text-white p-6 rounded-lg shadow-xl mb-6 transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center">
+                    <i class="fas fa-clipboard-list text-2xl mr-3 text-blue-400"></i>
+                    <p class="text-xl font-bold">Total Questions: <span class="text-blue-400">10</span> <span id="totalQuestions"></span></p>
+                </div>
+                <span class="bg-blue-500 text-white px-4 py-1 rounded-full text-sm">Required</span>
+            </div>
+            <p class="text-gray-300 border-l-4 border-blue-400 pl-3">Prepare yourself to complete all questions within the time limit. Good luck!</p>
+        </div>
+
+        <div class="space-y-4">
+            <div class="relative">
+                <i class="fas fa-id-card absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input 
+                    id="rollNumber" 
+                    type="text" 
+                    placeholder="Enter Roll Number" 
+                    class="w-full p-3 pl-10 rounded-lg border-2 border-gray-700 focus:border-blue-500 transition-colors duration-300 bg-gray-800 text-white placeholder-gray-400 focus:outline-none"
+                    required
+                >
+            </div>
+            
+            <div class="relative">
+                <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input 
+                    id="userName" 
+                    type="text" 
+                    placeholder="Enter Your Name" 
+                    class="w-full p-3 pl-10 rounded-lg border-2 border-gray-700 focus:border-blue-500 transition-colors duration-300 bg-gray-800 text-white placeholder-gray-400 focus:outline-none"
+                    required
+                >
+            </div>
+            
+            <button 
+                onclick="startQuiz()" 
+                class="w-full p-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg font-bold text-lg hover:from-blue-600 hover:to-blue-800 transform hover:scale-[1.02] transition-all duration-300 shadow-lg flex items-center justify-center"
+            >
+                <i class="fas fa-play-circle mr-2"></i>
+                Start Quiz
+            </button>
+        </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizContainer" class="container hidden">
+        <h1 class="text-3xl font-bold mb-6 gradient-text text-center">PMI Eduverse Examination</h1>
+        
+        <!-- Timer and Progress -->
+        <div class="flex justify-between items-center mb-6">
+            <div id="timer" class="timer text-xl font-bold bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-clock mr-2"></i>
+                <span id="timerDisplay">00:00</span>
+            </div>
+            <div class="relative w-64">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium text-white">Progress</span>
+                    <span id="progressCount" class="text-sm font-medium text-white">0/10</span>
+                </div>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="questionBox" class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="questionNumber" class="text-xl font-bold text-green-400">Question 1 of 10</h2>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">1 Mark</span>
+            </div>
+            <h2 id="question" class="text-xl font-semibold mb-6 text-gray-800">Loading question...</h2>
+            <div id="options" class="grid gap-4">
+                <!-- Options will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div class="flex justify-between mt-8">
+            <button onclick="prevQuestion()" class="bg-gray-600 hover:bg-gray-700 transition-colors duration-300 px-6 py-3 rounded-lg text-white font-medium">
+                <i class="fas fa-arrow-left mr-2"></i> Previous
+            </button>
+            <button onclick="nextQuestion()" class="bg-blue-600 hover:bg-blue-700 transition-colors duration-300 px-8 py-3 rounded-lg text-white font-medium">
+                Next <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+            <button onclick="submitQuiz()" class="bg-red-500 hover:bg-red-600 transition-colors duration-300 px-6 py-3 rounded-lg text-white font-medium">
+                <i class="fas fa-check-circle mr-2"></i> Submit Quiz
+            </button>
+        </div>
+    </div>
+
+    <!-- Result Section -->
+    <div id="resultContainer" class="container hidden">
+        <h1 class="text-4xl font-extrabold text-center mb-8 gradient-text animate-fade-in">Your Results</h1>
+        <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-2xl p-8 mb-8">
+            <p id="resultInfo" class="text-xl mb-6 text-center text-white animate-slide-up"></p>
+            <p id="totalMarks" class="text-2xl mb-6 text-center text-white font-bold animate-slide-up"></p>
+        </div>
+        <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
+            <canvas id="resultChart" class="mb-6 animate-fade-in"></canvas>
+        </div>
+        <div id="incorrectQuestions" class="bg-gray-50 rounded-lg p-6 shadow-lg mt-6 animate-fade-in"></div>
+        
+        <!-- Download PDF Button -->
+        <button onclick="downloadResultPDF()" class="w-full mt-4 bg-blue-500 text-white py-2 rounded">Download PDF</button>
+        
+        <button onclick="restartQuiz()" class="w-full mt-4 bg-gray-500 text-white py-2 rounded">Restart Quiz</button>
+    </div>
+
+    <script>
+        // JavaScript code remains the same
+        const questions = [
+            {
+                "question": "स्वर्णिम चतुर्भुज के चार खंड निम्नलिखित शहरों को जोड़ते हैं: (I) दिल्ली – मुंबई (II) मुंबई – चेन्नई (III) चेन्नई – कोलकाता (IV) कोलकाता – दिल्ली। उपर्युक्त चार खंडों की लंबाई को घटते हुए क्रम में सही उत्तर चुनिए:",
+                "options": ["III, IV, I, II", "III, IV, II, I", "IV, III, II, I", "IV, III, I, II"],
+                "correct": 0
+            },
+            {
+                "question": "निम्नलिखित में से कौन सा सुमेलित नहीं है? परमाणु ऊर्जा प्लांट – राज्य",
+                "options": ["कलपक्कम – तमिलनाडु", "काकरापार – गुजरात", "कैगा – तमिलनाडु", "नरोरा – उत्तर प्रदेश"],
+                "correct": 2
+            },
+            {
+                "question": "केन्द्रीय सतर्कता आयोग की स्थापना निम्नलिखित में से किस समिति की सिफारिशों के आधार पर हुई थी?",
+                "options": ["संथानम समिति", "केलकर समिति", "स्वर्ण सिंह समिति", "बक्शी टेकचंद समिति"],
+                "correct": 0
+            },
+            {
+                "question": "नवंबर 2024 के अंत तक, राजस्थान की मंत्रिपरिषद में कितनी महिलाएँ थीं?",
+                "options": ["केवल 1", "केवल 2", "केवल 3", "केवल 5"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान के राज्यपाल के संबंध में निम्नलिखित में से कौन सा कथन सही नहीं है?",
+                "options": ["राज्य पुनर्गठन आयोग की अनुशंसा के आधार पर राजप्रमुख के पद को समाप्त कर दिया गया।", "7वें संविधान संशोधन से राजप्रमुख का पद समाप्त किया गया।", "गुरुमुख निहाल सिंह को 1 नवंबर, 1956 को राजस्थान का पहला राज्यपाल नियुक्त किया गया।", "हरिभाऊ किसनराव बागडे ने 31 जुलाई, 2024 को राजस्थान के राज्यपाल का पदभार संभाला।"],
+                "correct": 2
+            },
+            {
+                "question": "राजस्थान में जिला योजना समिति का अध्यक्ष कौन बनता है?",
+                "options": ["जिला कलेक्टर", "जिला परिषद अध्यक्ष", "स्थानीय विधायक", "नगर निगम महापौर"],
+                "correct": 1
+            },
+            {
+                "question": "निम्नलिखित में से रियासती राज्यों के किस समूह ने स्वाधीनता से पहले पंचायतों पर विधेयक पारित कर दिया था?",
+                "options": ["अलवर, बाँसवाड़ा, करौली, सिरोही", "बाँसवाड़ा, बीकानेर, भरतपुर, बूँदी", "जोधपुर, जयपुर, उदयपुर, सिरोही", "करौली, बूँदी, अलवर, जैसलमेर"],
+                "correct": 2
+            },
+            {
+                "question": "जी.एस.टी. के 'इनपुट कर जमा तंत्र' के लाभ के संबंध में निम्न में से कौन सा कथन सही है?",
+                "options": ["यह दोहरे करारोपण को रोकता है।", "यह उत्पादन पर कर से बचाता है।", "यह स्टार्ट-अप को कर से राहत प्रदान करता है।", "यहाँ उत्पादकों को रिकॉर्ड रखने की जरूरत नहीं होती है।"],
+                "correct": 0
+            },
+            {
+                "question": "निम्नलिखित में से किस मुख्यमंत्री ने अधिकतम बार राजस्थान में राष्ट्रपति शासन का सामना किया?",
+                "options": ["हरिदेव जोशी", "भैरोंसिंह शेखावत", "जयनारायण व्यास", "मोहनलाल सुखाड़िया"],
+                "correct": 1
+            },
+            {
+                "question": "निम्नलिखित में से किस मुख्यमंत्री ने राजस्थान में सबसे अधिक बार राष्ट्रपति शासन का सामना किया?",
+                "options": ["हरिदेव जोशी", "भैरोंसिंह शेखावत", "जयनारायण व्यास", "शिवचरण माथुर"],
+                "correct": 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let rollNumber = "";
+        let userName = "";
+        let timerInterval;
+        let timeLeft = 600;
+
+        function startQuiz() {
+            rollNumber = document.getElementById('rollNumber').value;
+            userName = document.getElementById('userName').value;
+
+            if (!rollNumber || !userName) {
+                alert('Please enter both Roll Number and Name');
+                return;
+            }
+
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            startTimer();
+            loadQuestion();
+            updateProgress();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timerDisplay').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const questionData = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question').textContent = questionData.question;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+
+            questionData.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'question-option';
+                if (userAnswers[currentQuestion] === index) {
+                    button.classList.add('selected');
+                }
+                button.onclick = () => {
+                    userAnswers[currentQuestion] = index;
+                    loadQuestion();
+                    updateProgress();
+                };
+                optionsDiv.appendChild(button);
+            });
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answeredQuestions = userAnswers.filter(answer => answer !== undefined).length;
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+            document.getElementById('progressCount').textContent = `${answeredQuestions}/${questions.length}`;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            if (confirm("Are you sure you want to submit the quiz?")) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
+
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.remove('hidden');
+
+            document.getElementById('resultInfo').textContent = `Name: ${userName}, Roll Number: ${rollNumber}`;
+            document.getElementById('totalMarks').textContent = `Score: ${correct} / ${questions.length}`;
+
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        label: 'Results',
+                        data: [correct, incorrect],
+                        backgroundColor: ['#ff6347', '#1e3a8a'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const incorrectQuestionsDiv = document.getElementById('incorrectQuestions');
+            incorrectQuestionsDiv.innerHTML = '<h3 class="text-lg font-bold text-white">Incorrect Answers:</h3>';
+            questions.forEach((question, index) => {
+                if (userAnswers[index] !== question.correct) {
+                    const incorrectText = document.createElement('p');
+                    incorrectText.className = 'incorrect-text';
+                    incorrectText.textContent = `${question.question} - Correct Answer: ${question.options[question.correct]}`;
+                    incorrectQuestionsDiv.appendChild(incorrectText);
+                }
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            timeLeft = 600;
+            clearInterval(timerInterval);
+            document.getElementById('resultContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+        }
+
+        function downloadResultPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const examDate = new Date().toLocaleDateString();
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
+
+            doc.setFillColor(30, 58, 138);
+            doc.rect(0, 0, 210, 30, 'F');
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(22);
+            doc.setTextColor(255, 255, 255);
+            doc.text("PMI EDUVERSE EXAM RESULT", 105, 20, { align: 'center' });
+
+            const logoUrl = 'https://i.ibb.co/PzmBMLmY/SJHY6436.png';
+            doc.addImage(logoUrl, 'PNG', 10, 5, 30, 30);
+
+            const pageWidth = 210;
+            const pageHeight = 297;
+            const borderThickness = 2;
+
+            doc.setLineWidth(borderThickness);
+            doc.setDrawColor(0, 0, 0);
+            doc.rect(0, 0, pageWidth, pageHeight);
+
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(16);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Candidate Details:", 20, 50);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Name: ${userName}`, 20, 60);
+            doc.text(`Roll Number: ${rollNumber}`, 20, 70);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Exam Details:", 20, 90);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Marks: ${correct} / ${questions.length}`, 20, 100);
+            doc.text(`Total Time Spent: ${Math.floor(totalTimeSpent / 60)} min ${totalTimeSpent % 60} sec`, 20, 110);
+            doc.text(`Total Incorrect Answers: ${incorrect}`, 20, 120);
+            doc.text(`Test Topic: General Knowledge`, 20, 130);
+            doc.text(`Date of Exam: ${examDate}`, 20, 140);
+
+            doc.setFillColor(255, 215, 0);
+            doc.rect(20, 150, 170, 30, 'F');
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Examiner's Note:", 25, 160);
+            doc.setFont("helvetica", "normal");
+            doc.text("Focus on conceptual clarity and practice regularly!", 25, 170);
+
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(30, 58, 138);
+            doc.text("PMI EDUVERSE", 105, 280, { align: 'center' });
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Thank You for participating!", 105, 290, { align: 'center' });
+
+            doc.save("Quiz_Result.pdf");
+        }
+
+        // Disable Right Click
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable Ctrl+U (View Source) and DevTools Shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'C')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
