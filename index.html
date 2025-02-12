@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PMI EDUVERSE | Exam Preparation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,11 +15,12 @@
 
         html, body {
             height: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, #FF7F50, #f3f4f6);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF7F50, #f3f4f6);
             color: #111827;
             display: flex;
             flex-direction: column;
@@ -27,149 +28,151 @@
         }
 
         header {
-            background: linear-gradient(90deg, #f97316, #ea580c);
+            background: linear-gradient(135deg, #f97316, #ea580c);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem;
             text-align: center;
-            font-size: 1.6rem;
-            font-weight: bold;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-weight: 600;
             text-transform: uppercase;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         nav {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
             margin-top: 1rem;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: background 0.3s ease, transform 0.3s ease;
-            background: #f97316;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(249, 115, 22, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav a:hover {
             background: #ea580c;
-            transform: scale(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
         }
 
         #main-content {
             flex: 1;
-            padding: 2rem;
+            padding: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .section {
-            max-width: 1200px;
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             padding: 1.5rem;
-            background: white;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (min-width: 768px) {
+            .section {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
 
         .section:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .section h2 {
-            margin: 0;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: #f97316;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         .section p {
             color: #374151;
-            flex: 1;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            line-height: 1.6;
         }
 
         .section button {
-            background: #f97316;
+            background: linear-gradient(135deg, #f97316, #ea580c);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
         }
 
         .section button:hover {
-            background: #ea580c;
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(234, 88, 12, 0.3);
         }
 
         .divider {
-            margin: 2rem 0;
+            margin: 2rem auto;
             height: 4px;
+            max-width: 100px;
             background: linear-gradient(90deg, #fbbf24, #f43f5e);
-            animation: move 2s infinite;
+            border-radius: 2px;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes move {
-            0% {
-                background-position: 0;
-            }
-            100% {
-                background-position: 100%;
-            }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
         }
 
         footer {
-            background: #111827;
+            background: rgba(17, 24, 39, 0.95);
             color: white;
             text-align: center;
             padding: 1rem;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            backdrop-filter: blur(10px);
         }
 
-        footer p {
-            animation: scroll 10s linear infinite;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        footer p span {
-            display: inline-block;
-            padding-left: 100%;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        /* Fixed Footer with Running Text */
         .footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #000;
+            background: rgba(0, 0, 0, 0.9);
             color: #ff9a00;
-            font-size: 1.3rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
             padding: 12px 0;
             text-align: center;
             white-space: nowrap;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-text {
@@ -178,11 +181,62 @@
         }
 
         @keyframes scrollFooter {
-            0% {
-                transform: translateX(100%);
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+                color: #ffffff;
             }
-            100% {
-                transform: translateX(-100%);
+
+            .section {
+                background: rgba(30, 30, 30, 0.9);
+            }
+
+            .section p {
+                color: #e0e0e0;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+
+            .footer {
+                font-size: 1rem;
+                padding: 8px 0;
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .section {
+                margin: 1.2rem auto;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .section:hover {
+                transform: none;
+            }
+
+            nav a:hover {
+                transform: none;
             }
         }
     </style>
@@ -207,16 +261,13 @@
             ]
         };
 
-        // Function to generate HTML content dynamically
         function loadSection(section) {
             const gkContent = document.getElementById('gk-content');
             const otherExamsContent = document.getElementById('other-exams-content');
             
-            // Hide both sections initially
             gkContent.style.display = 'none';
             otherExamsContent.style.display = 'none';
 
-            // Show the clicked section
             if (section === 'gk') {
                 gkContent.style.display = 'block';
                 loadTopics(gkContent, 'gk');
@@ -226,9 +277,8 @@
             }
         }
 
-        // Load topics dynamically into the selected section
         function loadTopics(container, section) {
-            container.innerHTML = ''; // Clear existing content
+            container.innerHTML = '';
 
             topics[section].forEach(topic => {
                 const sectionDiv = document.createElement('div');
@@ -244,22 +294,29 @@
             });
         }
 
-        // Initial content load
         document.addEventListener('DOMContentLoaded', () => {
-            loadSection('gk'); // Load RPSC GK section by default
+            loadSection('gk');
+            
+            // Add smooth scrolling for better mobile experience
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
         });
 
-        // Disable right-click menu and inspect (Optional)
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Disable F12 and Right Click Dev Tools (Optional)
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) {
-                return false; // Disable F12 (Dev Tools) and Ctrl+Shift+I
-            }
-        };
+        // Optional security features
+        if (process.env.NODE_ENV === 'production') {
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.onkeydown = e => {
+                if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) {
+                    return false;
+                }
+            };
+        }
     </script>
 </head>
 <body>
@@ -272,12 +329,8 @@
     </header>
 
     <div id="main-content">
-        <!-- GK Content Section -->
         <div id="gk-content" style="display: none;"></div>
-
         <div class="divider"></div>
-
-        <!-- Other Exams Content Section -->
         <div id="other-exams-content" style="display: none;"></div>
     </div>
 
