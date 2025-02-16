@@ -137,7 +137,7 @@
                     </p>
                 </div>
                 <div class="text-center">
-                    <div id="timer" class="text-3xl font-bold text-red-500">05:00</div>
+                    <div id="timer" class="text-3xl font-bold text-red-500">00:01</div>
                     <p class="text-gray-600">Time Remaining</p>
                 </div>
             </div>
@@ -296,8 +296,8 @@
                                     <div class="flex items-center">
                                         <i class="far fa-clock text-2xl text-blue-500 mr-3"></i>
                                         <div>
-                                            <p class="text-2xl font-bold text-gray-800" id="time-taken">05:00</p>
-                                            <p class="text-sm text-gray-600" id="time-taken-seconds">(300 seconds)</p>
+                                            <p class="text-2xl font-bold text-gray-800" id="time-taken">00:01</p>
+                                            <p class="text-sm text-gray-600" id="time-taken-seconds">(60 seconds)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -306,8 +306,8 @@
                                     <div class="flex items-center">
                                         <i class="fas fa-stopwatch text-2xl text-green-500 mr-3"></i>
                                         <div>
-                                            <p class="text-2xl font-bold text-gray-800" id="avg-time">00:30</p>
-                                            <p class="text-sm text-gray-600" id="avg-time-seconds">(30 seconds)</p>
+                                            <p class="text-2xl font-bold text-gray-800" id="avg-time">00:01</p>
+                                            <p class="text-sm text-gray-600" id="avg-time-seconds">(60 seconds)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -474,39 +474,434 @@
         // Sample questions data
         const questions = [
             {
-                question: "Which of the following is an abiotic component of an ecosystem?",
-                options: ["Bacteria", "Fungi", "Sunlight", "Plants"],
+                question: "What type of transport protein is responsible for moving ions in opposite directions across a membrane?",
+                options: ["Symporter", "Antiporter", "Permease", "Channel protein"],
+                correctAnswer: 1
+            },
+            {
+                question: "What is the role of permeases in facilitated diffusion?",
+                options: [
+                    "They generate ATP for transport processes", 
+                    "They bind specific solutes and facilitate their passage across the membrane",
+                    "They create electrochemical gradients",
+                    "They provide structural integrity to the membrane"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "In secondary active transport, what drives the movement of one solute against its concentration gradient?",
+                options: [
+                    "Direct ATP hydrolysis",
+                    "Electrochemical potential gradient created by another solute's movement",
+                    "Passive diffusion", 
+                    "Mechanical forces acting on the membrane"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which type of ion channel opens in response to changes in membrane potential?",
+                options: [
+                    "Ligand-gated channel",
+                    "Mechanosensitive channel", 
+                    "Voltage-gated channel",
+                    "Aquaporin channel"
+                ],
                 correctAnswer: 2
             },
             {
-                question: "Which of the following is a biotic component of an ecosystem?", 
-                options: ["Water", "Air", "Rocks", "Animals"],
-                correctAnswer: 3
+                question: "The Na+/K+ ATPase pump is an example of which type of transport?",
+                options: [
+                    "Passive transport",
+                    "Primary active transport",
+                    "Secondary active transport",
+                    "Facilitated diffusion"
+                ],
+                correctAnswer: 1
             },
             {
-                question: "Which of the following best describes the relationship between different species in a community?",
-                options: ["Symbiosis", "Competition", "Predation", "All of the above"],
-                correctAnswer: 3
+                question: "Which mechanism allows for the simultaneous transport of two solutes in the same direction across a membrane?",
+                options: ["Antiport", "Symport", "Simple diffusion", "Facilitated diffusion"],
+                correctAnswer: 1
             },
             {
-                question: "Which of the following is an abiotic factor in an ecosystem?",
-                options: ["Temperature", "Animals", "Bacteria", "Plants"],
-                correctAnswer: 0
-            },
-            {
-                question: "Which of the following is an example of a primary consumer?",
-                options: ["Herbivore", "Carnivore", "Omnivore", "Decomposer"],
-                correctAnswer: 0
-            },
-            {
-                question: "Which of the following ecosystems has the highest biodiversity?",
-                options: ["Tundra", "Desert", "Tropical rainforest", "Savanna"],
+                question: "What characterizes primary active transport?",
+                options: [
+                    "It relies solely on diffusion processes",
+                    "It does not require any energy input",
+                    "It utilizes ATP or other energy sources to move ions against their gradient",
+                    "It occurs only in plant cells"
+                ],
                 correctAnswer: 2
             },
             {
-                question: "In the context of ecological succession, what is the first species to colonize a barren environment?",
-                options: ["Pioneer species", "Climax species", "Keystone species", "Invasive species"],
+                question: "In facilitated diffusion, which type of proteins assist in transporting molecules across the membrane?",
+                options: ["Enzymes", "Receptors", "Transport proteins (permeases)", "Structural proteins"],
+                correctAnswer: 2
+            },
+            {
+                question: "What is the primary function of ion channels in cellular membranes?",
+                options: [
+                    "To actively transport ions against their gradient",
+                    "To facilitate the passive movement of specific ions",
+                    "To synthesize ATP",
+                    "To provide structural support to the membrane"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which of the following correctly describes passive transport?",
+                options: [
+                    "Requires metabolic energy",
+                    "Moves substances against their concentration gradient",
+                    "Occurs along the concentration gradient",
+                    "Involves the use of pumps"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "The term \"co-transport\" refers to which of the following processes?",
+                options: [
+                    "Movement of ions through ion channels",
+                    "Simultaneous movement of two solutes either in the same or opposite directions",
+                    "Movement of water through aquaporins",
+                    "Passive movement down concentration gradients"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "In plants, which mechanism primarily drives mineral uptake against their concentration gradients?",
+                options: ["Passive transport", "Active transport", "Simple diffusion", "Osmosis"],
+                correctAnswer: 1
+            },
+            {
+                question: "What regulates the opening and closing of gated ion channels?",
+                options: [
+                    "Concentration gradients",
+                    "Membrane potential changes or ligand binding",
+                    "Temperature changes",
+                    "pH levels"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "The process by which glucose enters cells via sodium co-transport is an example of:",
+                options: [
+                    "Primary active transport",
+                    "Secondary active transport",
+                    "Simple diffusion",
+                    "Facilitated diffusion"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "What type of molecules typically undergo simple diffusion across membranes?",
+                options: [
+                    "Large polar molecules",
+                    "Small non-polar molecules",
+                    "Charged ions",
+                    "Macromolecules"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "How does facilitated diffusion differ from simple diffusion?",
+                options: [
+                    "Facilitated diffusion requires energy; simple diffusion does not",
+                    "Facilitated diffusion uses specific proteins; simple diffusion does not",
+                    "Facilitated diffusion occurs against concentration gradients; simple diffusion does not",
+                    "Simple diffusion requires specific proteins; facilitated diffusion does not"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which of the following processes involves no change in charge across the membrane?",
+                options: [
+                    "Electrogenic pumps",
+                    "Primary active transport",
+                    "Secondary active transport",
+                    "Electronegative pumps"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "What happens during primary active transport when ATP is hydrolyzed?",
+                options: [
+                    "Ions move down their concentration gradient",
+                    "Energy is released to pump ions against their gradient",
+                    "No energy is required",
+                    "Ions are transported through channels only"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which type of transport involves the simultaneous movement of two different solutes in the same direction?",
+                options: ["Antiport", "Symport", "Simple diffusion", "Endocytosis"],
+                correctAnswer: 1
+            },
+            {
+                question: "During facilitated diffusion, how do transporter proteins assist in moving solutes across the membrane?",
+                options: [
+                    "By altering their shape to shield the solute from the hydrophobic core",
+                    "By hydrolyzing ATP",
+                    "By creating an electrochemical gradient",
+                    "By forming vesicles around the solute"
+                ],
                 correctAnswer: 0
+            },
+            {
+                question: "What is the primary driving force for secondary active transport in plants?",
+                options: [
+                    "ATP hydrolysis",
+                    "Electrochemical proton gradient",
+                    "Ion concentration gradients",
+                    "Mechanical forces"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which type of ion channel opens in response to changes in membrane potential?",
+                options: [
+                    "Ligand-gated channel",
+                    "Mechanosensitive channel",
+                    "Voltage-gated channel",
+                    "Aquaporin channel"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "What mechanism allows ions to move in both directions across the membrane?",
+                options: ["Symport only", "Antiport only", "Ion channels", "Facilitated diffusion only"],
+                correctAnswer: 2
+            },
+            {
+                question: "Which ion pump is an example of an electrogenic transporter?",
+                options: [
+                    "Na+/K+ ATPase pump",
+                    "H+/K+ ATPase pump",
+                    "Ca2+ pump",
+                    "Cl- channel"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "In which type of transport do protons drive the movement of another solute against its concentration gradient?",
+                options: [
+                    "Primary active transport",
+                    "Secondary active transport",
+                    "Simple diffusion",
+                    "Osmosis"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "What type of protein facilitates facilitated diffusion?",
+                options: [
+                    "Receptors",
+                    "Enzymes",
+                    "Transport proteins (permeases)",
+                    "Structural proteins"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "Which of the following statements about simple diffusion is true?",
+                options: [
+                    "It requires specific transport proteins",
+                    "It moves substances against their concentration gradient",
+                    "It is a slow process for larger molecules",
+                    "It is mediated by ATP hydrolysis"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "Ion channels are primarily responsible for which type of transport?",
+                options: ["Active transport", "Passive transport", "Bulk flow", "Endocytosis"],
+                correctAnswer: 1
+            },
+            {
+                question: "Which of the following is a characteristic of primary active transport?",
+                options: [
+                    "Movement occurs along the concentration gradient",
+                    "Utilizes ATP to move ions against their gradient",
+                    "Involves ion channels only",
+                    "Does not involve any proteins"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "What type of transport does not require metabolic energy and occurs along the concentration gradient?",
+                options: [
+                    "Active transport",
+                    "Facilitated diffusion",
+                    "Secondary active transport",
+                    "Primary active transport"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which hormone acts as an important regulator of food intake by affecting gallbladder function?",
+                options: ["Secretin", "Cholecystokinin", "Somatostatin", "Enterogastrone"],
+                correctAnswer: 1
+            },
+            {
+                question: "What physiological process occurs when oxygen is transported from blood to body tissues?",
+                options: ["Ventilation", "Diffusion", "Circulation", "Respiration"],
+                correctAnswer: 1
+            },
+            {
+                question: "What type of muscle contraction primarily drives expiration during normal breathing?",
+                options: [
+                    "Diaphragm contraction",
+                    "Intercostal muscle relaxation",
+                    "Accessory muscle contraction",
+                    "Abdominal muscle contraction"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which component is NOT involved in hemostasis?",
+                options: ["Platelets", "Red blood cells", "Clotting factors", "Endothelial cells"],
+                correctAnswer: 1
+            },
+            {
+                question: "What triggers the release of secretin from the duodenum?",
+                options: [
+                    "Presence of fats",
+                    "Presence of acid",
+                    "Presence of carbohydrates",
+                    "Presence of proteins"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which phase of respiration involves gas exchange between alveoli and blood?",
+                options: ["Inspiration", "Expiration", "Internal respiration", "External respiration"],
+                correctAnswer: 3
+            },
+            {
+                question: "How does the diaphragm contribute to inhalation?",
+                options: [
+                    "By relaxing to decrease thoracic volume",
+                    "By contracting to increase thoracic volume",
+                    "By pushing air out of the lungs",
+                    "By filtering incoming air"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "What role does ADP play in platelet plug formation?",
+                options: [
+                    "It promotes vasodilation",
+                    "It attracts more platelets to the injury site",
+                    "It inhibits platelet aggregation",
+                    "It enhances fibrinogen synthesis"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which hormone assists in neutralizing gastric acid in the duodenum?",
+                options: ["Secretin", "Cholecystokinin", "Somatostatin", "Vilikinin"],
+                correctAnswer: 0
+            },
+            {
+                question: "What is the main purpose of ventilation in respiration?",
+                options: [
+                    "Gas exchange between blood and tissues",
+                    "Breathing air in and out of the lungs",
+                    "Transporting oxygen to cells",
+                    "Eliminating carbon dioxide from cells"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which factor promotes platelet adhesion during primary hemostasis?",
+                options: ["Collagen exposure", "Thromboxane A2", "Serotonin", "ADP"],
+                correctAnswer: 0
+            },
+            {
+                question: "What is the primary purpose of vasoconstriction at an injury site?",
+                options: [
+                    "To increase blood flow",
+                    "To decrease blood loss",
+                    "To promote platelet aggregation",
+                    "To enhance nutrient delivery"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "During pulmonary gas exchange, what is exchanged at the alveolar surface?",
+                options: [
+                    "Oxygen for glucose",
+                    "Carbon dioxide for nutrients",
+                    "Carbon dioxide for oxygen",
+                    "Nitrogen for carbon dioxide"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "What initiates inhalation during the breathing process?",
+                options: [
+                    "Intercostal muscles only",
+                    "Diaphragm contraction only",
+                    "Diaphragm and external intercostal muscles",
+                    "Accessory muscles only"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "Which process involves the diffusion of oxygen from alveoli into the blood?",
+                options: ["Ventilation", "Internal respiration", "External respiration", "Cellular respiration"],
+                correctAnswer: 2
+            },
+            {
+                question: "What is the role of somatostatin in the pancreas?",
+                options: [
+                    "Stimulating insulin release",
+                    "Inhibiting glucagon and insulin secretion",
+                    "Enhancing digestive enzyme activity",
+                    "Promoting bile production"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "In which part of the body does external respiration primarily occur?",
+                options: ["Heart", "Lungs", "Liver", "Kidneys"],
+                correctAnswer: 1
+            },
+            {
+                question: "Enterogastrone (GIP) primarily inhibits which of the following processes?",
+                options: [
+                    "Bile secretion",
+                    "Gastric secretion and motility",
+                    "Pancreatic enzyme release",
+                    "Nutrient absorption"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "What is the primary function of cholecystokinin in the digestive process?",
+                options: [
+                    "Inhibiting gastric motility",
+                    "Stimulating bile release and enzyme secretion", 
+                    "Promoting bicarbonate secretion",
+                    "Enhancing glucose metabolism"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Which hormone is primarily responsible for stimulating the release of bicarbonate in pancreatic juice?",
+                options: ["Cholecystokinin", "Secretin", "Somatostatin", "Enterogastrone"],
+                correctAnswer: 1
+            },
+            {
+                question: "What is the primary cause of climate change?",
+                options: ["Deforestation", "Burning of fossil fuels", "Overpopulation", "Natural variations"],
+                correctAnswer: 1
+            },
+            {
+                question: "Which of the following is NOT an example of a biotic factor?",
+                options: ["Bacteria", "Temperature", "Plants", "Animals"],
+                correctAnswer: 1
             },
             {
                 question: "Which of the following is an example of a mutualistic relationship?",
@@ -519,14 +914,39 @@
                 correctAnswer: 0
             },
             {
-                question: "Which of the following is NOT an example of a biotic factor?",
-                options: ["Bacteria", "Temperature", "Plants", "Animals"],
-                correctAnswer: 1
+                question: "In the context of ecological succession, what is the first species to colonize a barren environment?",
+                options: ["Pioneer species", "Climax species", "Keystone species", "Invasive species"],
+                correctAnswer: 0
             },
             {
-                question: "What is the primary cause of climate change?",
-                options: ["Deforestation", "Burning of fossil fuels", "Overpopulation", "Natural variations"],
-                correctAnswer: 1
+                question: "Which of the following ecosystems has the highest biodiversity?",
+                options: ["Tundra", "Desert", "Tropical rainforest", "Savanna"],
+                correctAnswer: 2
+            },
+            {
+                question: "Which of the following is an example of a primary consumer?",
+                options: ["Herbivore", "Carnivore", "Omnivore", "Decomposer"],
+                correctAnswer: 0
+            },
+            {
+                question: "Which of the following is an abiotic factor in an ecosystem?",
+                options: ["Temperature", "Animals", "Bacteria", "Plants"],
+                correctAnswer: 0
+            },
+            {
+                question: "Which of the following best describes the relationship between different species in a community?",
+                options: ["Symbiosis", "Competition", "Predation", "All of the above"],
+                correctAnswer: 3
+            },
+            {
+                question: "Which of the following is a biotic component of an ecosystem?", 
+                options: ["Water", "Air", "Rocks", "Animals"],
+                correctAnswer: 3
+            },
+            {
+                question: "Which of the following is an abiotic component of an ecosystem?",
+                options: ["Bacteria", "Fungi", "Sunlight", "Plants"],
+                correctAnswer: 2
             }
         ];
 
@@ -560,7 +980,6 @@
                 </div>
             `;
 
-            // Add event listeners to radio buttons
             const radioButtons = container.querySelectorAll('input[type="radio"]');
             radioButtons.forEach(radio => {
                 radio.addEventListener('change', () => {
@@ -568,20 +987,9 @@
                 });
             });
 
-            // Show/hide appropriate buttons for last question
-            const saveNextBtn = document.getElementById('save-next');
-            const saveLastBtn = document.getElementById('save-last');
-            
-            if (currentQuestion === totalQuestions) {
-                saveNextBtn.classList.add('hidden');
-                saveLastBtn.classList.remove('hidden');
-            } else {
-                saveNextBtn.classList.remove('hidden');
-                saveLastBtn.classList.add('hidden');
-            }
+            updateNavigationButtons();
         }
 
-        // Initialize question buttons
         function initializeQuestionButtons() {
             const buttonContainer = document.getElementById('question-buttons');
             buttonContainer.innerHTML = '';
@@ -597,17 +1005,14 @@
             }
         }
 
-        // Disable right-click
         document.addEventListener('contextmenu', e => e.preventDefault());
 
-        // Disable keyboard shortcuts and prevent tab switching
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey || e.altKey || (e.key === 'F12') || e.key === 'Tab') {
                 e.preventDefault();
             }
         });
 
-        // Detect tab switch and full screen exit
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 showWarningModal();
@@ -620,7 +1025,6 @@
             }
         });
 
-        // Warning modal functions
         function showWarningModal() {
             document.getElementById('warning-modal').classList.remove('hidden');
             document.getElementById('quiz-page').classList.add('blur-screen');
@@ -654,7 +1058,6 @@
             updateNavigationButtons();
         }
 
-        // Login functionality with validation
         document.getElementById('login-button').addEventListener('click', async function() {
             const rollNumber = document.getElementById('roll-number').value.trim();
             const studentName = document.getElementById('student-name').value.trim();
@@ -680,15 +1083,15 @@
             }
         });
 
-        // Timer functionality
         function startTimer() {
-            let timeLeft = 05 * 60; // 05 minutes in seconds
+            let timeLeft = 3600; // 1 hour in seconds
             const timerDisplay = document.getElementById('timer');
             
             timer = setInterval(() => {
-                const minutes = Math.floor(timeLeft / 05);
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
                 const seconds = timeLeft % 60;
-                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                timerDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
                 if (timeLeft <= 0) {
                     clearInterval(timer);
@@ -698,21 +1101,12 @@
             }, 1000);
         }
 
-        // Navigation functions
         function updateNavigationButtons() {
             const prevButton = document.getElementById('prev-question');
             const nextButton = document.getElementById('save-next');
-            const saveLastButton = document.getElementById('save-last');
             
             prevButton.disabled = currentQuestion === 1;
-            
-            if (currentQuestion === totalQuestions) {
-                nextButton.classList.add('hidden');
-                saveLastButton.classList.remove('hidden');
-            } else {
-                nextButton.classList.remove('hidden');
-                saveLastButton.classList.add('hidden');
-            }
+            nextButton.textContent = currentQuestion === totalQuestions ? 'Save' : 'Save & Next';
             
             updateQuestionButtons();
             updateCounts();
@@ -738,7 +1132,6 @@
             document.getElementById('remaining-count').textContent = totalQuestions - (answeredQuestions.size + skippedQuestions.size);
         }
 
-        // Navigation button event listeners
         document.getElementById('prev-question').addEventListener('click', function() {
             if (currentQuestion > 1) {
                 currentQuestion--;
@@ -748,24 +1141,15 @@
         });
 
         document.getElementById('save-next').addEventListener('click', function() {
-            if (selectedAnswers[currentQuestion-1] !== null) {
+            if (selectedAnswers[currentQuestion - 1] !== null) {
                 answeredQuestions.add(currentQuestion);
                 skippedQuestions.delete(currentQuestion);
-                answers[currentQuestion-1] = selectedAnswers[currentQuestion-1] === questions[currentQuestion-1].correctAnswer;
+                answers[currentQuestion - 1] = selectedAnswers[currentQuestion - 1] === questions[currentQuestion - 1].correctAnswer;
             }
             
             if (currentQuestion < totalQuestions) {
                 currentQuestion++;
                 loadQuestion(currentQuestion);
-                updateNavigationButtons();
-            }
-        });
-
-        document.getElementById('save-last').addEventListener('click', function() {
-            if (selectedAnswers[currentQuestion-1] !== null) {
-                answeredQuestions.add(currentQuestion);
-                skippedQuestions.delete(currentQuestion);
-                answers[currentQuestion-1] = selectedAnswers[currentQuestion-1] === questions[currentQuestion-1].correctAnswer;
             }
             updateNavigationButtons();
         });
@@ -777,67 +1161,50 @@
             if (currentQuestion < totalQuestions) {
                 currentQuestion++;
                 loadQuestion(currentQuestion);
-                updateNavigationButtons();
             }
+            updateNavigationButtons();
         });
 
-        // Submit test functionality
-        document.getElementById('submit-test').addEventListener('click', function() {
-            document.getElementById('submit-modal').classList.remove('hidden');
-            document.getElementById('quiz-page').classList.add('blur-screen');
-        });
+        document.getElementById('submit-test').addEventListener('click', submitTest);
 
-        function closeSubmitModal() {
-            document.getElementById('submit-modal').classList.add('hidden');
-            document.getElementById('quiz-page').classList.remove('blur-screen');
-        }
-
-        function confirmSubmit() {
-            closeSubmitModal();
-            // Save answer for the current question if selected
-            if (selectedAnswers[currentQuestion-1] !== null) {
-                answeredQuestions.add(currentQuestion);
-                skippedQuestions.delete(currentQuestion);
-                answers[currentQuestion-1] = selectedAnswers[currentQuestion-1] === questions[currentQuestion-1].correctAnswer;
-            }
-
-            if(timer) clearInterval(timer);
+        function submitTest() {
+            if (timer) clearInterval(timer);
 
             const correctAnswers = answers.filter(answer => answer === true).length;
             const wrongAnswers = answers.filter(answer => answer === false).length;
             const skipped = skippedQuestions.size;
-            const score = (correctAnswers / totalQuestions) * 10;
+            const score = (correctAnswers / totalQuestions) * 100;
 
-            // Update score cards
             document.getElementById('correct-count').textContent = correctAnswers;
             document.getElementById('wrong-count').textContent = wrongAnswers;
             document.getElementById('final-skipped-count').textContent = skipped;
-            document.getElementById('final-score').textContent = score.toFixed(1);
+            document.getElementById('final-score').textContent = score.toFixed(2);
 
-            // Update performance bar
             document.getElementById('performance-bar').style.width = `${score}%`;
 
-            // Calculate time taken
             const endTime = new Date();
-            const timeTaken = Math.floor((endTime - startTime) / 1000); // in seconds
-            const minutes = Math.floor(timeTaken / 05);
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            const hours = Math.floor(timeTaken / 3600);
+            const minutes = Math.floor((timeTaken % 3600) / 60);
             const seconds = timeTaken % 60;
+            document.getElementById('time-taken').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
             const resultDetails = document.getElementById('result-details');
             resultDetails.innerHTML = '';
             for (let i = 1; i <= totalQuestions; i++) {
-                const status = answers[i-1] === true ? 'Correct' : 
-                             answers[i-1] === false ? 'Wrong' : 
-                             skippedQuestions.has(i) ? 'Skipped' : 'Not Attempted';
+                const status = answers[i - 1] === true ? 'Correct' : 
+                               answers[i - 1] === false ? 'Wrong' : 
+                               skippedQuestions.has(i) ? 'Skipped' : 'Not Attempted';
                 resultDetails.innerHTML += `<p>Q${i}: ${status}</p>`;
             }
 
+            document.getElementById('submit-test').classList.add('hidden');
             document.getElementById('result-container').classList.remove('hidden');
         }
 
-        // Initialize exam
         window.onload = function() {
             resetExam();
         };
     </script>
 </body>
-</html>
+</html
