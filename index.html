@@ -180,7 +180,6 @@
             box-shadow: 0 15px 40px rgba(59, 130, 246, 0.25);
         }
 
-        /* Topic specific colors */
         .section[data-topic="polity"] h2 {
             background: linear-gradient(135deg, #dc2626, #ef4444);
             -webkit-background-clip: text;
@@ -341,22 +340,22 @@
 
         .director-image {
             position: absolute;
-            top: -140px;  /* Moved higher up to accommodate larger size */
+            top: -140px;
             left: 30px;
-            height: 250px; /* Increased size */
-            width: 250px; /* Increased size */
+            height: 250px;
+            width: 250px;
             overflow: hidden;
             z-index: 101;
             pointer-events: none;
-            border-radius: 10px; /* Added for better aesthetics */
+            border-radius: 10px;
         }
 
         .director-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            image-rendering: -webkit-optimize-contrast; /* For better image quality */
-            image-rendering: crisp-edges; /* For better image quality */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
         .footer-content {
@@ -397,7 +396,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Dark mode */
         @media (prefers-color-scheme: dark) {
             body {
                 background: linear-gradient(135deg, #0f172a, #1e293b, #2d3748);
@@ -418,7 +416,6 @@
             }
         }
 
-        /* Mobile optimizations */
         @media (max-width: 480px) {
             #main-content {
                 padding: 1rem;
@@ -439,7 +436,6 @@
             }
         }
 
-        /* Loading animation */
         .loading-bar {
             height: 4px;
             width: 100%;
@@ -466,18 +462,18 @@
     <script>
         const topics = {
             'gk': [
-                { title: 'Indian Polity', icon: 'fas fa-landmark', description: 'Master the fundamentals of Indian Constitution with interactive quizzes and real-time feedback.', link: 'polity.html', topic: 'polity' },
-                { title: 'Rajasthan Art & Culture', icon: 'fas fa-palette', description: 'Explore Rajasthan\'s rich heritage through engaging multimedia content and practice tests.', link: 'comingsoon.html', topic: 'culture' },
-                { title: 'Indian History', icon: 'fas fa-monument', description: 'Journey through Indian history with comprehensive practice sets and detailed explanations.', link: 'comingsoon.html', topic: 'history' },
-                { title: 'Geography of Rajasthan', icon: 'fas fa-mountain', description: 'Interactive maps and location-based questions to master Rajasthan\'s geography.', link: 'comingsoon.html', topic: 'geography' },
-                { title: 'Science & Technology', icon: 'fas fa-microscope', description: 'Stay updated with modern scientific concepts through adaptive learning modules.', link: 'comingsoon.html', topic: 'science' }
+                { title: 'Indian Polity', icon: 'fas fa-landmark', description: 'Master the fundamentals of Indian Constitution with interactive quizzes and real-time feedback. Covers topics like constitutional framework, fundamental rights, and governance structures.', link: 'polity.html', topic: 'polity' },
+                { title: 'Rajasthan Art & Culture', icon: 'fas fa-palette', description: 'Explore Rajasthan\'s rich heritage through engaging multimedia content and practice tests. Learn about traditional art forms, festivals, and cultural practices unique to Rajasthan.', link: 'comingsoon.html', topic: 'culture' },
+                { title: 'Indian History', icon: 'fas fa-monument', description: 'Journey through Indian history with comprehensive practice sets and detailed explanations. Covers ancient, medieval, and modern periods of Indian history, including important events and personalities.', link: 'comingsoon.html', topic: 'history' },
+                { title: 'Geography of Rajasthan', icon: 'fas fa-mountain', description: 'Interactive maps and location-based questions to master Rajasthan\'s geography. Study the state\'s physical features, climate, natural resources, and economic geography.', link: 'comingsoon.html', topic: 'geography' },
+                { title: 'Science & Technology', icon: 'fas fa-microscope', description: 'Stay updated with modern scientific concepts through adaptive learning modules. Covers basic principles of physics, chemistry, biology, and recent technological advancements.', link: 'comingsoon.html', topic: 'science' }
             ],
             'other-exams': [
-                { title: 'CSIR-NET', icon: 'fas fa-atom', description: 'Comprehensive preparation with previous year papers and mock tests.', link: 'csirnetindex.html' },
-                { title: 'NEET', icon: 'fas fa-heartbeat', description: 'Subject-wise practice tests with detailed solutions and performance analytics.', link: 'comingsoon.html' },
-                { title: 'UPSC', icon: 'fas fa-balance-scale', description: 'Structured preparation path with daily practice questions and current affairs.', link: 'comingsoon.html' },
-                { title: 'SSC', icon: 'fas fa-user-tie', description: 'Topic-wise practice sets with difficulty progression and time management tools.', link: 'comingsoon.html' },
-                { title: 'PCS', icon: 'fas fa-building-columns', description: 'State-specific preparation material with bilingual support.', link: 'comingsoon.html' }
+                { title: 'CSIR-NET', description: 'Comprehensive preparation with previous year papers and mock tests. Tailored for aspirants in scientific research, covering various science disciplines.', link: 'csirnetindex.html' },
+                { title: 'NEET', icon: 'fas fa-heartbeat', description: 'Subject-wise practice tests with detailed solutions and performance analytics. Focused on biology, physics, and chemistry for medical entrance preparation.', link: 'comingsoon.html' },
+                { title: 'UPSC', icon: 'fas fa-balance-scale', description: 'Structured preparation path with daily practice questions and current affairs. Covers General Studies, CSAT, and optional subjects for Civil Services Examination.', link: 'comingsoon.html' },
+                { title: 'SSC', icon: 'fas fa-user-tie', description: 'Topic-wise practice sets with difficulty progression and time management tools. Prepares for various SSC exams including CGL, CHSL, and CPO.', link: 'comingsoon.html' },
+                { title: 'PCS', icon: 'fas fa-building-columns', description: 'State-specific preparation material with bilingual support. Focuses on state administration, local history, and current affairs relevant to Public Service Commissions.', link: 'comingsoon.html' }
             ]
         };
 
@@ -485,7 +481,6 @@
             const gkContent = document.getElementById('gk-content');
             const otherExamsContent = document.getElementById('other-exams-content');
             
-            // Show loading animation
             const loadingBar = document.createElement('div');
             loadingBar.className = 'loading-bar';
             document.body.appendChild(loadingBar);
@@ -502,7 +497,6 @@
                     loadTopics(otherExamsContent, 'other-exams');
                 }
                 
-                // Remove loading animation
                 loadingBar.remove();
             }, 500);
         }
@@ -520,23 +514,6 @@
                     <div>
                         <h2><i class="${topic.icon}"></i>${topic.title}</h2>
                         <p>${topic.description}</p>
-                        <div class="stats-container">
-                            <div class="stat-card">
-                                <i class="fas fa-clock"></i>
-                                <div class="stat-value">45</div>
-                                <div class="stat-label">Minutes per Test</div>
-                            </div>
-                            <div class="stat-card">
-                                <i class="fas fa-question-circle"></i>
-                                <div class="stat-value">50</div>
-                                <div class="stat-label">Questions</div>
-                            </div>
-                            <div class="stat-card">
-                                <i class="fas fa-trophy"></i>
-                                <div class="stat-value">100</div>
-                                <div class="stat-label">Total Points</div>
-                            </div>
-                        </div>
                     </div>
                     <button onclick="location.href='${topic.link}'">
                         <i class="fas fa-play-circle"></i>Start Practice Test
@@ -571,7 +548,6 @@
         <div id="gk-content"></div>
         <div id="other-exams-content"></div>
     </div>
-
     <footer>
         <p>&copy; 2025 PMI Eduverse | Empowering Students for Success</p>
     </footer>
