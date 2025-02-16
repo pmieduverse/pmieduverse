@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Eduverse Examination</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        /* Friendly gradient background */
+        background: linear-gradient(135deg, #4158D0, #C850C0);
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 800px;
+        /* Modern glassmorphism with better visibility */
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .gradient-text {
+        /* Vibrant gradient text */
+        background: linear-gradient(to right, #FF512F, #F09819);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+    }
+
+    button {
+        /* Friendly button style */
+        background: linear-gradient(45deg, #FF512F, #F09819);
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(45deg, #F09819, #FF512F);
+    }
+
+    .question-option {
+        /* Improved option style */
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        color: white;
+        padding: 18px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 1.1rem;
+    }
+
+    .question-option:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .question-option.selected {
+        background: linear-gradient(45deg, #FF512F, #F09819);
+        border: none;
+        font-weight: 500;
+    }
+
+    input {
+        /* Enhanced input style */
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        color: white;
+        padding: 16px;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #F09819;
+        box-shadow: 0 0 15px rgba(240, 152, 25, 0.3);
+    }
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .timer {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #F09819;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .incorrect-text {
+        color: #000000;
+    }
+
+    /* Enhanced card style for sections */
+    .thumbnail-section {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .thumbnail-section img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s ease;
+    }
+
+    .thumbnail-section img:hover {
+        transform: scale(1.02);
+    }
+</style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginContainer" class="container">
+        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Examination</h1>
+        
+        <!-- Thumbnail Section -->
+        <div class="mb-6">
+            <img src="https://media-hosting.imagekit.io//183507301a434fad/polity.png?Expires=1834303997&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=gSAO5eugDJVxz5k2qYu1YPo-JbDP-yLQhgsQH9CmH2H6rbpTQCZvy7O6aaQ6d4MEqFJd24BxKC2WijtY8yq3ZuOpTeIHT2HPid89tb~dg3gsLc9TwnUYISWy2SOAxdaCWknoTYIVUnMGeaNnlwdW5YEnSPsPd8SbgTr2-w8qYr~Wo3d94KwQ2fGib~4K24qUr66u2XqDfU3AVK0Lxrq6RZ6FrriFrmO-Es~WPhpoccxWvn0XCC4jbBHQ4iYs5C0IMeSSVVEuWNYYn1DDHKlxr0nZY2LV53JMcp-RiU-x0qehryQyBxHEbPPyFUJmRalIZh~OJg7ZoCQKbCBL9uPiAg__" alt="Exam Thumbnail" class="w-full h-auto max-w-[1280px] max-h-[720px] mx-auto rounded-lg shadow-lg">
+            <p class="text-center mt-2 text-lg font-semibold">RPSC General Knowledge Paper [1st Paper]</p>
+        </div>
+
+        <!-- Total Questions Section -->
+        <div class="bg-gray-800 text-white p-4 rounded shadow-lg mb-4">
+            <p class="text-lg font-bold">Total Questions in Quiz: <span id="totalQuestions"></span></p>
+            <p class="text-sm text-gray-300">Prepare yourself to complete all questions before submitting!</p>
+        </div>
+
+        <input id="rollNumber" type="text" placeholder="Enter Roll Number" class="w-full p-3 mb-4 rounded text-black">
+        <input id="userName" type="text" placeholder="Enter Your Name" class="w-full p-3 mb-4 rounded text-black">
+        <button onclick="startQuiz()" class="w-full mt-4">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizContainer" class="container hidden">
+        <h1 class="text-2xl font-bold mb-4 gradient-text">PMI Eduverse Examination</h1>
+        <div id="timer" class="timer mb-4"></div>
+        <div id="questionBox">
+            <h2 id="questionNumber" class="text-lg font-semibold mb-2">Question 1 of 10</h2>
+            <h2 id="question" class="text-lg font-semibold mb-6">Loading question...</h2>
+            <div id="options" class="grid gap-4"></div>
+        </div>
+        <div class="flex justify-between mt-6">
+            <button onclick="prevQuestion()" class="bg-gray-400">Previous</button>
+            <button onclick="nextQuestion()">Next</button>
+            <button onclick="submitQuiz()" class="bg-red-500">Submit Quiz</button>
+        </div>
+    </div>
+
+    <!-- Result Section -->
+    <div id="resultContainer" class="container hidden">
+        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">Results</h1>
+        <p id="resultInfo" class="text-lg mb-4 text-center"></p>
+        <p id="totalMarks" class="text-lg mb-4 text-center"></p>
+        <canvas id="resultChart" class="mb-6"></canvas>
+        <div id="incorrectQuestions" class="mt-6"></div>
+        
+        <!-- Download PDF Button -->
+        <button onclick="downloadResultPDF()" class="w-full mt-4 bg-blue-500 text-white py-2 rounded">Download PDF</button>
+        
+        <button onclick="restartQuiz()" class="w-full mt-4 bg-gray-500 text-white py-2 rounded">Restart Quiz</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                "question": "अनुच्छेद 28 के तहत, किस प्रकार के शिक्षण संस्थानों में धार्मिक शिक्षा पूरी तरह से निषिद्ध है?",
+                "options": ["पूरी तरह से राज्य द्वारा वित्तपोषित संस्थान", "राज्य द्वारा मान्यता प्राप्त संस्थान", "राज्य से सहायता प्राप्त संस्थान", "राज्य द्वारा प्रशासित संस्थान लेकिन किसी न्यास (ट्रस्ट) द्वारा स्थापित"],
+                "correct": 0
+            },
+            {
+                "question": "अनुच्छेद 28 के अनुसार, राज्य द्वारा मान्यता प्राप्त या राज्य से सहायता प्राप्त संस्थानों में धार्मिक शिक्षा:",
+                "options": ["पूरी तरह से प्रतिबंधित है", "केवल बहुसंख्यक धर्म के लिए अनुमत है", "स्वैच्छिक रूप से प्रदान की जा सकती है", "केवल सरकारी अनुमति के बाद ही दी जा सकती है"],
+                "correct": 2
+            },
+            {
+                "question": "निम्नलिखित में से अनुच्छेद 29 के बारे में कौन-सा कथन सही है?",
+                "options": ["यह केवल धार्मिक अल्पसंख्यकों की सुरक्षा करता है", "यह केवल व्यक्तिगत नागरिकों को अधिकार प्रदान करता है, समूहों को नहीं", "यह किसी भी नागरिक समूह को उनकी भाषा, लिपि, या संस्कृति को संरक्षित करने का अधिकार देता है", "यह भाषाई संरक्षण से संबंधित राजनीतिक भाषणों को प्रतिबंधित करता है"],
+                "correct": 2
+            },
+            {
+                "question": "अनुच्छेद 29 के अनुसार, किसी भी नागरिक को राज्य द्वारा वित्तपोषित शिक्षण संस्थानों में प्रवेश से इन आधारों पर वंचित नहीं किया जा सकता:",
+                "options": ["आर्थिक पृष्ठभूमि", "लिंग और आयु", "धर्म, जाति, भाषा या नस्ल", "विकलांगता"],
+                "correct": 2
+            },
+            {
+                "question": "अनुच्छेद 30(1) अल्पसंख्यकों को क्या अधिकार प्रदान करता है?",
+                "options": ["सरकार से अनिवार्य रूप से धन प्राप्त करने का अधिकार", "अपनी पसंद के शैक्षिक संस्थान स्थापित करने और उनका प्रशासन करने का अधिकार", "सरकारी शैक्षिक नीतियों पर पूर्ण नियंत्रण का अधिकार", "सभी स्कूलों में धार्मिक शिक्षा को अनिवार्य करने का अधिकार"],
+                "correct": 1
+            },
+            {
+                "question": "कौन-सा संशोधन अधिनियम अल्पसंख्यक संस्थानों की संपत्ति के अधिकार की रक्षा हेतु अनुच्छेद 30 में जोड़ा गया था?",
+                "options": ["42वां संशोधन अधिनियम, 1976", "44वां संशोधन अधिनियम, 1978", "86वां संशोधन अधिनियम, 2002", "73वां संशोधन अधिनियम, 1992"],
+                "correct": 1
+            },
+            {
+                "question": "निम्नलिखित में से कौन-सा कथन अल्पसंख्यक शिक्षण संस्थानों के बारे में सही नहीं है?",
+                "options": ["वे अपने शिक्षण और गैर-शिक्षण कर्मचारियों को स्वयं नियुक्त कर सकते हैं", "वे सभी राष्ट्रीय कानूनों और नियमों से मुक्त होते हैं", "वे अपनी पसंद के योग्य छात्रों को प्रवेश दे सकते हैं", "उन्हें स्वच्छता, कराधान और सार्वजनिक व्यवस्था संबंधी राष्ट्रीय कानूनों का पालन करना होगा"],
+                "correct": 1
+            },
+            {
+                "question": "मलंकारा सीरियन कैथोलिक कॉलेज मामले (2007) में सुप्रीम कोर्ट ने क्या फैसला दिया?",
+                "options": ["अल्पसंख्यक संस्थानों को प्रशासन में पूर्ण स्वतंत्रता दी जानी चाहिए", "अनुच्छेद 30 के तहत अल्पसंख्यकों को बहुसंख्यकों से अधिक अधिकार नहीं मिलते", "राज्य अल्पसंख्यक संस्थानों के कार्यों को नियंत्रित नहीं कर सकता", "अल्पसंख्यक संस्थान सभी छात्रों को धार्मिक शिक्षा देने के लिए बाध्य कर सकते हैं"],
+                "correct": 1
+            },
+            {
+                "question": "वे अल्पसंख्यक शिक्षण संस्थान जो न तो राज्य से मान्यता प्राप्त करना चाहते हैं और न ही सहायता, उन्हें किन नियमों का पालन करना होता है?",
+                "options": ["किसी भी कानून या नियमों का पालन नहीं करना पड़ता", "पाठ्यक्रम और प्रशासन पर राज्य का पूर्ण नियंत्रण होता है", "सामान्य कानून जैसे अनुबंध कानून, कर कानून, श्रम कानून आदि लागू होते हैं", "सभी छात्रों के लिए धार्मिक शिक्षा अनिवार्य होती है"],
+                "correct": 2
+            },
+            {
+                "question": "बिना सरकारी सहायता प्राप्त अल्पसंख्यक शिक्षण संस्थानों पर कौन-से नियम लागू किए जा सकते हैं?",
+                "options": ["शिक्षक नियुक्ति के लिए कोई भी तर्कसंगत चयन प्रक्रिया अपनाने की स्वतंत्रता", "सरकार द्वारा अनुमोदित पाठ्यक्रम और पाठ्यचर्या को अनिवार्य रूप से लागू करना", "सभी सरकारी आरक्षण श्रेणियों के लिए अनिवार्य कोटा लागू करना", "राज्य द्वारा छात्रों के प्रवेश पर पूर्ण नियंत्रण लागू करना"],
+                "correct": 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let rollNumber = "";
+        let userName = "";
+        let timerInterval;
+        let timeLeft = 600;
+
+        // Set total questions count when page loads
+        document.getElementById('totalQuestions').textContent = questions.length;
+
+        function startQuiz() {
+            rollNumber = document.getElementById('rollNumber').value;
+            userName = document.getElementById('userName').value;
+
+            if (!rollNumber || !userName) {
+                alert('Please enter both Roll Number and Name');
+                return;
+            }
+
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            startTimer();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const questionData = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question').textContent = questionData.question;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+
+            questionData.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'question-option';
+                if (userAnswers[currentQuestion] === index) {
+                    button.classList.add('selected');
+                }
+                button.onclick = () => {
+                    userAnswers[currentQuestion] = index;
+                    loadQuestion();
+                };
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            if (confirm("Are you sure you want to submit the quiz?")) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
+
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.remove('hidden');
+
+            document.getElementById('resultInfo').textContent = `Name: ${userName}, Roll Number: ${rollNumber}`;
+            document.getElementById('totalMarks').textContent = `Score: ${correct} / ${questions.length}`;
+
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        label: 'Results',
+                        data: [correct, incorrect],
+                        backgroundColor: ['#ff6347', '#1e3a8a'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const incorrectQuestionsDiv = document.getElementById('incorrectQuestions');
+            incorrectQuestionsDiv.innerHTML = '<h3 class="text-lg font-bold text-white">Incorrect Answers:</h3>';
+            questions.forEach((question, index) => {
+                if (userAnswers[index] !== question.correct) {
+                    const incorrectText = document.createElement('p');
+                    incorrectText.className = 'incorrect-text';
+                    incorrectText.textContent = `${question.question} - Correct Answer: ${question.options[question.correct]}`;
+                    incorrectQuestionsDiv.appendChild(incorrectText);
+                }
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            timeLeft = 600;
+            clearInterval(timerInterval);
+            document.getElementById('resultContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+        }
+
+        function downloadResultPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const examDate = new Date().toLocaleDateString();
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
+
+            doc.setFillColor(30, 58, 138);
+            doc.rect(0, 0, 210, 30, 'F');
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(22);
+            doc.setTextColor(255, 255, 255);
+            doc.text("PMI EDUVERSE EXAM RESULT", 105, 20, { align: 'center' });
+
+            const logoUrl = 'https://i.ibb.co/PzmBMLmY/SJHY6436.png';
+            doc.addImage(logoUrl, 'PNG', 10, 5, 30, 30);
+
+            const pageWidth = 210;
+            const pageHeight = 297;
+            const borderThickness = 2;
+
+            doc.setLineWidth(borderThickness);
+            doc.setDrawColor(0, 0, 0);
+            doc.rect(0, 0, pageWidth, pageHeight);
+
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(16);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Candidate Details:", 20, 50);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Name: ${userName}`, 20, 60);
+            doc.text(`Roll Number: ${rollNumber}`, 20, 70);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Exam Details:", 20, 90);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Marks: ${correct} / ${questions.length}`, 20, 100);
+            doc.text(`Total Time Spent: ${Math.floor(totalTimeSpent / 60)} min ${totalTimeSpent % 60} sec`, 20, 110);
+            doc.text(`Total Incorrect Answers: ${incorrect}`, 20, 120);
+            doc.text(`Test Topic: General Knowledge`, 20, 130);
+            doc.text(`Date of Exam: ${examDate}`, 20, 140);
+
+            doc.setFillColor(255, 215, 0);
+            doc.rect(20, 150, 170, 30, 'F');
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Examiner's Note:", 25, 160);
+            doc.setFont("helvetica", "normal");
+            doc.text("Focus on conceptual clarity and practice regularly!", 25, 170);
+
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(30, 58, 138);
+            doc.text("PMI EDUVERSE", 105, 280, { align: 'center' });
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Thank You for participating!", 105, 290, { align: 'center' });
+
+            doc.save("Quiz_Result.pdf");
+        }
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'C')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
