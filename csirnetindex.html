@@ -17,7 +17,7 @@
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
@@ -30,78 +30,79 @@
             100% { background-position: 100% 50%; }
         }
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             width: 100%;
-            padding: 20px;
+            padding: 15px;
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             animation: containerPulse 3s infinite alternate;
         }
         @keyframes containerPulse {
-            0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
-            100% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); }
+            0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+            100% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
         }
         h2 {
             text-align: center;
             color: var(--text-color);
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
             animation: titleGlow 2s infinite alternate;
         }
         @keyframes titleGlow {
-            0% { text-shadow: 0 0 5px var(--primary-color); }
-            100% { text-shadow: 0 0 20px var(--secondary-color); }
+            0% { text-shadow: 0 0 3px var(--primary-color); }
+            100% { text-shadow: 0 0 10px var(--secondary-color); }
         }
         .test-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
         .test-card {
             background: var(--card-color);
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: cardFloat 4s infinite alternate;
         }
         @keyframes cardFloat {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+            100% { transform: translateY(-5px); }
         }
         .test-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
         .test-card-header {
             background: var(--primary-color);
             color: var(--text-color);
-            padding: 20px;
+            padding: 15px;
         }
         .test-card-body {
-            padding: 20px;
+            padding: 15px;
         }
         .test-card h3 {
             margin: 0;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
         .test-card p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #555;
-            margin: 10px 0;
+            margin: 8px 0;
         }
         .start-btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: var(--secondary-color);
             color: var(--text-color);
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 20px;
             transition: all 0.3s ease;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-size: 0.8rem;
         }
         .start-btn:hover {
             background: var(--primary-color);
@@ -110,13 +111,13 @@
         .test-info {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
-            font-size: 0.9rem;
+            margin-top: 10px;
+            font-size: 0.8rem;
             color: #777;
         }
         .logo {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: logoSpin 10s linear infinite;
         }
         @keyframes logoSpin {
@@ -124,11 +125,29 @@
             100% { transform: rotateY(360deg); }
         }
         .logo img {
-            max-width: 150px;
+            max-width: 100px;
         }
-        @media (max-width: 600px) {
+        @media (min-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
             .test-list {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .test-card h3 {
+                font-size: 1.3rem;
+            }
+            .test-card p {
+                font-size: 1rem;
+            }
+            .start-btn {
+                font-size: 0.9rem;
+            }
+            .logo img {
+                max-width: 120px;
             }
         }
     </style>
