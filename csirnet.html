@@ -105,16 +105,29 @@
     </div>
 
     <!-- Login Page -->
-    <div id="login-page" class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600">
-        <div class="bg-white p-8 rounded-lg shadow-xl w-96">
-            <div class="text-center mb-6">
-                <i class="fas fa-user-graduate text-5xl text-blue-600"></i>
-                <h2 class="text-2xl font-bold text-gray-800 mt-4">Student Login</h2>
+    <div id="login-page" class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 to-purple-700">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 transform hover:scale-105 transition-transform duration-300">
+            <div class="text-center mb-8">
+                <img src="https://i.ibb.co/PzmBMLmY/SJHY6436.png" alt="PMI Eduverse Logo" class="w-24 h-24 mx-auto mb-4">
+                <h2 class="text-3xl font-bold text-gray-800">PMI Eduverse</h2>
+                <p class="text-gray-600 mt-2">Online Examination Portal</p>
             </div>
-            <div class="space-y-4">
-                <input type="text" id="roll-number" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter Roll Number" required />
-                <input type="text" id="student-name" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter Full Name" required />
-                <button id="login-button" class="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition duration-200">
+            <div class="space-y-6">
+                <div class="relative">
+                    <input type="text" id="roll-number" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none pl-10" placeholder="Enter Roll Number" required />
+                    <i class="fas fa-id-card absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <div class="relative">
+                    <input type="text" id="student-name" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none pl-10" placeholder="Enter Full Name" required />
+                    <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <div class="text-sm text-gray-600 mb-4">
+                    <p><strong>Exam Details:</strong></p>
+                    <p>• 60 Questions</p>
+                    <p>• Duration: 1 hour</p>
+                    <p>• Subjects: Ecology, Evolution, Animal Physiology, Plant Physiology</p>
+                </div>
+                <button id="login-button" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-lg hover:from-blue-600 hover:to-purple-700 transition duration-300 transform hover:scale-105">
                     Start Exam <i class="fas fa-arrow-right ml-2"></i>
                 </button>
             </div>
