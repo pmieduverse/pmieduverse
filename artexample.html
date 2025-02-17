@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Eduverse Examination</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(-45deg, #3498db, #8e44ad, #2ecc71, #e74c3c);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+    }
+    .container {
+        width: 100%;
+        max-width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        transition: all 0.3s ease;
+    }
+    .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+    }
+    .gradient-text {
+        background: linear-gradient(to right, #ff6b6b, #feca57);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+    }
+    button, .question-option {
+        width: 100%;
+        background: linear-gradient(45deg, #4b6cb7, #182848);
+        border: none;
+        color: #ffffff;
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    button:hover, .question-option:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+    button:after, .question-option:after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(45deg);
+        transition: all 0.3s ease;
+    }
+    button:hover:after, .question-option:hover:after {
+        left: -100%;
+        top: -100%;
+    }
+    .question-option.selected {
+        background: linear-gradient(45deg, #00b894, #00cec9);
+    }
+    input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #a29bfe;
+        box-shadow: 0 0 15px rgba(162, 155, 254, 0.5);
+    }
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .timer {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #feca57;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .incorrect-text {
+        color: #ff7675;
+    }
+    .thumbnail-section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        transition: all 0.3s ease;
+    }
+    .thumbnail-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+    }
+    .thumbnail-section img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+    }
+    .thumbnail-section img:hover {
+        transform: scale(1.05);
+    }
+    @media (max-width: 640px) {
+        body {
+            padding: 0.25rem;
+        }
+        .container {
+            padding: 1rem;
+        }
+        button, .question-option, input {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+        .timer {
+            font-size: 1.2rem;
+        }
+    }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-600 to-pink-500 text-white min-h-screen flex items-center justify-center p-4">
+    <!-- Login Section -->
+    <div id="loginContainer" class="w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Exam</h1>
+        
+        <!-- Thumbnail Section -->
+        <div class="mb-6">
+            <img src="https://iili.io/2yK73Pa.md.png" alt="Exam Thumbnail" class="w-full rounded-lg shadow-md">
+            <p class="text-center mt-2 text-sm sm:text-base font-semibold">RPSC General Knowledge Paper [1st Paper]</p>
+        </div>
+
+        <!-- Total Questions Section -->
+        <div class="bg-gray-800 text-white p-3 rounded-lg shadow-md mb-4">
+            <p class="text-base sm:text-lg font-bold">Total Questions: <span id="totalQuestions"></span></p>
+            <p class="text-xs sm:text-sm text-gray-300">Complete all questions before submitting!</p>
+        </div>
+
+        <input id="rollNumber" type="text" placeholder="Roll Number" class="w-full p-3 mb-3 rounded bg-white/30 border border-white/50 text-white placeholder-white/70">
+        <input id="userName" type="text" placeholder="Your Name" class="w-full p-3 mb-3 rounded bg-white/30 border border-white/50 text-white placeholder-white/70">
+        <button onclick="startQuiz()" class="w-full p-3 rounded bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold hover:opacity-90 transition">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizContainer" class="hidden w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <h1 class="text-xl sm:text-2xl font-bold mb-4 gradient-text">PMI Eduverse Exam</h1>
+        <div id="timer" class="text-lg sm:text-xl font-bold mb-4 text-yellow-300"></div>
+        <div id="questionBox">
+            <h2 id="questionNumber" class="text-base sm:text-lg font-semibold mb-2">Question 1 of 10</h2>
+            <h2 id="question" class="text-base sm:text-lg font-semibold mb-4">Loading question...</h2>
+            <div id="options" class="grid gap-3"></div>
+        </div>
+        <div class="flex justify-between mt-6">
+            <button onclick="prevQuestion()" class="px-4 py-2 bg-gray-600 rounded">Prev</button>
+            <button onclick="nextQuestion()" class="px-4 py-2 bg-blue-600 rounded">Next</button>
+            <button onclick="submitQuiz()" class="px-4 py-2 bg-red-600 rounded">Submit</button>
+        </div>
+    </div>
+
+    <!-- Result Section -->
+    <div id="resultContainer" class="hidden w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">Results</h1>
+        <p id="resultInfo" class="text-base sm:text-lg mb-3 text-center"></p>
+        <p id="totalMarks" class="text-base sm:text-lg mb-3 text-center"></p>
+        <canvas id="resultChart" class="mb-6"></canvas>
+        <div id="incorrectQuestions" class="mt-4 text-sm"></div>
+        
+        <button onclick="downloadResultPDF()" class="w-full p-3 mt-4 rounded bg-blue-600 text-white font-bold hover:bg-blue-700">Download PDF</button>
+        <button onclick="restartQuiz()" class="w-full p-3 mt-3 rounded bg-gray-600 text-white font-bold hover:bg-gray-700">Restart Quiz</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                "question": "राजस्थान के किस शहर को \"गुलाबी शहर\" के नाम से जाना जाता है?",
+                "options": ["जोधपुर", "जयपुर", "उदयपुर", "बीकानेर"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान के किस किले को यूनेस्को की विश्व धरोहर सूची में शामिल किया गया है?",
+                "options": ["चित्तौड़गढ़ किला", "कुम्भलगढ़ किला", "आमेर किला", "जैसलमेर किला"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"गैर नृत्य\" किस समुदाय से संबंधित है?",
+                "options": ["भील", "कालबेलिया", "मीणा", "गुर्जर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शासक ने \"जंतर-मंतर\" का निर्माण करवाया?",
+                "options": ["महाराजा सवाई जय सिंह II", "महाराणा प्रताप", "महाराजा मान सिंह", "महाराजा उम्मेद सिंह"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"पाबूजी की फड़\" किस शैली में बनाई जाती है?",
+                "options": ["मीनाकारी", "फड़ चित्रण", "पिछवाई", "ब्लॉक प्रिंटिंग"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थानी भाषा के प्रसिद्ध कवि \"कन्हैयालाल सेठिया\" की रचना कौन-सी है?",
+                "options": ["\"दूदाड़ी\"", "\"मुमल\"", "\"ढोला मारू\"", "\"पाबूजी\""],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"कैलादेवी मंदिर\" स्थित है?",
+                "options": ["करौली", "अजमेर", "बूंदी", "चित्तौड़गढ़"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"बीकानेरी भुजिया\" किससे बनाई जाती है?",
+                "options": ["मूंगफली", "बेसन", "दाल", "मावा"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान के किस शहर को \"सन सिटी\" के नाम से जाना जाता है?",
+                "options": ["जोधपुर", "जैसलमेर", "बीकानेर", "अजमेर"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"कालबेलिया नृत्य\" किससे संबंधित है?",
+                "options": ["सांपों के साथ खेलना", "तलवारबाजी", "मटकी नृत्य", "घूमर नृत्य"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"रणकपुर जैन मंदिर\" स्थित है?",
+                "options": ["उदयपुर", "जोधपुर", "अजमेर", "बीकानेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"घूमर नृत्य\" किस अवसर पर किया जाता है?",
+                "options": ["होली", "दीपावली", "विवाह", "रक्षाबंधन"],
+                "correct": 2
+            },
+            {
+                "question": "राजस्थान के किस शहर को \"झीलों की नगरी\" कहा जाता है?",
+                "options": ["जयपुर", "उदयपुर", "जोधपुर", "अजमेर"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"पिछवाई चित्रकला\" किस शहर से संबंधित है?",
+                "options": ["नाथद्वारा", "जयपुर", "बीकानेर", "जोधपुर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"अजमेर शरीफ दरगाह\" स्थित है?",
+                "options": ["अजमेर", "जयपुर", "जोधपुर", "उदयपुर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"मेवाड़ शैली\" किस क्षेत्र में प्रसिद्ध है?",
+                "options": ["चित्रकला", "संगीत", "नृत्य", "वास्तुकला"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"हवा महल\" स्थित है?",
+                "options": ["जयपुर", "जोधपुर", "उदयपुर", "बीकानेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"तेजाजी की कथा\" किस समुदाय से संबंधित है?",
+                "options": ["जाट", "राजपूत", "भील", "गुर्जर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"जैसलमेर किला\" स्थित है?",
+                "options": ["जैसलमेर", "जोधपुर", "बीकानेर", "अजमेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"बगरू प्रिंटिंग\" किस शहर से संबंधित है?",
+                "options": ["जयपुर", "उदयपुर", "बूंदी", "बीकानेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"सिटी पैलेस\" स्थित है?",
+                "options": ["उदयपुर", "जयपुर", "जोधपुर", "बीकानेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"मारवाड़ी भाषा\" किस क्षेत्र में बोली जाती है?",
+                "options": ["मेवाड़", "मारवाड़", "शेखावाटी", "हाड़ौती"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"बीकानेर किला\" स्थित है?",
+                "options": ["बीकानेर", "जोधपुर", "जयपुर", "अजमेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"कठपुतली नृत्य\" किस शहर से संबंधित है?",
+                "options": ["जयपुर", "उदयपुर", "जोधपुर", "बीकानेर"],
+                "correct": 1
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"अमर सिंह गेट\" स्थित है?",
+                "options": ["चित्तौड़गढ़", "जयपुर", "उदयपुर", "जोधपुर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"मेवाड़ी लोकगीत\" किस अवसर पर गाए जाते हैं?",
+                "options": ["विवाह", "होली", "दीपावली", "रक्षाबंधन"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"जंतर-मंतर\" स्थित है?",
+                "options": ["जयपुर", "जोधपुर", "उदयपुर", "बीकानेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"ब्लॉक प्रिंटिंग\" किस शहर से संबंधित है?",
+                "options": ["सांगानेर", "बूंदी", "बीकानेर", "अजमेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान के किस शहर में \"मेहरानगढ़ किला\" स्थित है?",
+                "options": ["जोधपुर", "जयपुर", "उदयपुर", "बीकानेर"],
+                "correct": 0
+            },
+            {
+                "question": "राजस्थान की प्रसिद्ध \"ढोला-मारू की कथा\" किस भाषा में लिखी गई है?",
+                "options": ["राजस्थानी", "हिंदी", "संस्कृत", "गुजराती"],
+                "correct": 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let rollNumber = "";
+        let userName = "";
+        let timerInterval;
+        let timeLeft = 900;
+
+        // Set total questions count when page loads
+        document.getElementById('totalQuestions').textContent = questions.length;
+
+        function startQuiz() {
+            rollNumber = document.getElementById('rollNumber').value;
+            userName = document.getElementById('userName').value;
+
+            if (!rollNumber || !userName) {
+                alert('Please enter both Roll Number and Name');
+                return;
+            }
+
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            startTimer();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const questionData = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question').textContent = questionData.question;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+
+            questionData.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'question-option';
+                if (userAnswers[currentQuestion] === index) {
+                    button.classList.add('selected');
+                }
+                button.onclick = () => {
+                    userAnswers[currentQuestion] = index;
+                    loadQuestion();
+                };
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            if (confirm("Are you sure you want to submit the quiz?")) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
+
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.remove('hidden');
+
+            document.getElementById('resultInfo').textContent = `Name: ${userName}, Roll Number: ${rollNumber}`;
+            document.getElementById('totalMarks').textContent = `Score: ${correct} / ${questions.length}`;
+
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        label: 'Results',
+                        data: [correct, incorrect],
+                        backgroundColor: ['#ff6347', '#1e3a8a'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const incorrectQuestionsDiv = document.getElementById('incorrectQuestions');
+            incorrectQuestionsDiv.innerHTML = '<h3 class="text-lg font-bold text-white">Incorrect Answers:</h3>';
+            questions.forEach((question, index) => {
+                if (userAnswers[index] !== question.correct) {
+                    const incorrectText = document.createElement('p');
+                    incorrectText.className = 'incorrect-text';
+                    incorrectText.textContent = `${question.question} - Correct Answer: ${question.options[question.correct]}`;
+                    incorrectQuestionsDiv.appendChild(incorrectText);
+                }
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            timeLeft = 600;
+            clearInterval(timerInterval);
+            document.getElementById('resultContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+        }
+
+        function downloadResultPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const examDate = new Date().toLocaleDateString();
+            const correct = userAnswers.filter((answer, index) => answer === questions[index].correct).length;
+            const incorrect = questions.length - correct;
+            const totalTimeSpent = 600 - timeLeft;
+
+            doc.setFillColor(30, 58, 138);
+            doc.rect(0, 0, 210, 30, 'F');
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(22);
+            doc.setTextColor(255, 255, 255);
+            doc.text("PMI EDUVERSE EXAM RESULT", 105, 20, { align: 'center' });
+
+            const logoUrl = 'https://i.ibb.co/PzmBMLmY/SJHY6436.png';
+            doc.addImage(logoUrl, 'PNG', 10, 5, 30, 30);
+
+            const pageWidth = 210;
+            const pageHeight = 297;
+            const borderThickness = 2;
+
+            doc.setLineWidth(borderThickness);
+            doc.setDrawColor(0, 0, 0);
+            doc.rect(0, 0, pageWidth, pageHeight);
+
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(16);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Candidate Details:", 20, 50);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Name: ${userName}`, 20, 60);
+            doc.text(`Roll Number: ${rollNumber}`, 20, 70);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Exam Details:", 20, 90);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Marks: ${correct} / ${questions.length}`, 20, 100);
+            doc.text(`Total Time Spent: ${Math.floor(totalTimeSpent / 60)} min ${totalTimeSpent % 60} sec`, 20, 110);
+            doc.text(`Total Incorrect Answers: ${incorrect}`, 20, 120);
+            doc.text(`Test Topic: General Knowledge`, 20, 130);
+            doc.text(`Date of Exam: ${examDate}`, 20, 140);
+
+            doc.setFillColor(255, 215, 0);
+            doc.rect(20, 150, 170, 30, 'F');
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Examiner's Note:", 25, 160);
+            doc.setFont("helvetica", "normal");
+            doc.text("Focus on conceptual clarity and practice regularly!", 25, 170);
+
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(30, 58, 138);
+            doc.text("PMI EDUVERSE", 105, 280, { align: 'center' });
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 0, 0);
+            doc.text("Thank You for participating!", 105, 290, { align: 'center' });
+
+            doc.save("Quiz_Result.pdf");
+        }
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
+                event.preventDefault();
+            }
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'C')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
