@@ -10,195 +10,208 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
     body {
         font-family: 'Poppins', sans-serif;
-        /* Friendly gradient background */
-        background: linear-gradient(135deg, #4158D0, #C850C0);
+        background: linear-gradient(-45deg, #3498db, #8e44ad, #2ecc71, #e74c3c);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
         color: #ffffff;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem;
+        padding: 0.5rem;
     }
-
     .container {
         width: 100%;
-        max-width: 800px;
-        /* Modern glassmorphism with better visibility */
-        background: rgba(255, 255, 255, 0.15);
+        max-width: 100%;
+        background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        padding: 2.5rem;
+        padding: 1.5rem;
         border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        transition: all 0.3s ease;
     }
-
+    .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+    }
     .gradient-text {
-        /* Vibrant gradient text */
-        background: linear-gradient(to right, #FF512F, #F09819);
+        background: linear-gradient(to right, #ff6b6b, #feca57);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 600;
     }
-
-    button {
-        /* Friendly button style */
-        background: linear-gradient(45deg, #FF512F, #F09819);
+    button, .question-option {
+        width: 100%;
+        background: linear-gradient(45deg, #4b6cb7, #182848);
         border: none;
-        color: white;
-        padding: 14px 28px;
-        font-size: 1.1rem;
-        border-radius: 15px;
+        color: #ffffff;
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 10px;
         cursor: pointer;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         font-weight: 500;
+        margin-bottom: 0.5rem;
+        position: relative;
+        overflow: hidden;
     }
-
-    button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(45deg, #F09819, #FF512F);
-    }
-
-    .question-option {
-        /* Improved option style */
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        color: white;
-        padding: 18px;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        font-size: 1.1rem;
-    }
-
-    .question-option:hover {
-        background: rgba(255, 255, 255, 0.25);
+    button:hover, .question-option:hover {
         transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
-
-    .question-option.selected {
-        background: linear-gradient(45deg, #FF512F, #F09819);
-        border: none;
-        font-weight: 500;
-    }
-
-    input {
-        /* Enhanced input style */
-        background: rgba(255, 255, 255, 0.15);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        color: white;
-        padding: 16px;
-        border-radius: 15px;
+    button:after, .question-option:after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(45deg);
         transition: all 0.3s ease;
-        font-size: 1.1rem;
     }
-
+    button:hover:after, .question-option:hover:after {
+        left: -100%;
+        top: -100%;
+    }
+    .question-option.selected {
+        background: linear-gradient(45deg, #00b894, #00cec9);
+    }
+    input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
     input:focus {
         outline: none;
         background: rgba(255, 255, 255, 0.2);
-        border-color: #F09819;
-        box-shadow: 0 0 15px rgba(240, 152, 25, 0.3);
+        border-color: #a29bfe;
+        box-shadow: 0 0 15px rgba(162, 155, 254, 0.5);
     }
-
     input::placeholder {
         color: rgba(255, 255, 255, 0.7);
     }
-
     .timer {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: bold;
-        color: #F09819;
+        color: #feca57;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        animation: pulse 2s infinite;
     }
-
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
     .incorrect-text {
-        color: #000000;
+        color: #ff7675;
     }
-
-    /* Enhanced card style for sections */
     .thumbnail-section {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
-        padding: 2rem;
-        margin-bottom: 2rem;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    }
-
-    .thumbnail-section img {
-        max-width: 100%;
-        height: auto;
+        padding: 1rem;
+        margin-bottom: 1rem;
         border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-        transition: transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        transition: all 0.3s ease;
     }
-
+    .thumbnail-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+    }
+    .thumbnail-section img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+    }
     .thumbnail-section img:hover {
-        transform: scale(1.02);
+        transform: scale(1.05);
     }
-</style>
+    @media (max-width: 640px) {
+        body {
+            padding: 0.25rem;
+        }
+        .container {
+            padding: 1rem;
+        }
+        button, .question-option, input {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+        .timer {
+            font-size: 1.2rem;
+        }
+    }
+    </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-purple-600 to-pink-500 text-white min-h-screen flex items-center justify-center p-4">
     <!-- Login Section -->
-    <div id="loginContainer" class="container">
-        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Examination</h1>
+    <div id="loginContainer" class="w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Exam</h1>
         
         <!-- Thumbnail Section -->
         <div class="mb-6">
-            <img src="https://media-hosting.imagekit.io//183507301a434fad/polity.png?Expires=1834303997&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=gSAO5eugDJVxz5k2qYu1YPo-JbDP-yLQhgsQH9CmH2H6rbpTQCZvy7O6aaQ6d4MEqFJd24BxKC2WijtY8yq3ZuOpTeIHT2HPid89tb~dg3gsLc9TwnUYISWy2SOAxdaCWknoTYIVUnMGeaNnlwdW5YEnSPsPd8SbgTr2-w8qYr~Wo3d94KwQ2fGib~4K24qUr66u2XqDfU3AVK0Lxrq6RZ6FrriFrmO-Es~WPhpoccxWvn0XCC4jbBHQ4iYs5C0IMeSSVVEuWNYYn1DDHKlxr0nZY2LV53JMcp-RiU-x0qehryQyBxHEbPPyFUJmRalIZh~OJg7ZoCQKbCBL9uPiAg__" alt="Exam Thumbnail" class="w-full h-auto max-w-[1280px] max-h-[720px] mx-auto rounded-lg shadow-lg">
-            <p class="text-center mt-2 text-lg font-semibold">RPSC General Knowledge Paper [1st Paper]</p>
+            <img src="https://media-hosting.imagekit.io//183507301a434fad/polity.png?Expires=1834303997&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=gSAO5eugDJVxz5k2qYu1YPo-JbDP-yLQhgsQH9CmH2H6rbpTQCZvy7O6aaQ6d4MEqFJd24BxKC2WijtY8yq3ZuOpTeIHT2HPid89tb~dg3gsLc9TwnUYISWy2SOAxdaCWknoTYIVUnMGeaNnlwdW5YEnSPsPd8SbgTr2-w8qYr~Wo3d94KwQ2fGib~4K24qUr66u2XqDfU3AVK0Lxrq6RZ6FrriFrmO-Es~WPhpoccxWvn0XCC4jbBHQ4iYs5C0IMeSSVVEuWNYYn1DDHKlxr0nZY2LV53JMcp-RiU-x0qehryQyBxHEbPPyFUJmRalIZh~OJg7ZoCQKbCBL9uPiAg__" alt="Exam Thumbnail" class="w-full rounded-lg shadow-md">
+            <p class="text-center mt-2 text-sm sm:text-base font-semibold">RPSC General Knowledge Paper [1st Paper]</p>
         </div>
 
         <!-- Total Questions Section -->
-        <div class="bg-gray-800 text-white p-4 rounded shadow-lg mb-4">
-            <p class="text-lg font-bold">Total Questions in Quiz: <span id="totalQuestions"></span></p>
-            <p class="text-sm text-gray-300">Prepare yourself to complete all questions before submitting!</p>
+        <div class="bg-gray-800 text-white p-3 rounded-lg shadow-md mb-4">
+            <p class="text-base sm:text-lg font-bold">Total Questions: <span id="totalQuestions"></span></p>
+            <p class="text-xs sm:text-sm text-gray-300">Complete all questions before submitting!</p>
         </div>
 
-        <input id="rollNumber" type="text" placeholder="Enter Roll Number" class="w-full p-3 mb-4 rounded text-black">
-        <input id="userName" type="text" placeholder="Enter Your Name" class="w-full p-3 mb-4 rounded text-black">
-        <button onclick="startQuiz()" class="w-full mt-4">Start Quiz</button>
+        <input id="rollNumber" type="text" placeholder="Roll Number" class="w-full p-3 mb-3 rounded bg-white/30 border border-white/50 text-white placeholder-white/70">
+        <input id="userName" type="text" placeholder="Your Name" class="w-full p-3 mb-3 rounded bg-white/30 border border-white/50 text-white placeholder-white/70">
+        <button onclick="startQuiz()" class="w-full p-3 rounded bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold hover:opacity-90 transition">Start Quiz</button>
     </div>
 
     <!-- Quiz Section -->
-    <div id="quizContainer" class="container hidden">
-        <h1 class="text-2xl font-bold mb-4 gradient-text">PMI Eduverse Examination</h1>
-        <div id="timer" class="timer mb-4"></div>
+    <div id="quizContainer" class="hidden w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <h1 class="text-xl sm:text-2xl font-bold mb-4 gradient-text">PMI Eduverse Exam</h1>
+        <div id="timer" class="text-lg sm:text-xl font-bold mb-4 text-yellow-300"></div>
         <div id="questionBox">
-            <h2 id="questionNumber" class="text-lg font-semibold mb-2">Question 1 of 10</h2>
-            <h2 id="question" class="text-lg font-semibold mb-6">Loading question...</h2>
-            <div id="options" class="grid gap-4"></div>
+            <h2 id="questionNumber" class="text-base sm:text-lg font-semibold mb-2">Question 1 of 10</h2>
+            <h2 id="question" class="text-base sm:text-lg font-semibold mb-4">Loading question...</h2>
+            <div id="options" class="grid gap-3"></div>
         </div>
         <div class="flex justify-between mt-6">
-            <button onclick="prevQuestion()" class="bg-gray-400">Previous</button>
-            <button onclick="nextQuestion()">Next</button>
-            <button onclick="submitQuiz()" class="bg-red-500">Submit Quiz</button>
+            <button onclick="prevQuestion()" class="px-4 py-2 bg-gray-600 rounded">Prev</button>
+            <button onclick="nextQuestion()" class="px-4 py-2 bg-blue-600 rounded">Next</button>
+            <button onclick="submitQuiz()" class="px-4 py-2 bg-red-600 rounded">Submit</button>
         </div>
     </div>
 
     <!-- Result Section -->
-    <div id="resultContainer" class="container hidden">
-        <h1 class="text-3xl font-bold text-center mb-6 gradient-text">Results</h1>
-        <p id="resultInfo" class="text-lg mb-4 text-center"></p>
-        <p id="totalMarks" class="text-lg mb-4 text-center"></p>
+    <div id="resultContainer" class="hidden w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">Results</h1>
+        <p id="resultInfo" class="text-base sm:text-lg mb-3 text-center"></p>
+        <p id="totalMarks" class="text-base sm:text-lg mb-3 text-center"></p>
         <canvas id="resultChart" class="mb-6"></canvas>
-        <div id="incorrectQuestions" class="mt-6"></div>
+        <div id="incorrectQuestions" class="mt-4 text-sm"></div>
         
-        <!-- Download PDF Button -->
-        <button onclick="downloadResultPDF()" class="w-full mt-4 bg-blue-500 text-white py-2 rounded">Download PDF</button>
-        
-        <button onclick="restartQuiz()" class="w-full mt-4 bg-gray-500 text-white py-2 rounded">Restart Quiz</button>
+        <button onclick="downloadResultPDF()" class="w-full p-3 mt-4 rounded bg-blue-600 text-white font-bold hover:bg-blue-700">Download PDF</button>
+        <button onclick="restartQuiz()" class="w-full p-3 mt-3 rounded bg-gray-600 text-white font-bold hover:bg-gray-700">Restart Quiz</button>
     </div>
 
     <script>
