@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMI Eduverse Examination</title>
+    <title>PMI-EDUVERSE Examination</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,10 +17,10 @@
     }
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(-45deg, #3498db, #8e44ad, #2ecc71, #e74c3c);
+        background: linear-gradient(-45deg, #f06, #9f6, #06f, #60f);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
-        color: #ffffff;
+        color: #333333;
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -30,28 +30,31 @@
     .container {
         width: 100%;
         max-width: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
         padding: 1.5rem;
         border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
+    }
+    #loginContainer, #quizContainer, #resultContainer {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
     .container:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
     .gradient-text {
-        background: linear-gradient(to right, #ff6b6b, #feca57);
+        background: linear-gradient(to right, #f06, #06f);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 600;
     }
     button, .question-option {
         width: 100%;
-        background: linear-gradient(45deg, #4b6cb7, #182848);
+        background: linear-gradient(45deg, #f06, #06f);
         border: none;
         color: #ffffff;
         padding: 12px;
@@ -61,7 +64,7 @@
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         font-weight: 500;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         position: relative;
         overflow: hidden;
     }
@@ -85,13 +88,19 @@
         top: -100%;
     }
     .question-option.selected {
-        background: linear-gradient(45deg, #00b894, #00cec9);
+        background: linear-gradient(45deg, rgb(106, 255, 0), rgb(221, 255, 0));
+    }
+    .question-option {
+        text-align: left;
+        padding: 15px;
+        font-size: 1.1rem;
+        line-height: 1.4;
     }
     input {
         width: 100%;
         background: rgba(255, 255, 255, 0.1);
         border: 2px solid rgba(255, 255, 255, 0.2);
-        color: white;
+        color: #000000;
         padding: 12px;
         border-radius: 10px;
         font-size: 1rem;
@@ -101,16 +110,16 @@
     input:focus {
         outline: none;
         background: rgba(255, 255, 255, 0.2);
-        border-color: #a29bfe;
-        box-shadow: 0 0 15px rgba(162, 155, 254, 0.5);
+        border-color: #06f;
+        box-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
     }
     input::placeholder {
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(0, 0, 0, 0.7);
     }
     .timer {
         font-size: 1.5rem;
         font-weight: bold;
-        color: #feca57;
+        color: #f06;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         animation: pulse 2s infinite;
     }
@@ -120,7 +129,15 @@
         100% { transform: scale(1); }
     }
     .incorrect-text {
-        color: #ff7675;
+        color: #ffffff;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(6, 0, 10, 0.325);
+        font-size: 14px;
+        line-height: 1.4;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.1);
     }
     .thumbnail-section {
         background: rgba(255, 255, 255, 0.1);
@@ -130,12 +147,12 @@
         margin-bottom: 1rem;
         border-radius: 15px;
         border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
         transition: all 0.3s ease;
     }
     .thumbnail-section:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
     .thumbnail-section img {
         width: 100%;
@@ -146,6 +163,16 @@
     }
     .thumbnail-section img:hover {
         transform: scale(1.05);
+    }
+    .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+    .navigation-buttons button {
+        width: 30%;
+        padding: 10px;
+        font-size: 0.9rem;
     }
     @media (max-width: 640px) {
         body {
@@ -161,13 +188,17 @@
         .timer {
             font-size: 1.2rem;
         }
+        .navigation-buttons button {
+            padding: 8px;
+            font-size: 0.8rem;
+        }
     }
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-600 to-pink-500 text-white min-h-screen flex items-center justify-center p-4">
     <!-- Login Section -->
     <div id="loginContainer" class="w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
-        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">PMI Eduverse Exam</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">PMI EDUVERSE</h1>
         
         <!-- Thumbnail Section -->
         <div class="mb-6">
@@ -188,30 +219,29 @@
 
     <!-- Quiz Section -->
     <div id="quizContainer" class="hidden w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
-        <h1 class="text-xl sm:text-2xl font-bold mb-4 gradient-text">PMI Eduverse Exam</h1>
+        <h1 class="text-xl sm:text-2xl font-bold mb-4 gradient-text">PMI EDUVERSE</h1>
         <div id="timer" class="text-lg sm:text-xl font-bold mb-4 text-yellow-300"></div>
         <div id="questionBox">
             <h2 id="questionNumber" class="text-base sm:text-lg font-semibold mb-2">Question 1 of 10</h2>
             <h2 id="question" class="text-base sm:text-lg font-semibold mb-4">Loading question...</h2>
             <div id="options" class="grid gap-3"></div>
         </div>
-        <div class="flex justify-between mt-6">
-            <button onclick="prevQuestion()" class="px-4 py-2 bg-gray-600 rounded">Prev</button>
-            <button onclick="nextQuestion()" class="px-4 py-2 bg-blue-600 rounded">Next</button>
-            <button onclick="submitQuiz()" class="px-4 py-2 bg-red-600 rounded">Submit</button>
+        <div class="navigation-buttons">
+            <button onclick="prevQuestion()" class="bg-gray-600 rounded">Prev</button>
+            <button onclick="nextQuestion()" class="bg-blue-600 rounded">Next</button>
+            <button onclick="submitQuiz()" class="bg-red-600 rounded">Submit</button>
         </div>
     </div>
 
     <!-- Result Section -->
     <div id="resultContainer" class="hidden w-full max-w-md bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-lg">
         <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 gradient-text">Results</h1>
-        <p id="resultInfo" class="text-base sm:text-lg mb-3 text-center"></p>
-        <p id="totalMarks" class="text-base sm:text-lg mb-3 text-center"></p>
+        <p id="resultInfo" class="text-base sm:text-lg mb-4"></p>
+        <p id="totalMarks" class="text-lg sm:text-xl font-bold mb-4"></p>
         <canvas id="resultChart" class="mb-6"></canvas>
-        <div id="incorrectQuestions" class="mt-4 text-sm"></div>
-        
-        <button onclick="downloadResultPDF()" class="w-full p-3 mt-4 rounded bg-blue-600 text-white font-bold hover:bg-blue-700">Download PDF</button>
-        <button onclick="restartQuiz()" class="w-full p-3 mt-3 rounded bg-gray-600 text-white font-bold hover:bg-gray-700">Restart Quiz</button>
+        <div id="incorrectQuestions" class="mb-6"></div>
+        <button onclick="restartQuiz()" class="w-full p-3 mb-3 rounded bg-blue-600 text-white font-bold">Restart Quiz</button>
+        <button onclick="downloadResultPDF()" class="w-full p-3 rounded bg-green-600 text-white font-bold">Download Result PDF</button>
     </div>
 
     <script>
