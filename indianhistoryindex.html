@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI EDUVERSE - History, Art, Culture, Literature, Tradition and Heritage of Rajasthan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #C0C0C0;
+            --background-color: #f0f3f5;
+            --card-color: rgba(255, 255, 255, 0.9);
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            margin: 0;
+            padding: 10px;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: backgroundShift 10s infinite alternate;
+        }
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .container {
+            max-width: 100%;
+            width: 100%;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: containerPulse 3s infinite alternate;
+        }
+        @keyframes containerPulse {
+            0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+            100% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+        }
+        h2 {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 2s infinite alternate;
+        }
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 3px var(--primary-color); }
+            100% { text-shadow: 0 0 10px var(--secondary-color); }
+        }
+        .test-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .test-card {
+            background: var(--card-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: cardFloat 4s infinite alternate;
+        }
+        @keyframes cardFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+        .test-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .test-card-header {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 15px;
+        }
+        .test-card-body {
+            padding: 15px;
+        }
+        .test-card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .test-card p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 8px 0;
+        }
+        .start-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+        .start-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+        .test-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+            animation: logoSpin 10s linear infinite;
+        }
+        @keyframes logoSpin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        .logo img {
+            max-width: 100px;
+        }
+        @media (min-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            .test-list {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .test-card h3 {
+                font-size: 1.3rem;
+            }
+            .test-card p {
+                font-size: 1rem;
+            }
+            .start-btn {
+                font-size: 0.9rem;
+            }
+            .logo img {
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://i.ibb.co/4g0Gz6Mf/SJHY6436.png" alt="PMI EDUVERSE Logo">
+        </div>
+        <h2>Indian History</h2>
+        <div class="test-list">
+            <div class="test-card">
+                <div class="test-card-header">
+                    <h3>Example Test 1</h3>
+                </div>
+                <div class="test-card-body">
+                    <p>45 Questions and 45 Marks. Good Luck for the Test.</p>
+                    <div class="test-info">
+                        <span>Duration: 15 mins</span>
+                        <span>Marks: 45</span>
+                    </div>
+                    <a href="comingsoo.html" class="start-btn">Start Test</a>
+                </div>
+            </div>
+            <div class="test-card">
+    <div class="test-card-header">
+        <h3>प्राचीन भारत</h3>
+    </div>
+    <div class="test-card-body">
+        <p>प्रागैतिहासिक काल</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>पाषाण युग (पुरापाषाण, मध्यपाषाण, नवपाषाण)</h3>
+    </div>
+    <div class="test-card-body">
+        <p>ताम्र-पाषाण युग</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>सिंधु घाटी सभ्यता</h3>
+    </div>
+    <div class="test-card-body">
+        <p>प्रमुख स्थल और उनकी विशेषताएँ</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>सामाजिक, आर्थिक और धार्मिक व्यवस्था</h3>
+    </div>
+    <div class="test-card-body">
+        <p>पतन के कारण</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>वैदिक सभ्यता</h3>
+    </div>
+    <div class="test-card-body">
+        <p>ऋग्वैदिक और उत्तरवैदिक काल</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>समाज, अर्थव्यवस्था और राजनीतिक स्थिति</h3>
+    </div>
+    <div class="test-card-body">
+        <p>महाजनपद और मगध साम्राज्य</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>16 महाजनपद</h3>
+    </div>
+    <div class="test-card-body">
+        <p>बिम्बिसार, अजातशत्रु और महापद्मनंदा</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>जैन धर्म और बौद्ध धर्म</h3>
+    </div>
+    <div class="test-card-body">
+        <p>महावीर स्वामी और गौतम बुद्ध</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>प्रमुख सिद्धांत और ग्रंथ</h3>
+    </div>
+    <div class="test-card-body">
+        <p>मौर्य साम्राज्य</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>चन्द्रगुप्त मौर्य और चाणक्य</h3>
+    </div>
+    <div class="test-card-body">
+        <p>अशोक और उसका धम्म नीति</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>मौर्य प्रशासन और कला</h3>
+    </div>
+    <div class="test-card-body">
+        <p>शुंग, सातवाहन और कुषाण साम्राज्य</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>पुष्यमित्र शुंग</h3>
+    </div>
+    <div class="test-card-body">
+        <p>कनिष्क और उसकी उपलब्धियाँ</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>गुप्त साम्राज्य</h3>
+    </div>
+    <div class="test-card-body">
+        <p>चन्द्रगुप्त प्रथम, समुद्रगुप्त, चन्द्रगुप्त द्वितीय</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>स्वर्ण युग और सांस्कृतिक उपलब्धियाँ</h3>
+    </div>
+    <div class="test-card-body">
+        <p>हर्षवर्धन और उनकी उपलब्धियाँ</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>राजपूत काल और उनकी वंशावली</h3>
+    </div>
+    <div class="test-card-body">
+        <p>चौहान, प्रतिहार, चालुक्य, परमार</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>दिल्ली सल्तनत (1206-1526)</h3>
+    </div>
+    <div class="test-card-body">
+        <p>गुलाम वंश, खिलजी वंश, तुगलक वंश, सैयद वंश, लोदी वंश</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>प्रशासन, सामाजिक एवं धार्मिक नीतियाँ</h3>
+    </div>
+    <div class="test-card-body">
+        <p>भक्ति और सूफी आंदोलन</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>प्रमुख संत और विचारधारा</h3>
+    </div>
+    <div class="test-card-body">
+        <p>मुगल साम्राज्य (1526-1707)</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>बाबर से औरंगजेब तक</h3>
+    </div>
+    <div class="test-card-body">
+        <p>अकबर की नीतियाँ और प्रशासन</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>मुगलकालीन कला और स्थापत्य</h3>
+    </div>
+    <div class="test-card-body">
+        <p>मराठा साम्राज्य और शिवाजी</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>राजपूत-मुगल संबंध</h3>
+    </div>
+    <div class="test-card-body">
+        <p>विदेशी आक्रमण और उनके प्रभाव</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>पुर्तगाली, डच, अंग्रेज और फ्रांसीसी शासन</h3>
+    </div>
+    <div class="test-card-body">
+        <p>ब्रिटिश ईस्ट इंडिया कंपनी का शासन</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>प्लासी और बक्सर का युद्ध</h3>
+    </div>
+    <div class="test-card-body">
+        <p>बंगाल, मैसूर, मराठा और सिख युद्ध</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>स्थायी बंदोबस्त और रैयतवाड़ी व्यवस्था</h3>
+    </div>
+    <div class="test-card-body">
+        <p>1857 का विद्रोह</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>कारण, प्रवृत्ति और प्रभाव</h3>
+    </div>
+    <div class="test-card-body">
+        <p>ब्रिटिश शासन के प्रमुख सुधार और आंदोलन</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>सामाजिक सुधार आंदोलन (राजा राममोहन राय, ईश्वरचंद विद्यासागर)</h3>
+    </div>
+    <div class="test-card-body">
+        <p>भारतीय राष्ट्रीय कांग्रेस की स्थापना (1885)</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>बंगाल विभाजन और स्वदेशी आंदोलन</h3>
+    </div>
+    <div class="test-card-body">
+        <p>भारतीय स्वतंत्रता संग्राम (1885-1947)</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>प्रारंभिक राष्ट्रीय आंदोलन</h3>
+    </div>
+    <div class="test-card-body">
+        <p>होमरूल लीग और गांधीवादी आंदोलन</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>असहयोग आंदोलन, सविनय अवज्ञा आंदोलन, भारत छोड़ो आंदोलन</h3>
+    </div>
+    <div class="test-card-body">
+        <p>भगत सिंह, नेताजी सुभाष चंद्र बोस, क्रांतिकारी आंदोलन</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>संविधान निर्माण और स्वतंत्रता के बाद भारत</h3>
+    </div>
+    <div class="test-card-body">
+        <p>भारतीय संविधान सभा और इसके प्रमुख सदस्य</p>
+        <div class="test-info">
+            <span>Duration: TBA</span>
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+    </div>
+</div>
+
+<div class="test-card">
+    <div class="test-card-header">
+        <h3>संविधान लागू होने की प्रक्रिया</h3>
+    </div>
+    <div class="test-card-body">
+        <p>Duration: TBA</p>
+        <div class="test-info">
+            <span>Marks: TBA</span>
+        </div>
+        <a href="#" class="start-btn disabled">Coming Soon</a>
+    </div>
+    </div>
+</div>
+</body>
+</html>
