@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI EDUVERSE - History, Art, Culture, Literature, Tradition and Heritage of Rajasthan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #C0C0C0;
+            --background-color: #f0f3f5;
+            --card-color: rgba(255, 255, 255, 0.9);
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            margin: 0;
+            padding: 10px;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: backgroundShift 10s infinite alternate;
+        }
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .container {
+            max-width: 100%;
+            width: 100%;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: containerPulse 3s infinite alternate;
+        }
+        @keyframes containerPulse {
+            0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+            100% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+        }
+        h2 {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 2s infinite alternate;
+        }
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 3px var(--primary-color); }
+            100% { text-shadow: 0 0 10px var(--secondary-color); }
+        }
+        .test-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .test-card {
+            background: var(--card-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: cardFloat 4s infinite alternate;
+        }
+        @keyframes cardFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+        .test-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .test-card-header {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 15px;
+        }
+        .test-card-body {
+            padding: 15px;
+        }
+        .test-card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .test-card p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 8px 0;
+        }
+        .start-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+        .start-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+        .test-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+            animation: logoSpin 10s linear infinite;
+        }
+        @keyframes logoSpin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        .logo img {
+            max-width: 100px;
+        }
+        @media (min-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            .test-list {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .test-card h3 {
+                font-size: 1.3rem;
+            }
+            .test-card p {
+                font-size: 1rem;
+            }
+            .start-btn {
+                font-size: 0.9rem;
+            }
+            .logo img {
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://i.ibb.co/4g0Gz6Mf/SJHY6436.png" alt="PMI EDUVERSE Logo">
+        </div>
+        <h2>Indian Polity</h2>
+        <div class="test-list">
+            <div class="test-card">
+                <div class="test-card-header">
+                    <h3>Example Test 1</h3>
+                </div>
+                <div class="test-card-body">
+                    <p>45 Questions and 45 Marks. Good Luck for the Test.</p>
+                    <div class="test-info">
+                        <span>Duration: 15 mins</span>
+                        <span>Marks: 45</span>
+                    </div>
+                    <a href="polity.html" class="start-btn">Start Test</a>
+                </div>
+            </div>
+            <div class="test-card">
+            <div class="test-card-header">
+                <h3>भारत में ब्रिटिश शासन के तहत संवैधानिक विकास</h3>
+            </div>
+            <div class="test-card-body">
+                <p>1773 का रेगुलेटिंग एक्ट, 1833 और 1858 का अधिनियम</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>भारतीय परिषद अधिनियम 1861, 1892, 1909</h3>
+            </div>
+            <div class="test-card-body">
+                <p>भारत सरकार अधिनियम 1919 और 1935</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>स्वतंत्रता अधिनियम 1947</h3>
+            </div>
+            <div class="test-card-body">
+                <p>संविधान सभा की स्थापना और कार्यप्रणाली</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>प्रमुख समितियाँ और उनके अध्यक्ष</h3>
+            </div>
+            <div class="test-card-body">
+                <p>संविधान की उद्देशिका (Preamble)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>संविधान की विशेषताएँ</h3>
+            </div>
+            <div class="test-card-body">
+                <p>संघवाद और एकात्मकता</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>संसदीय प्रणाली</h3>
+            </div>
+            <div class="test-card-body">
+                <p>मौलिक अधिकार (Fundamental Rights)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राज्य नीति के निदेशक तत्व (DPSP)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>मौलिक कर्तव्य (Fundamental Duties)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>प्रमुख अनुच्छेद (Article 1, 14, 19, 21, 32, 368 आदि)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>संविधान की अनुसूचियाँ (Schedules)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>प्रमुख संशोधन और उनका प्रभाव (42वां, 44वां, 73वां, 74वां, 97वां आदि)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>राष्ट्रपति: चुनाव, शक्तियाँ और कार्यकाल</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>उपराष्ट्रपति और प्रधानमंत्री</h3>
+            </div>
+            <div class="test-card-body">
+                <p>मंत्रिपरिषद और कैबिनेट</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>संसद: लोकसभा, राज्यसभा, कार्यप्रणाली, विशेषाधिकार</h3>
+            </div>
+            <div class="test-card-body">
+                <p>अध्यादेश प्रणाली</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राज्यपाल: नियुक्ति, शक्तियाँ और कार्यकाल</h3>
+            </div>
+            <div class="test-card-body">
+                <p>मुख्यमंत्री और मंत्रिपरिषद</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राज्य विधानमंडल</h3>
+            </div>
+            <div class="test-card-body">
+                <p>उच्चतम न्यायालय (Supreme Court)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>उच्च न्यायालय (High Courts)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>अधीनस्थ न्यायालय</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>विभाजन की अनुसूचियाँ (Union, State, Concurrent List)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>वित्तीय, प्रशासनिक और विधायी संबंध</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>अनुच्छेद 356 और राष्ट्रपति शासन</h3>
+            </div>
+            <div class="test-card-body">
+                <p>चुनाव आयोग की संरचना और शक्तियाँ</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>लोकसभा और राज्यसभा चुनाव प्रक्रिया</h3>
+            </div>
+            <div class="test-card-body">
+                <p>चुनाव सुधार और EVM</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>निर्वाचन आयोग</h3>
+            </div>
+            <div class="test-card-body">
+                <p>वित्त आयोग</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राष्ट्रीय मानवाधिकार आयोग (NHRC)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>केंद्रीय सतर्कता आयोग (CVC)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>नीति आयोग</h3>
+            </div>
+            <div class="test-card-body">
+                <p>राष्ट्रीय आपातकाल (Article 352)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राज्य आपातकाल (Article 356)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>वित्तीय आपातकाल (Article 360)</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>73वां और 74वां संविधान संशोधन</h3>
+            </div>
+            <div class="test-card-body">
+                <p>ग्राम पंचायत, पंचायत समिति और जिला परिषद</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>नगरीय प्रशासन</h3>
+            </div>
+            <div class="test-card-body">
+                <p>विधि आयोग</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>निर्वाचन सुधार समिति</h3>
+            </div>
+            <div class="test-card-body">
+                <p>राष्ट्रीय पिछड़ा वर्ग आयोग</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>भारतीय नागरिकता अधिनियम 1955</h3>
+            </div>
+            <div class="test-card-body">
+                <p>नागरिकता प्राप्त करने और खोने की विधियाँ</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राज्यों की पुनर्संरचना (States Reorganization Act 1956)</h3>
+            </div>
+            <div class="test-card-body">
+                <p>अनुच्छेद 370 और 35A का निरसन</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>राष्ट्रीय और क्षेत्रीय दल</h3>
+            </div>
+            <div class="test-card-body">
+                <p>चुनाव आचार संहिता</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>पारदर्शिता और उत्तरदायित्व</h3>
+            </div>
+            <div class="test-card-body">
+                <p>RTI अधिनियम 2005</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+        
+        <div class="test-card">
+            <div class="test-card-header">
+                <h3>लोकपाल और लोकायुक्त</h3>
+            </div>
+            <div class="test-card-body">
+                <p>भ्रष्टाचार निवारण और जन शिकायत निवारण</p>
+                <div class="test-info">
+                    <span>Duration: TBA</span>
+                    <span>Marks: TBA</span>
+                </div>
+                <a href="#" class="start-btn" style="pointer-events: none; opacity: 0.6;">Coming Soon</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
