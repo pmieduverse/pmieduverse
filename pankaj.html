@@ -146,14 +146,11 @@
 
         /* Grid Layout */
         .teacher-grid, .coaching-grid {
-            display: flex;
-            overflow-x: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2.5rem;
             padding: 3rem 0;
-            scroll-snap-type: x mandatory;
-        }
-        .teacher-grid::-webkit-scrollbar, .coaching-grid::-webkit-scrollbar {
-            display: none;
+            position: relative;
         }
 
         /* Card Styling */
@@ -164,9 +161,6 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease;
             position: relative;
-            scroll-snap-align: start;
-            flex: 0 0 auto;
-            width: 300px;
         }
         .teacher-card:hover, .coaching-card:hover {
             transform: translateY(-15px) rotate(1deg);
@@ -449,12 +443,12 @@
                 <option value="math">Mathematics</option>
                 <option value="science">Science</option>
                 <option value="english">English</option>
-                <option value="english">biology</option>
-                <option value="english">zoology</option>
+                <option value="biology">Biology</option>
+                <option value="zoology">Zoology</option>
             </select>
             <select id="level-filter">
                 <option value="all">All Levels</option>
-                <option value="school">coching</option>
+                <option value="school">School</option>
                 <option value="college">College</option>
                 <option value="competitive">Competitive Exams</option>
             </select>
@@ -535,8 +529,8 @@
             { name: "Aman Dhattarwal", subject: "Physics", level: "Competitive Exams", rating: 5, price: "paid", duration: "long", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@amandhattarwal" },
             { name: "Khan Sir", subject: "General Knowledge", level: "Competitive Exams", rating: 4, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@khansir" },
             { name: "New Teacher 1", subject: "Chemistry", level: "School", rating: 3, price: "paid", duration: "long", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher1" },
-            { name: "New Teacher 2", subject: "science", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
-            { name: "New Teacher 3", subject: "zoology", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
+            { name: "New Teacher 2", subject: "Science", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
+            { name: "New Teacher 3", subject: "Zoology", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
             { name: "New Teacher 4", subject: "Biology", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
             { name: "New Teacher 5", subject: "Biology", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
             { name: "New Teacher 6", subject: "Biology", level: "College", rating: 5, price: "free", duration: "short", image: "https://via.placeholder.com/300x200", channel: "https://youtube.com/@newteacher2" },
